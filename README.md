@@ -1,6 +1,6 @@
 # ofmana
 
-Application web de gestion d'agence : fiches modèles, revenus, planning de contenu et tâches.
+Application web de gestion d'agence : fiches modèles, prospection, statistiques, planning de contenu et tâches. Interface sombre, effet verre, accents violet et magenta.
 
 Tout tient dans un seul fichier, `index.html`, sans dépendance ni étape de build. Il suffit de l'ouvrir dans un navigateur.
 
