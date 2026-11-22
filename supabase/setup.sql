@@ -277,3 +277,115 @@ drop function if exists public.is_admin();
 drop function if exists public.my_model_ids();
 drop function if exists public.handle_new_user();
 drop function if exists public.link_model_user();
+-- ============================================================
+--  ofmana v2 : paiements, dépôts de contenus, anti-fuite, IA, stockage de fichiers
+-- ============================================================
+
+create table if not exists public.payouts (
+  id text primary key,
+  model_id text not null references public.models on delete cascade,
+  data jsonb not null default '{}',
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.submissions (
+  id text primary key,
+  model_id text not null references public.models on delete cascade,
+  data jsonb not null default '{}',
+  created_by uuid default auth.uid() references auth.users on delete set null,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.leaks (
+  id text primary key,
+  model_id text references public.models on delete cascade,
+  data jsonb not null default '{}'
+);
+
+create table if not exists public.ai_usage (
+  id bigint generated always as identity primary key,
+  user_id uuid references auth.users on delete set null,
+  kind text,
+  tokens int not null default 0,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists payouts_model_idx on public.payouts (model_id);
+create index if not exists submissions_model_idx on public.submissions (model_id);
+create index if not exists submissions_created_by_idx on public.submissions (created_by);
+create index if not exists leaks_model_idx on public.leaks (model_id);
+create index if not exists ai_usage_created_idx on public.ai_usage (created_at);
+create index if not exists ai_usage_user_idx on public.ai_usage (user_id);
+
+alter table public.payouts     enable row level security;
+alter table public.submissions enable row level security;
+alter table public.leaks       enable row level security;
+alter table public.ai_usage    enable row level security;
+
+do $$
+declare r record;
+begin
+  for r in select policyname, tablename from pg_policies
+           where schemaname = 'public' and tablename in ('payouts','submissions','leaks','ai_usage')
+  loop
+    execute format('drop policy if exists %I on public.%I', r.policyname, r.tablename);
+  end loop;
+end $$;
+
+-- Paiements : l'admin gère, la modèle lit les siens
+create policy payouts_admin on public.payouts for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+create policy payouts_self_select on public.payouts for select to authenticated
+  using (model_id in (select private.my_model_ids()));
+
+-- Dépôts : l'admin gère ; la modèle lit les siens, en crée pour elle-même (statut « envoyé »)
+-- et peut retirer un dépôt tant qu'il n'a pas été traité
+create policy submissions_admin on public.submissions for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+create policy submissions_self_select on public.submissions for select to authenticated
+  using (model_id in (select private.my_model_ids()));
+create policy submissions_self_insert on public.submissions for insert to authenticated
+  with check (model_id in (select private.my_model_ids()) and data->>'status' = 'envoye'
+              and created_by = (select auth.uid()));
+create policy submissions_self_delete on public.submissions for delete to authenticated
+  using (model_id in (select private.my_model_ids()) and data->>'status' = 'envoye');
+
+-- Anti-fuite : admin uniquement
+create policy leaks_admin on public.leaks for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+
+-- Consommation IA : lecture admin (écriture par la fonction serveur uniquement)
+create policy ai_usage_admin_select on public.ai_usage for select to authenticated
+  using (private.is_admin());
+
+revoke all on public.payouts, public.submissions, public.leaks, public.ai_usage from anon;
+grant select, insert, update, delete on public.payouts, public.submissions, public.leaks to authenticated;
+grant select on public.ai_usage to authenticated;
+
+-- ---------- Stockage de fichiers ----------
+-- uploads : contenus envoyés par les modèles (dossier = id de la fiche modèle)
+-- documents : coffre de l'agence (contrats, pièces), admin uniquement
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('uploads', 'uploads', false, 52428800, array['image/*','video/*']),
+       ('documents', 'documents', false, 20971520, null)
+on conflict (id) do update set public = false, file_size_limit = excluded.file_size_limit,
+                               allowed_mime_types = excluded.allowed_mime_types;
+
+do $$
+declare r record;
+begin
+  for r in select policyname from pg_policies where schemaname = 'storage' and tablename = 'objects' and policyname like 'ofmana_%'
+  loop
+    execute format('drop policy if exists %I on storage.objects', r.policyname);
+  end loop;
+end $$;
+
+create policy ofmana_uploads_select on storage.objects for select to authenticated
+  using (bucket_id = 'uploads' and (private.is_admin() or (storage.foldername(name))[1] in (select private.my_model_ids())));
+create policy ofmana_uploads_insert on storage.objects for insert to authenticated
+  with check (bucket_id = 'uploads' and (private.is_admin() or (storage.foldername(name))[1] in (select private.my_model_ids())));
+create policy ofmana_uploads_delete on storage.objects for delete to authenticated
+  using (bucket_id = 'uploads' and (private.is_admin() or (storage.foldername(name))[1] in (select private.my_model_ids())));
+create policy ofmana_documents_admin on storage.objects for all to authenticated
+  using (bucket_id = 'documents' and private.is_admin())
+  with check (bucket_id = 'documents' and private.is_admin());

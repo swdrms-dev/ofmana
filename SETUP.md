@@ -61,6 +61,16 @@ Tu ne peux pas retirer tes propres droits, et il reste toujours au moins un admi
 
 > Si tu avais lancé `setup.sql` avant l'ajout de cette page, relance-le une fois : il ajoute les nouvelles fonctions sans toucher à tes données.
 
+## 8. Activer l'assistant IA (OpenAI)
+
+L'assistant passe par une fonction serveur Supabase (`assistant`, déjà déployée). Ta clé OpenAI n'est **jamais** dans le site.
+
+1. Sur [platform.openai.com/api-keys](https://platform.openai.com/api-keys), crée une clé (elle commence par `sk-`).
+2. Dans Supabase, va dans **Edge Functions > Secrets**, ajoute `OPENAI_API_KEY` avec ta clé, puis enregistre.
+3. Facultatif : `OPENAI_MODEL`, pour changer de modèle (par défaut `gpt-4.1-mini`, environ 0,2 centime par demande), et `AI_DAILY_LIMIT`, pour le nombre maximum de demandes par jour (40 par défaut, pour protéger ton crédit).
+
+Seuls les admins peuvent utiliser l'assistant. Ne colle jamais ta clé OpenAI dans le code, dans `config.js` ou dans une conversation.
+
 ## Bon à savoir
 
 - Sur l'offre gratuite, Supabase n'envoie que quelques emails par heure (confirmation, mot de passe oublié). Si tu ajoutes beaucoup de modèles d'un coup, configure ton propre service d'envoi dans **Authentication > Emails > SMTP Settings**, par exemple Resend ou Brevo.
