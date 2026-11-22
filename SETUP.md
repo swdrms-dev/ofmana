@@ -9,7 +9,10 @@ Les comptes et les données sont stockés sur **Supabase** (gratuit pour démarr
 2. Choisis un nom (par exemple `ofmana`), un mot de passe de base de données (garde-le de côté), et une région en Europe (Paris ou Frankfurt).
 3. Attends environ 2 minutes que le projet soit prêt.
 
-## 2. Créer la base de données et ses règles de sécurité
+## 2. Créer la base de données et ses règles de sécurité ✅ (déjà fait le 22/11/2026)
+
+La base du projet `cncjihvrhkprqwbbyxst` a été configurée et testée par Claude via le connecteur Supabase.
+Pour la recréer sur un autre projet, ou la mettre à jour :
 
 1. Dans le menu de gauche, ouvre **SQL Editor**, puis **New query**.
 2. Copie tout le contenu du fichier [`supabase/setup.sql`](supabase/setup.sql), colle-le, puis clique sur **Run**.

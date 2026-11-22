@@ -61,21 +61,31 @@ create table if not exists public.prospects (
 create index if not exists content_model_idx on public.content (model_id);
 create index if not exists tasks_model_idx on public.tasks (model_id);
 create index if not exists models_user_idx on public.models (user_id);
+create index if not exists admin_invites_invited_by_idx on public.admin_invites (invited_by);
 
--- ---------- Fonctions d'aide ----------
-create or replace function public.is_admin() returns boolean
-language sql stable security definer set search_path = public as $$
-  select exists (select 1 from profiles where id = auth.uid() and role = 'admin');
+-- ---------- Fonctions internes (schéma privé, non exposé par l'API) ----------
+create schema if not exists private;
+revoke all on schema private from public, anon;
+grant usage on schema private to authenticated;
+
+create or replace function private.is_admin() returns boolean
+language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.profiles where id = (select auth.uid()) and role = 'admin');
 $$;
 
-create or replace function public.my_model_ids() returns setof text
-language sql stable security definer set search_path = public as $$
-  select id from models where user_id = auth.uid();
+create or replace function private.my_model_ids() returns setof text
+language sql stable security definer set search_path = '' as $$
+  select id from public.models where user_id = (select auth.uid());
 $$;
+
+revoke all on function private.is_admin() from public, anon;
+revoke all on function private.my_model_ids() from public, anon;
+grant execute on function private.is_admin() to authenticated;
+grant execute on function private.my_model_ids() to authenticated;
 
 -- Nouveau compte : le tout premier devient admin, ainsi que les emails invités comme admin.
 -- Les autres sont des modèles ; si une fiche porte déjà cet email, le compte y est relié.
-create or replace function public.handle_new_user() returns trigger
+create or replace function private.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
 declare r text;
 begin
@@ -97,10 +107,10 @@ end $$;
 drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
-  for each row execute function public.handle_new_user();
+  for each row execute function private.handle_new_user();
 
 -- Quand l'admin saisit ou change l'email d'une fiche, on relie le compte correspondant.
-create or replace function public.link_model_user() returns trigger
+create or replace function private.link_model_user() returns trigger
 language plpgsql security definer set search_path = public as $$
 begin
   new.updated_at := now();
@@ -121,7 +131,10 @@ end $$;
 drop trigger if exists models_link_user on public.models;
 create trigger models_link_user
   before insert or update on public.models
-  for each row execute function public.link_model_user();
+  for each row execute function private.link_model_user();
+
+revoke all on function private.handle_new_user() from public, anon, authenticated;
+revoke all on function private.link_model_user() from public, anon, authenticated;
 
 -- Une modèle peut cocher / décocher les tâches partagées avec elle, et rien d'autre.
 create or replace function public.set_task_done(task_id text, is_done boolean) returns void
@@ -130,7 +143,7 @@ begin
   update tasks
      set data = jsonb_set(data, '{done}', to_jsonb(is_done))
    where id = task_id
-     and (is_admin() or (shared and model_id in (select my_model_ids())));
+     and (private.is_admin() or (shared and model_id in (select private.my_model_ids())));
   if not found then
     raise exception 'Tâche introuvable ou non autorisée';
   end if;
@@ -144,7 +157,7 @@ create or replace function public.list_accounts()
 returns table (id uuid, email text, role text, created_at timestamptz, model_name text)
 language plpgsql stable security definer set search_path = public as $$
 begin
-  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  if not private.is_admin() then raise exception 'Réservé aux admins'; end if;
   return query
     select p.id, p.email, p.role, p.created_at,
            (select m.data->>'name' from models m where m.user_id = p.id limit 1)
@@ -157,14 +170,14 @@ create or replace function public.grant_admin(target_email text) returns text
 language plpgsql security definer set search_path = public as $$
 declare e text := lower(btrim(coalesce(target_email, ''))); uid uuid;
 begin
-  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  if not private.is_admin() then raise exception 'Réservé aux admins'; end if;
   if e !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' then raise exception 'Adresse email invalide'; end if;
   select u.id into uid from auth.users u where lower(u.email) = e limit 1;
   if uid is not null then
     update profiles set role = 'admin' where id = uid;
     return 'promoted';
   end if;
-  insert into admin_invites (email, invited_by) values (e, auth.uid()) on conflict (email) do nothing;
+  insert into admin_invites (email, invited_by) values (e, (select auth.uid())) on conflict (email) do nothing;
   return 'invited';
 end $$;
 
@@ -172,9 +185,9 @@ end $$;
 create or replace function public.set_role(target uuid, new_role text) returns void
 language plpgsql security definer set search_path = public as $$
 begin
-  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  if not private.is_admin() then raise exception 'Réservé aux admins'; end if;
   if new_role not in ('admin', 'model') then raise exception 'Rôle inconnu'; end if;
-  if target = auth.uid() and new_role <> 'admin' then
+  if target = (select auth.uid()) and new_role <> 'admin' then
     raise exception 'Tu ne peux pas retirer tes propres droits admin.';
   end if;
   if new_role = 'model'
@@ -216,40 +229,40 @@ end $$;
 
 -- Profils : chacun lit le sien, l'admin lit tout. Les rôles ne changent que via set_role / grant_admin.
 create policy profiles_select on public.profiles for select to authenticated
-  using (id = auth.uid() or public.is_admin());
+  using (id = (select auth.uid()) or private.is_admin());
 
 -- Invitations admin : visibles et gérables par les admins
 create policy admin_invites_admin on public.admin_invites for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 
 -- Réglages (nom de l'agence) : lisibles par tout compte connecté, modifiables par l'admin
 create policy settings_select on public.settings for select to authenticated using (true);
 create policy settings_admin on public.settings for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 
 -- Fiches modèles : l'admin gère tout, une modèle lit uniquement la sienne
 create policy models_admin on public.models for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 create policy models_self_select on public.models for select to authenticated
-  using (user_id = auth.uid());
+  using (user_id = (select auth.uid()));
 
 -- Notes privées et prospection : admin uniquement
 create policy model_private_admin on public.model_private for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 create policy prospects_admin on public.prospects for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 
 -- Planning : l'admin gère tout, une modèle lit uniquement ses contenus
 create policy content_admin on public.content for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 create policy content_self_select on public.content for select to authenticated
-  using (model_id in (select public.my_model_ids()));
+  using (model_id in (select private.my_model_ids()));
 
 -- Tâches : l'admin gère tout, une modèle lit uniquement les tâches partagées avec elle
 create policy tasks_admin on public.tasks for all to authenticated
-  using (public.is_admin()) with check (public.is_admin());
+  using (private.is_admin()) with check (private.is_admin());
 create policy tasks_self_select on public.tasks for select to authenticated
-  using (shared and model_id in (select public.my_model_ids()));
+  using (shared and model_id in (select private.my_model_ids()));
 
 -- Accès anonyme : aucun
 revoke all on public.profiles, public.settings, public.models, public.model_private,
@@ -258,3 +271,9 @@ grant select, insert, update, delete on public.settings, public.models, public.m
       public.content, public.tasks, public.prospects, public.admin_invites to authenticated;
 revoke insert, update, delete on public.profiles from authenticated;
 grant select on public.profiles to authenticated;
+
+-- Nettoyage des anciennes versions de fonctions (si le script a déjà été lancé avant)
+drop function if exists public.is_admin();
+drop function if exists public.my_model_ids();
+drop function if exists public.handle_new_user();
+drop function if exists public.link_model_user();
