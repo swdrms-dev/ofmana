@@ -126,6 +126,90 @@ textarea.field{min-height:96px;padding:12px 14px;resize:vertical;line-height:1.4
 .toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140px);background:var(--ink);color:var(--bg);padding:8px 8px 8px 18px;border-radius:12px;display:flex;gap:10px;align-items:center;z-index:30;transition:transform .25s;max-width:calc(100% - 32px);min-height:48px}
 .toast.show{transform:translate(-50%,0)}
 .toast button{background:none;border:0;color:var(--acc);font-weight:700;cursor:pointer;min-height:36px;padding:0 10px}
+.padd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-bottom:16px;padding:14px}
+.kpis.sm .kpi b{font-size:24px}
+.board{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(236px,1fr);gap:12px;overflow-x:auto;padding:2px 2px 14px;align-items:start;scroll-snap-type:x proximity}
+.kcol{background:light-dark(#eee8e6,#18161b);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:360px;scroll-snap-align:start;transition:background .15s,box-shadow .15s}
+.kcol.over{background:var(--soft);box-shadow:inset 0 0 0 2px var(--acc)}
+.kcol.lost .pcard{opacity:.7}
+.kh{display:flex;align-items:center;gap:8px;padding:4px 4px 6px;font:700 14px "Plus Jakarta Sans",sans-serif}
+.kh i{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}.kh .n{margin-left:auto;color:var(--mute);font-weight:600;font-size:13px}
+.kempty{border:1.5px dashed light-dark(#d9d0d2,#332e37);border-radius:12px;color:var(--mute);font-size:13px;text-align:center;padding:20px 8px}
+.pcard{position:relative;background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:10px 6px 10px 12px;cursor:grab;user-select:none;-webkit-user-select:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 6px;transition:box-shadow .15s}
+.pcard:hover{box-shadow:0 8px 20px -12px #1b152066}
+.pcard b{display:block;font-weight:600;overflow-wrap:anywhere}.pcard small{color:var(--mute);font-size:13px;display:block}
+.pmeta{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;color:var(--mute)}.pmeta:empty{display:none}
+.grip{touch-action:none;cursor:grab;width:34px;height:34px;border:0;background:none;color:var(--mute);border-radius:8px;display:grid;place-items:center;margin:-6px 0 0}
+.grip:hover{background:var(--line)}
+.pcard.dragging{opacity:.3}
+.ghost{position:fixed;left:0;top:0;margin:0;pointer-events:none;z-index:40;box-shadow:0 18px 40px -12px #0008}
+body.dragon,body.dragon *{cursor:grabbing!important}
+.p-relancer{background:var(--warnbg);color:var(--warn)}
+.instalink{grid-column:1/-1;color:var(--accInk);font-weight:600;text-decoration:none}
+.scroll{overflow-x:auto}
+/* fiches */
+.dh.hero{align-items:flex-start;gap:14px;padding:20px 14px 0 22px;border:0;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.av.lg{width:56px;height:56px;border-radius:16px;font-size:20px;transition:background .2s}
+.hn{flex:1;display:flex;flex-direction:column;gap:2px;padding-top:2px}
+.title-in{font:800 22px/1.2 "Plus Jakarta Sans",sans-serif;border:0;background:none;padding:4px 6px;margin-left:-6px;border-radius:8px;width:100%;color:var(--ink)}
+.title-in::placeholder{color:var(--mute);opacity:.7}
+.title-in:hover,.title-in:focus,.handle-in input:hover,.handle-in input:focus{background:var(--bg)}
+.title-wrap{display:flex;align-items:center;font:800 22px "Plus Jakarta Sans",sans-serif;color:var(--mute)}.title-wrap .title-in{margin-left:0}
+.handle-in{display:flex;align-items:center;color:var(--mute);font-size:15px}.handle-in input{border:0;background:none;padding:4px 4px;color:var(--mute);width:100%;font-size:15px;border-radius:6px}.handle-in input:focus{color:var(--ink)}
+.tabs{display:flex;gap:2px;width:100%;margin:10px 0 0 -8px;overflow-x:auto}
+.tab{background:none;border:0;padding:0 12px;min-height:44px;font-weight:600;color:var(--mute);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}.tab:hover{color:var(--ink)}.tab.on{color:var(--ink);border-color:var(--acc)}
+.dh.hero:not(:has(.tabs)){padding-bottom:18px}
+.panel{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px;align-content:start}.panel[hidden]{display:none}
+.fgroup{display:flex;flex-direction:column;gap:8px}.fgroup.full{grid-column:1/-1}.flabel{font-size:13px;font-weight:600;color:var(--mute)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.db .opt{display:inline-flex;flex-direction:row;position:relative;font-size:14px;color:var(--ink);gap:0}
+.opt input,.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{min-height:40px;padding:0 14px;border-radius:99px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:500;background:var(--panel);transition:background .12s,border-color .12s}
+.opt span:hover{border-color:var(--mute)}
+.opt input:checked+span{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.opt input:focus-visible+span,.sw input:focus-visible+span{outline:2px solid var(--acc);outline-offset:2px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px;padding:4px}.db .sw{display:block;position:relative}
+.sw span{display:block;width:30px;height:30px;border-radius:50%;background:var(--c);cursor:pointer;transition:transform .12s}.sw span:hover{transform:scale(1.1)}.sw input:checked+span{box-shadow:0 0 0 3px var(--panel),0 0 0 5px var(--c)}
+.slider{display:flex;align-items:center;gap:14px}.slider input{flex:1;accent-color:var(--acc);height:28px;cursor:pointer}.slider output{font:800 24px "Plus Jakarta Sans",sans-serif;min-width:70px;text-align:right;color:var(--ink)}
+.affix{position:relative;display:block}.affix .field{padding-right:36px;width:100%}.affix>span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--mute);pointer-events:none;font-size:15px;font-weight:400}
+.revlist{display:flex;flex-direction:column;gap:8px;grid-column:1/-1}
+.revrow{display:grid;grid-template-columns:100px 150px minmax(0,1fr);gap:12px;align-items:center}.rm{font-weight:600}
+.rbar{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.rbar i{display:block;height:100%;width:0;border-radius:99px;transition:width .25s}
+.revtot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid var(--line);color:var(--mute)}.revtot b{color:var(--ink);font:800 20px "Plus Jakarta Sans",sans-serif}
+.linkdanger{background:none;border:0;color:var(--mute);cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 6px;font-weight:500}.linkdanger:hover{color:var(--accInk)}
+.db .agecard{grid-column:1/-1;display:flex;flex-direction:row;gap:12px;align-items:flex-start;padding:14px;border:1px solid var(--line);border-radius:12px;color:var(--ink);font-size:15px;cursor:pointer;transition:background .15s,border-color .15s}
+.db .agecard:has(input:checked){border-color:var(--ok);background:var(--okbg)}.agecard small{display:block;color:var(--mute);font-weight:400;font-size:13px;margin-top:2px}
+.instalink{color:var(--accInk);font-weight:600;text-decoration:none;font-size:14px;padding:2px 0}
+/* stats */
+.chart.big{height:300px}
+.mchip{display:inline-flex;align-items:center;gap:8px}.mchip.off{opacity:.5}.mchip.off .dot{background:transparent;box-shadow:inset 0 0 0 2px var(--c)}
+.srow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr));gap:12px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.srow small{display:block;color:var(--mute);font-size:13px}.srow b{font:700 20px "Plus Jakarta Sans",sans-serif;white-space:nowrap}
+.stackbar span{transition:filter .15s;cursor:pointer}.stackbar span:hover{filter:brightness(1.15) saturate(1.1)}
+.fig{position:relative;min-height:280px}.fig>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.gl{stroke:var(--line)}.yl{fill:var(--mute);font-size:11px;text-anchor:end}.xl{fill:var(--mute);font-size:11px;text-anchor:middle}
+.area{fill:var(--acc);fill-opacity:.12}.ln1{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linejoin:round}.ln2{fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4}
+.pt1{fill:var(--panel);stroke:var(--acc);stroke-width:2.5;pointer-events:none}.pt2{fill:var(--ink);pointer-events:none}
+.hit{fill:transparent;cursor:crosshair}.hit:hover{fill:var(--ink);fill-opacity:.06}
+.dwrap{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr);gap:20px;align-items:center}
+.donut{width:100%;max-width:200px;display:block;overflow:visible}.dtrack{fill:none;stroke:var(--line);stroke-width:26}.dseg{fill:none;stroke-width:26;cursor:pointer;transition:stroke-width .15s}.dseg:hover{stroke-width:32}
+.dn1{font:800 24px "Plus Jakarta Sans",sans-serif;fill:var(--ink);text-anchor:middle}.dn2{font-size:12px;fill:var(--mute);text-anchor:middle}
+.dleg{display:flex;flex-direction:column;gap:10px}.dleg div{display:flex;align-items:center;gap:8px}.dleg span{flex:1}
+.funnel{display:flex;flex-direction:column;gap:8px}
+.frow{display:grid;grid-template-columns:120px minmax(0,1fr) 36px 60px;gap:10px;align-items:center;font-size:14px;cursor:default}
+.fbar{display:flex;justify-content:center;height:28px;background:light-dark(#f3eff0,#211e25);border-radius:8px}.fbar i{display:block;height:100%;border-radius:8px;transition:filter .15s}.frow:hover .fbar i{filter:brightness(1.12)}
+.fconv{font-size:12px;color:var(--mute);white-space:nowrap}
+.segbar{display:flex;height:14px;border-radius:99px;overflow:hidden;gap:2px}.segbar span:hover{filter:brightness(1.1)}
+.hbars{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.hrow{display:grid;grid-template-columns:130px minmax(0,1fr) 28px;gap:10px;align-items:center;font-size:14px}.hrow div{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.hrow i{display:block;height:100%;background:var(--acc);border-radius:99px}
+.sub{font-size:15px;margin:20px 0 8px}
+.prog{height:10px;background:var(--line);border-radius:99px;overflow:hidden}.prog i{display:block;height:100%;background:var(--ok)}
+.perf{width:100%;border-collapse:collapse;font-size:14px}.perf th,.perf td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}.perf th:first-child,.perf td:first-child{text-align:left}.perf tr:last-child td{border-bottom:0}.perf tbody tr:hover{background:light-dark(#faf7f6,#1f1c22)}
+.th{background:none;border:0;font-weight:600;color:var(--mute);cursor:pointer;padding:4px 0;font-size:13px;min-height:32px}.th.on,.th:hover{color:var(--ink)}
+.tname{display:inline-flex;align-items:center;gap:10px;font-weight:600}.tname .av.sm{grid-row:auto}
+.spark.mini{height:28px;width:90px;display:inline-flex}
+.tip{position:fixed;left:0;top:0;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);padding:8px 11px;border-radius:9px;font-size:13px;line-height:1.4;white-space:pre-line;opacity:0;transition:opacity .12s;max-width:240px;font-weight:500;box-shadow:0 8px 24px -8px #0006}.tip.on{opacity:1}
+@media(max-width:600px){.panel{grid-template-columns:minmax(0,1fr)}.revrow{grid-template-columns:90px minmax(0,1fr)}.revrow .rbar{grid-column:1/-1}.dwrap{grid-template-columns:minmax(0,1fr);justify-items:center}.dleg{width:100%}.frow{grid-template-columns:92px minmax(0,1fr) 28px 50px;font-size:13px}.hrow{grid-template-columns:100px minmax(0,1fr) 24px}.dh.hero{padding-left:16px}}
+@media(max-width:420px){.brand{display:none}}
 @keyframes slide{from{transform:translateX(40px);opacity:0}}@keyframes fade{from{opacity:0}}@keyframes grow{from{transform:scaleY(0)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:1000px){.grid2,.grid2.even{grid-template-columns:minmax(0,1fr)}.quick{grid-template-columns:repeat(3,minmax(0,1fr))}.quick input[name=title]{grid-column:1/-1}.quick .btn{grid-column:1/-1;justify-content:center}}
@@ -135,45 +219,19 @@ textarea.field{min-height:96px;padding:12px 14px;resize:vertical;line-height:1.4
 </head>
 <body>
 <div id="root"></div>
-<script id="state" type="application/json">{"agency":"Mon Agence","sample":true,"savedAt":1,
-"models":[
-{"id":"m1","name":"Léa Moreau","handle":"leamoreau","niche":"Fitness & lifestyle","status":"active","pct":40,"price":12.99,"subs":1840,"manager":"Sarah","start":"2025-09-01","ig":"leamoreau.fit","tt":"leamoreau","x":"leamoreau","notes":"Gros potentiel sur les PPV vidéos d'entraînement. Shooting mensuel le 1er.","color":"#ff4f6d","rev":{"2026-06":6200,"2026-07":6900,"2026-08":7400,"2026-09":7100,"2026-10":8300,"2026-11":9150}},
-{"id":"m2","name":"Inès Garcia","handle":"ines.cosplay","niche":"Cosplay & gaming","status":"active","pct":35,"price":9.99,"subs":2630,"manager":"Yanis","start":"2025-04-15","ig":"ines.cosplay","tt":"inescosplay","x":"","notes":"Communauté très fidèle. Live Twitch le jeudi, redirection vers OF.","color":"#3d7bfd","rev":{"2026-06":7800,"2026-07":8100,"2026-08":7600,"2026-09":8900,"2026-10":9400,"2026-11":10200}},
-{"id":"m3","name":"Camille Roux","handle":"camilleroux","niche":"Glamour & mode","status":"active","pct":40,"price":14.99,"subs":960,"manager":"Sarah","start":"2026-02-01","ig":"camille.roux","tt":"","x":"camilleroux","notes":"Page payante. Tester un bundle 3 mois à -25 %.","color":"#f5a524","rev":{"2026-06":3100,"2026-07":3500,"2026-08":4200,"2026-09":4000,"2026-10":4700,"2026-11":5300}},
-{"id":"m4","name":"Maya Dubois","handle":"mayadbs","niche":"Girl next door","status":"onboarding","pct":45,"price":7.99,"subs":120,"manager":"Yanis","start":"2026-11-10","ig":"maya.dbs","tt":"mayadbs","x":"","notes":"Contrat à signer. Préparer 30 contenus avant le lancement.","color":"#14a37f","rev":{"2026-11":640}}],
-"content":[
-{"id":"c1","modelId":"m3","date":"2026-11-21","time":"18:00","type":"Story","title":"Teaser shooting Paris","price":"","status":"pret","note":""},
-{"id":"c2","modelId":"m1","date":"2026-11-23","time":"12:00","type":"Post mur","title":"Routine jambes — photos salle","price":"","status":"programme","note":""},
-{"id":"c3","modelId":"m2","date":"2026-11-23","time":"20:00","type":"PPV message","title":"Cosplay elfe — set complet","price":15,"status":"programme","note":""},
-{"id":"c4","modelId":"m2","date":"2026-11-24","time":"19:00","type":"Live","title":"Live questions-réponses abonnés","price":"","status":"programme","note":""},
-{"id":"c5","modelId":"m1","date":"2026-11-25","time":"10:00","type":"Promo / campagne","title":"Black Friday : abonnement -50 % pendant 72 h","price":"","status":"programme","note":""},
-{"id":"c6","modelId":"m3","date":"2026-11-25","time":"10:00","type":"Promo / campagne","title":"Black Friday : bundle 3 mois -40 %","price":"","status":"pret","note":""},
-{"id":"c7","modelId":"m3","date":"2026-11-26","time":"21:00","type":"PPV message","title":"Making-of du shooting mode","price":12,"status":"pret","note":""},
-{"id":"c8","modelId":"m4","date":"2026-11-28","time":"18:00","type":"Post mur","title":"Premier post de bienvenue","price":"","status":"idee","note":""},
-{"id":"c9","modelId":"m1","date":"2026-11-29","time":"20:00","type":"PPV message","title":"Vidéo séance complète","price":20,"status":"idee","note":""},
-{"id":"c10","modelId":"m2","date":"2026-12-01","time":"12:00","type":"Reel promo","title":"Teaser cosplay de décembre","price":"","status":"idee","note":""},
-{"id":"c11","modelId":"m4","date":"2026-12-04","time":"19:00","type":"Live","title":"Premier live de lancement","price":"","status":"idee","note":""},
-{"id":"c12","modelId":"m1","date":"2026-12-12","time":"18:00","type":"Promo / campagne","title":"Calendrier de l'Avent abonnés","price":"","status":"idee","note":""}],
-"tasks":[
-{"id":"t1","title":"Envoyer les demandes DMCA (fuite repérée sur un forum)","modelId":"m2","due":"2026-11-20","prio":"haute","who":"Yanis","done":false},
-{"id":"t2","title":"Faire signer le contrat d'agence","modelId":"m4","due":"2026-11-21","prio":"haute","who":"Yanis","done":false},
-{"id":"t3","title":"Valider les visuels Black Friday","modelId":"","due":"2026-11-24","prio":"haute","who":"Sarah","done":false},
-{"id":"t4","title":"Relancer les abonnés expirés (message de réabonnement)","modelId":"m1","due":"2026-11-26","prio":"moyenne","who":"Sarah","done":false},
-{"id":"t5","title":"Bilan mensuel de novembre et versement des parts","modelId":"","due":"2026-11-30","prio":"moyenne","who":"Sarah","done":false},
-{"id":"t6","title":"Préparer 30 contenus avant le lancement","modelId":"m4","due":"2026-12-02","prio":"moyenne","who":"Yanis","done":false},
-{"id":"t7","title":"Moodboard du shooting de décembre","modelId":"m3","due":"2026-12-05","prio":"basse","who":"Sarah","done":false},
-{"id":"t8","title":"Mettre à jour la bio et les liens","modelId":"m1","due":"2026-11-18","prio":"basse","who":"Sarah","done":true}]}</script>
+<script id="state" type="application/json">{"agency":"Mon Agence","sample":false,"savedAt":1,"models":[],"content":[],"tasks":[],"prospects":[]}</script>
 <script id="app">{
 const D=document,$=s=>D.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const HEAD=[...D.head.querySelectorAll('[data-keep]')].map(e=>e.outerHTML).join('\n');
 const APP=$('#app').textContent;
-const LS='agence-modeles-v1';
+const LS='agence-modeles-v2';
 let S=JSON.parse($('#state').textContent);
 let dirty=false;
 try{const L=JSON.parse(localStorage.getItem(LS)||'null');if(L&&Array.isArray(L.models)&&(L.savedAt||0)>(S.savedAt||0)){S=L;dirty=true}}catch(e){}
-const VIEWS={dashboard:'Tableau de bord',modeles:'Modèles',planning:'Planning',taches:'Tâches'};
-let ui={view:'dashboard',mf:'all',pf:'all',tf:'todo',q:''};
+S.prospects=S.prospects||[];
+const VIEWS={dashboard:'Tableau de bord',modeles:'Modèles',prospection:'Prospection',stats:'Statistiques',planning:'Planning',taches:'Tâches'};
+let ui={view:'dashboard',mf:'all',pf:'all',tf:'todo',q:'',pq:'',sp:6,ss:'r'};
 try{Object.assign(ui,JSON.parse(sessionStorage.getItem(LS+'-ui')||'{}'))}catch(e){}
 const hv=location.hash.slice(1);if(VIEWS[hv])ui.view=hv;else if(!VIEWS[ui.view])ui.view='dashboard';
 const keepUI=()=>{try{sessionStorage.setItem(LS+'-ui',JSON.stringify(ui))}catch(e){}};
@@ -184,6 +242,9 @@ const CST={idee:'Idée',pret:'Prêt',programme:'Programmé',publie:'Publié'};
 const TYPES=['Post mur','PPV message','Story','Live','Reel promo','Promo / campagne'];
 const PRIO={haute:'Haute',moyenne:'Moyenne',basse:'Basse'},PR={haute:0,moyenne:1,basse:2};
 const GHOST={name:'Agence',color:'#8a8090'};
+const PS={a_contacter:'À contacter',dm:'DM envoyé',relance:'Relancée',positive:'Réponse positive',appel:'Appel / visio',contrat:'Contrat envoyé',signee:'Signée',negative:'Pas intéressée'};
+const PSC={a_contacter:'#8a8090',dm:'#3d7bfd',relance:'#f5a524',positive:'#14a37f',appel:'#06a3c4',contrat:'#8b5cf6',signee:'#ff4f6d',negative:'#b0a7b1'};
+const POS=['positive','appel','contrat','signee'];
 const MS=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'];
 const ML=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 const f0=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR',maximumFractionDigits:0}),f2=new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}),fn=new Intl.NumberFormat('fr-FR');
@@ -194,7 +255,7 @@ const iso=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
 const pISO=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const TODAY=new Date();TODAY.setHours(0,0,0,0);const T0=iso(TODAY);
 const addD=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
-const months=()=>{const r=[];for(let i=5;i>=0;i--){const d=new Date(TODAY.getFullYear(),TODAY.getMonth()-i,1);r.push(d.getFullYear()+'-'+pad(d.getMonth()+1))}return r};
+const months=(n=6)=>{const r=[];for(let i=n-1;i>=0;i--){const d=new Date(TODAY.getFullYear(),TODAY.getMonth()-i,1);r.push(d.getFullYear()+'-'+pad(d.getMonth()+1))}return r};
 const mS=k=>MS[+k.slice(5)-1],mL=k=>ML[+k.slice(5)-1],cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
 const rev=(m,k)=>+((m.rev||{})[k]||0);
 const uid=()=>Math.random().toString(36).slice(2,10);
@@ -212,6 +273,9 @@ const nextColor=()=>COLORS.find(c=>!S.models.some(m=>m.color===c))||COLORS[S.mod
 const sv=(p,s=20,f)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f||'none'}" stroke="${f?'none':'currentColor'}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
 const I={dashboard:'<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>',
 modeles:'<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M16 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-5.5"/>',
+prospection:'<path d="M3 4h18l-7 8.5V19l-4 2v-8.5z"/>',
+stats:'<path d="M3 21h18M6 17v-5M11 17V7M16 17v-8M21 17V4"/>',
+grip:'<circle cx="9" cy="6" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="18" r="1"/>',
 planning:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
 taches:'<rect x="3" y="3" width="18" height="18" rx="4"/><path d="m8 12 3 3 5-6"/>',
 plus:'<path d="M12 5v14M5 12h14"/>',search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',
@@ -228,7 +292,7 @@ const save=async()=>{if(!art){if(status!=='wait')setStatus('local');return}
  try{await art.publish(docHTML());dirty=false;setStatus('ok')}catch(e){const c=String(e&&(e.code||e.message)||e);if(/conflict/i.test(c))return;setStatus(/not_granted|not_writer/i.test(c)?'ro':'err')}};
 const schedule=()=>{dirty=true;clearTimeout(saveT);setStatus(art?'saving':(status==='wait'?'wait':'local'));saveT=setTimeout(save,1200)};
 const persist=()=>{S.savedAt=Date.now();try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}};
-const commit=(fn,msg)=>{prev=JSON.stringify(S);fn();persist();render();if(msg)toast(msg,true);schedule()};
+const commit=(fn,msg)=>{prev=JSON.stringify(S);fn();persist();render();if(typeof msg==='function')msg=msg();if(msg)toast(msg,true);schedule()};
 const undo=()=>{if(!prev)return;S=JSON.parse(prev);prev=null;persist();render();toast('Action annulée');schedule()};
 let tT;const toast=(m,u)=>{const t=$('#toast');t.innerHTML=`<span>${esc(m)}</span>${u?'<button data-act="undo">Annuler</button>':''}`;t.classList.add('show');clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),5000)};
 
@@ -237,14 +301,15 @@ const taskRow=t=>{const m=mdl(t.modelId);return `<div class="task${t.done?' done
 
 const vDash=()=>{
  const ms=months(),cur=ms[5],pv=ms[4],M=S.models;
- if(!M.length)return `<div class="head"><div><h1>Bienvenue dans ${esc(S.agency)}</h1><p>Ajoutez votre première modèle pour voir revenus, planning et tâches ici.</p></div><button class="btn pri" data-act="add-model">${sv(I.plus,18)}Ajouter une modèle</button></div>`;
+ const PA=S.prospects.filter(p=>p.stage!=='signee'&&p.stage!=='negative').length,PP=S.prospects.filter(p=>POS.includes(p.stage)&&p.stage!=='signee').length;
+ if(!M.length)return `<div class="head"><div><h1>Bienvenue dans ${esc(S.agency)}</h1><p>Ajoute ta première modèle pour voir ici les revenus, le planning et les tâches.${S.prospects.length?` Tu as ${PA} profil${PA>1?'s':''} en cours de prospection.`:' Ou commence par la prospection : colle les @ Instagram des profils que tu veux approcher.'}</p></div><div class="tools"><a class="btn" href="#prospection">${sv(I.prospection,18)}Prospection</a><button class="btn pri" data-act="add-model">${sv(I.plus,18)}Ajouter une modèle</button></div></div>`;
  const tot=k=>M.reduce((a,m)=>a+rev(m,k),0),com=k=>M.reduce((a,m)=>a+rev(m,k)*(+m.pct||0)/100,0);
  const T=tot(cur),P=tot(pv),C=com(cur),CP=com(pv),d=pct(T,P);
  const subs=M.filter(m=>m.status!=='pause').reduce((a,m)=>a+(+m.subs||0),0);
  const lateN=S.tasks.filter(isLate).length,openN=S.tasks.filter(t=>!t.done).length;
  const rank=[...M].sort((a,b)=>rev(b,cur)-rev(a,cur)),top=rank[0];
  const max=Math.max(1,...ms.map(tot)),rmax=Math.max(1,rev(top,cur));
- const cols=ms.map(k=>{const t=tot(k);return `<div class="col${k===cur?' cur':''}"><span class="tot">${t?kEur(t):''}</span><div class="stackbar" style="height:${t/max*86}%">${M.map(m=>{const v=rev(m,k);return v?`<span style="background:${m.color};height:${v/t*100}%" title="${esc(m.name)} : ${eur(v)}"></span>`:''}).join('')}</div></div>`}).join('');
+ const cols=ms.map(k=>{const t=tot(k);return `<div class="col${k===cur?' cur':''}"><span class="tot">${t?kEur(t):''}</span><div class="stackbar" style="height:${t/max*86}%">${M.map(m=>{const v=rev(m,k);return v?`<span style="background:${m.color};height:${v/t*100}%" data-tip="${esc(m.name)} · ${mL(k)}\n${eur(v)}"></span>`:''}).join('')}</div></div>`}).join('');
  const up=S.content.filter(c=>c.date>=T0&&c.date<=iso(addD(TODAY,7))).sort(cmpC).slice(0,6);
  const pr=S.tasks.filter(t=>!t.done).sort(cmpT).slice(0,5);
  const s=M.length>1?'s':'';
@@ -255,6 +320,7 @@ const vDash=()=>{
   <div class="card kpi"><small>Part agence</small><b>${eur(C)}</b>${dl(pct(C,CP),mS(pv))}</div>
   <div class="card kpi"><small>Abonnés (hors pause)</small><b>${num(subs)}</b><span class="delta mutd">${M.length} modèle${s} gérée${s}</span></div>
   <div class="card kpi"><small>Tâches en retard</small><b class="${lateN?'late':''}">${lateN}</b><span class="delta mutd">${openN} à faire au total</span></div>
+  <div class="card kpi"><small>Prospection en cours</small><b>${PA}</b><span class="delta mutd">${PP} réponse${PP>1?'s':''} positive${PP>1?'s':''} à suivre</span></div>
  </div>
  <div class="grid2">
   <section class="card"><h2>Revenus des 6 derniers mois</h2><div class="chart">${cols}</div><div class="months">${ms.map(k=>`<span>${mS(k)}</span>`).join('')}</div><div class="legend">${M.map(m=>`<span><i class="dot" style="--c:${m.color}"></i>${esc(m.name)}</span>`).join('')}</div></section>
@@ -298,42 +364,134 @@ const vTasks=()=>{const L=S.tasks.filter(tfil[ui.tf]).sort(cmpT),lt=S.tasks.filt
  <div class="chips">${Object.entries(TF).map(([k,v])=>`<button class="chip${ui.tf===k?' on':''}" data-act="tf" data-v="${k}">${v}<span>${S.tasks.filter(tfil[k]).length}</span></button>`).join('')}</div>
  <section class="card">${L.length?L.map(taskRow).join(''):`<p class="empty">${ui.tf==='late'?'Aucune tâche en retard.':'Aucune tâche ici.'}</p>`}</section>`};
 
-const R={dashboard:vDash,modeles:vModels,planning:vPlan,taches:vTasks};
+/* ---------- prospection ---------- */
+const cleanHandle=s=>{s=String(s||'').trim();const m=s.match(/instagram\.com\/([^/?#\s]+)/i);if(m)s=m[1];return s.replace(/^@+/,'').replace(/[^\w.]/g,'').toLowerCase().slice(0,30)};
+const daysAgo=s=>Math.round((TODAY-pISO(s))/864e5);
+const kfmt=n=>n>=1e6?(n/1e6).toLocaleString('fr-FR',{maximumFractionDigits:1})+' M':n>=1000?(n/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' k':num(n);
+const needsFollow=p=>p.stage!=='signee'&&p.stage!=='negative'&&((!!p.followUp&&p.followUp<=T0)||((p.stage==='dm'||p.stage==='relance')&&!!p.lastContact&&daysAgo(p.lastContact)>=3));
+const pcard=p=>{const da=p.moved?daysAgo(p.moved):null;return `<div class="pcard" data-act="openp" data-id="${p.id}" style="--c:${PSC[p.stage]}"><div><b>@${esc(p.handle)}</b>${p.name||p.niche?`<small>${esc([p.name,p.niche].filter(Boolean).join(' · '))}</small>`:''}</div><button type="button" class="grip" aria-label="Déplacer @${esc(p.handle)}">${sv(I.grip,18)}</button><div class="pmeta">${p.followers?`<span>${kfmt(p.followers)} abonnés</span>`:''}${da!=null?`<span>${da>0?'depuis '+da+' j':'aujourd’hui'}</span>`:''}${needsFollow(p)?'<span class="pill p-relancer">À relancer</span>':''}${p.ageOk?'<span class="pill p-active">18+ vérifié</span>':''}</div></div>`};
+const boardHTML=()=>{const q=(ui.pq||'').trim().toLowerCase().replace(/^@/,''),L=S.prospects.filter(p=>!q||[p.handle,p.name,p.niche].join(' ').toLowerCase().includes(q));
+ return Object.entries(PS).map(([k,v])=>{const it=L.filter(p=>p.stage===k).sort((a,b)=>String(b.moved||'').localeCompare(String(a.moved||'')));return `<section class="kcol${k==='negative'?' lost':''}" data-stage="${k}" style="--c:${PSC[k]}"><div class="kh"><i></i>${v}<span class="n">${it.length}</span></div>${it.length?it.map(pcard).join(''):`<div class="kempty">${k==='a_contacter'&&!S.prospects.length?'Ajoute des @ au-dessus':'Dépose un profil ici'}</div>`}</section>`}).join('')};
+const vProspect=()=>{const P=S.prospects,c=P.filter(p=>p.stage!=='a_contacter'),pos=P.filter(p=>POS.includes(p.stage)).length,sg=P.filter(p=>p.stage==='signee').length,fu=P.filter(needsFollow).length,rate=c.length?Math.round(pos/c.length*100):null;
+ return `<div class="head"><div><h1>Prospection</h1><p>Glisse chaque profil d’une étape à l’autre. Sur mobile, maintiens la poignée ⋮⋮.${fu?` <span class="late">${fu} à relancer.</span>`:''}</p></div><div class="tools"><label class="search">${sv(I.search,18)}<input id="pq" type="search" placeholder="Chercher un @…" value="${esc(ui.pq)}" aria-label="Chercher un profil"></label></div></div>
+ <form class="padd card" id="padd"><input class="field" name="handles" placeholder="@pseudo ou lien Instagram, plusieurs à la fois possible" required autocomplete="off" aria-label="Ajouter des profils Instagram"><button class="btn pri">${sv(I.plus,18)}Ajouter</button></form>
+ <div class="kpis sm"><div class="card kpi"><small>Profils suivis</small><b>${P.length}</b></div><div class="card kpi"><small>Contactées</small><b>${c.length}</b></div><div class="card kpi"><small>Taux de réponse positive</small><b>${rate==null?'—':rate+' %'}</b><span class="delta mutd">${pos} sur ${c.length} contactée${c.length>1?'s':''}</span></div><div class="card kpi"><small>Signées</small><b>${sg}</b></div></div>
+ <div class="board" id="board">${boardHTML()}</div>`};
+const applyStage=(p,st)=>{if(p.stage===st)return '';p.stage=st;p.moved=T0;if(st==='dm'||st==='relance')p.lastContact=T0;
+ if(st==='signee'&&!mdl(p.modelId)){const m={id:uid(),name:p.name||'@'+p.handle,handle:p.handle,niche:p.niche||'',status:'onboarding',pct:40,price:9.99,subs:0,manager:'',start:T0,ig:p.handle,tt:'',x:'',notes:p.notes||'',rev:{},color:nextColor()};S.models.push(m);p.modelId=m.id;return ' · fiche modèle créée'}return ''};
+const moveTo=(p,st)=>{if(!PS[st]||p.stage===st)return;if(st==='signee'&&!p.ageOk){toast('Vérifie d’abord qu’elle est majeure (case dans sa fiche)');openProspect(p.id);return}let x='';commit(()=>{x=applyStage(p,st)},()=>`@${p.handle} → ${PS[st]}${x}`)};
+
+/* ---------- statistiques ---------- */
+const hidden=new Set();let lineRO=null;
+const visM=()=>S.models.filter(m=>!hidden.has(m.id));
+const IDX={a_contacter:0,dm:1,relance:2,positive:3,appel:4,contrat:5,signee:6,negative:1};
+const FS=[['Repérées',0,'#8a8090'],['Contactées',1,'#3d7bfd'],['Réponse positive',3,'#14a37f'],['Appel / visio',4,'#06a3c4'],['Contrat envoyé',5,'#8b5cf6'],['Signées',6,'#ff4f6d']];
+const CSC={idee:'#b0a7b1',pret:'#f5a524',programme:'#3d7bfd',publie:'#14a37f'};
+const vStats=()=>{
+ const n=ui.sp||6,ms=months(n),cur=ms[n-1],M=S.models,vis=visM();
+ const tot=k=>vis.reduce((a,m)=>a+rev(m,k),0),totals=ms.map(tot),sum=totals.reduce((a,b)=>a+b,0);
+ const comm=ms.reduce((a,k)=>a+vis.reduce((b,m)=>b+rev(m,k)*(+m.pct||0)/100,0),0);
+ const filled=totals.filter(Boolean).length,avg=filled?sum/filled:0,bi=totals.indexOf(Math.max(...totals)),max=Math.max(1,...totals);
+ const chips=M.length?`<div class="chips tog">${M.map(m=>`<button class="chip mchip${hidden.has(m.id)?' off':''}" data-act="togm" data-id="${m.id}" style="--c:${m.color}" aria-pressed="${!hidden.has(m.id)}"><i class="dot"></i>${esc(m.name)}</button>`).join('')}${hidden.size?'<button class="chip" data-act="togall">Tout afficher</button>':''}</div>`:'';
+ const bars=sum?`<div class="chart big">${ms.map((k,i)=>`<div class="col${i===n-1?' cur':''}"><span class="tot">${totals[i]?kEur(totals[i]):''}</span><div class="stackbar" style="height:${totals[i]/max*86}%">${vis.map(m=>{const v=rev(m,k);return v?`<span style="background:${m.color};height:${v/totals[i]*100}%" data-tip="${esc(m.name)} · ${mL(k)}\n${eur(v)} (${Math.round(v/totals[i]*100)} %)"></span>`:''}).join('')}</div></div>`).join('')}</div><div class="months">${ms.map(k=>`<span>${mS(k)}</span>`).join('')}</div>`
+  :`<p class="empty">${M.length?'Aucun chiffre d’affaires saisi sur cette période. Renseigne-le dans les fiches modèles.':'Ajoute une modèle et son chiffre d’affaires pour voir les graphiques.'}</p>`;
+ /* donut */
+ const dv=vis.map(m=>({m,v:rev(m,cur)})).filter(x=>x.v).sort((a,b)=>b.v-a.v),dt=dv.reduce((a,x)=>a+x.v,0),C=2*Math.PI*78;let off=0;
+ const segs=dv.map(x=>{const L=x.v/dt*C,g=dv.length>1?2:0,s=`<circle class="dseg" cx="100" cy="100" r="78" style="stroke:${x.m.color}" stroke-dasharray="${Math.max(L-g,0.5)} ${C-L+g}" stroke-dashoffset="${-off}" data-tip="${esc(x.m.name)}\n${eur(x.v)} · ${Math.round(x.v/dt*100)} %"/>`;off+=L;return s}).join('');
+ const donut=dt?`<div class="dwrap"><svg viewBox="0 0 200 200" class="donut" role="img" aria-label="Répartition du CA de ${mL(cur)}"><circle cx="100" cy="100" r="78" class="dtrack"/><g transform="rotate(-90 100 100)">${segs}</g><text x="100" y="98" class="dn1">${kEur(dt)}</text><text x="100" y="120" class="dn2">${mL(cur)}</text></svg><div class="dleg">${dv.map(x=>`<div data-tip="${esc(x.m.name)}\n${eur(x.v)}"><i class="dot" style="--c:${x.m.color}"></i><span>${esc(x.m.name)}</span><b>${Math.round(x.v/dt*100)} %</b></div>`).join('')}</div></div>`:`<p class="empty">Pas de CA saisi pour ${mL(cur)}.</p>`;
+ /* entonnoir */
+ const P=S.prospects,fc=FS.map(f=>P.filter(p=>IDX[p.stage]>=f[1]).length),neg=P.filter(p=>p.stage==='negative').length;
+ const funnel=P.length?`<div class="funnel">${FS.map((f,i)=>{const cv=i&&fc[i-1]?Math.round(fc[i]/fc[i-1]*100):null;return `<div class="frow" data-tip="${f[0]} : ${fc[i]} profil${fc[i]>1?'s':''}${i?`\n${cv==null?'—':cv+' %'} de l’étape précédente`:''}"><span class="fl">${f[0]}</span><div class="fbar"><i style="width:${fc[i]?Math.max(fc[i]/fc[0]*100,4):0}%;background:${f[2]}"></i></div><b class="num">${fc[i]}</b><span class="fconv">${i?(cv==null?'—':'→ '+cv+' %'):''}</span></div>`}).join('')}</div><p class="hint" style="margin-top:12px">${neg} pas intéressée${neg>1?'s':''} · taux de signature global : ${fc[1]?Math.round(fc[5]/fc[1]*100):0} % des contactées</p>`:`<p class="empty">Ajoute des profils dans Prospection pour voir ton entonnoir.</p><a class="more" href="#prospection">Aller à la prospection →</a>`;
+ /* production */
+ const end30=iso(addD(TODAY,30)),C30=S.content.filter(c=>c.date>=T0&&c.date<=end30),ty=TYPES.map(t=>[t,C30.filter(c=>c.type===t).length]),tmax=Math.max(1,...ty.map(x=>x[1]));
+ const done=S.tasks.filter(t=>t.done).length,tp=S.tasks.length?Math.round(done/S.tasks.length*100):0;
+ const prod=`${C30.length?`<div class="segbar">${Object.keys(CST).map(k=>{const v=C30.filter(c=>c.status===k).length;return v?`<span style="flex:${v};background:${CSC[k]}" data-tip="${CST[k]} : ${v}"></span>`:''}).join('')}</div><div class="legend">${Object.keys(CST).map(k=>`<span><i class="dot" style="--c:${CSC[k]}"></i>${CST[k]} ${C30.filter(c=>c.status===k).length}</span>`).join('')}</div>
+  <div class="hbars">${ty.map(([t,v])=>`<div class="hrow" data-tip="${t} : ${v}"><span>${t}</span><div><i style="width:${v/tmax*100}%"></i></div><b class="num">${v}</b></div>`).join('')}</div>`:'<p class="empty">Aucun contenu prévu sur les 30 prochains jours.</p>'}
+  <h3 class="sub">Tâches terminées</h3><div class="prog" data-tip="${done} sur ${S.tasks.length} tâches"><i style="width:${tp}%"></i></div><p class="hint">${S.tasks.length?`${tp} % · ${S.tasks.filter(isLate).length} en retard`:'Aucune tâche pour l’instant'}</p>`;
+ /* tableau */
+ const rows=M.map(m=>{const r=ms.reduce((a,k)=>a+rev(m,k),0),c=rev(m,cur),p=rev(m,ms[n-2]);return{m,name:m.name.toLowerCase(),r,c,ev:pct(c,p),ag:r*(+m.pct||0)/100,pa:+m.subs?c/m.subs:0}});
+ const k=ui.ss||'r';rows.sort((a,b)=>k==='name'?a.name.localeCompare(b.name):((b[k]??-1e9)-(a[k]??-1e9)));
+ const cols=[['name','Modèle'],['r',`CA ${n} mois`],['c',`CA ${mS(cur)}`],['ev','Évolution'],['pa','CA / abonné'],['ag','Part agence']];
+ const table=M.length?`<div class="scroll"><table class="perf"><thead><tr>${cols.map(([c,l])=>`<th><button class="th${k===c?' on':''}" data-act="sort" data-v="${c}">${l}${k===c?' ↓':''}</button></th>`).join('')}<th>Tendance</th></tr></thead><tbody>${rows.map(x=>{const mx=Math.max(1,...ms.map(q=>rev(x.m,q)));return `<tr><td><span class="tname"><span class="av sm" style="--c:${x.m.color}">${ini(x.m.name)}</span>${esc(x.m.name)}</span></td><td>${eur(x.r)}</td><td>${eur(x.c)}</td><td>${x.ev==null?'—':dl(x.ev)}</td><td>${x.pa?eur2(x.pa):'—'}</td><td>${eur(x.ag)}</td><td><span class="spark mini" style="--c:${x.m.color}">${ms.map(q=>`<i style="height:${Math.max(8,rev(x.m,q)/mx*100)}%" data-tip="${mL(q)} : ${eur(rev(x.m,q))}"></i>`).join('')}</span></td></tr>`}).join('')}</tbody></table></div>`:'<p class="empty">Aucune modèle pour l’instant.</p>';
+ return `<div class="head"><div><h1>Statistiques</h1><p>${sum?`${eur(sum)} de CA sur ${n} mois, dont ${eur(comm)} pour l’agence.`:'Les graphiques se remplissent au fur et à mesure que tu saisis tes données.'}</p></div><div class="chips" style="margin:0">${[3,6,12].map(v=>`<button class="chip${n===v?' on':''}" data-act="sp" data-v="${v}">${v} mois</button>`).join('')}</div></div>
+ <section class="card" style="margin-bottom:16px"><h2>Chiffre d’affaires par mois</h2>${chips}${bars}
+  <div class="srow"><div><small>Total sur ${n} mois</small><b>${eur(sum)}</b></div><div><small>Moyenne par mois</small><b>${eur(avg)}</b></div><div><small>Meilleur mois</small><b>${sum?cap(mL(ms[bi])):'—'}</b></div><div><small>Part agence</small><b>${eur(comm)}</b></div></div></section>
+ <div class="grid2"><section class="card"><h2>CA brut et part agence</h2><div class="legend" style="margin:0 0 8px"><span><i class="dot" style="--c:var(--acc)"></i>CA brut</span><span><i class="dot" style="--c:var(--ink)"></i>Part agence</span></div>${sum?'<div class="fig"><svg id="lineSvg"></svg></div>':'<p class="empty">Pas encore de données.</p>'}</section>
+  <section class="card"><h2>Répartition de ${mL(cur)}</h2>${donut}</section></div>
+ <div class="grid2 even"><section class="card"><h2>Entonnoir de recrutement</h2>${funnel}</section><section class="card"><h2>Production, 30 prochains jours</h2>${prod}</section></div>
+ <section class="card"><h2>Performance par modèle</h2>${table}</section>`};
+const drawLine=()=>{const s=$('#lineSvg');if(!s)return;const W=s.clientWidth||600,H=s.clientHeight||300,n=ui.sp||6,ms=months(n),vis=visM();
+ const g=ms.map(k=>vis.reduce((a,m)=>a+rev(m,k),0)),c=ms.map(k=>vis.reduce((a,m)=>a+rev(m,k)*(+m.pct||0)/100,0));
+ const nar=W<520,pl=nar?10:52,pr=14,pt=16,pb=28,mx=Math.max(1,...g)*1.12,step=n>1?(W-pl-pr)/(n-1):0;
+ const x=i=>n>1?pl+i*step:W/2,y=v=>pt+(H-pt-pb)*(1-v/mx),path=a=>a.map((v,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join('');
+ let o='';for(let t=0;t<=4;t++){const v=mx/4*t,yy=y(v);o+=`<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" class="gl"/>`+(nar?'':`<text x="${pl-8}" y="${yy+4}" class="yl">${kEur(v)}</text>`)}
+ o+=`<path d="${path(g)} L${x(n-1)} ${y(0)} L${x(0)} ${y(0)}Z" class="area"/><path d="${path(g)}" class="ln1"/><path d="${path(c)}" class="ln2"/>`;
+ ms.forEach((k,i)=>{const hw=n>1?step/2:W/2;o+=`<rect class="hit" x="${x(i)-hw}" y="${pt}" width="${hw*2}" height="${H-pt-pb}" data-tip="${cap(mL(k))}\nCA brut : ${eur(g[i])}\nPart agence : ${eur(c[i])}"/><circle cx="${x(i)}" cy="${y(g[i])}" r="4" class="pt1"/><circle cx="${x(i)}" cy="${y(c[i])}" r="3.5" class="pt2"/>`;
+  if(!nar||n<=6||i%2===(n-1)%2)o+=`<text x="${x(i)}" y="${H-8}" class="xl">${mS(k)}</text>`});
+ s.innerHTML=o};
+const afterRender=()=>{if(lineRO){lineRO.disconnect();lineRO=null}const s=$('#lineSvg');if(!s)return;if(window.ResizeObserver){lineRO=new ResizeObserver(drawLine);lineRO.observe(s)}else drawLine()};
+
+const R={dashboard:vDash,modeles:vModels,prospection:vProspect,stats:vStats,planning:vPlan,taches:vTasks};
 const root=$('#root');
-root.innerHTML='<div id="shell"></div><div id="layer"></div><div id="toast" class="toast" role="status" aria-live="polite"></div>';
+root.innerHTML='<div id="shell"></div><div id="layer"></div><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="tip" class="tip" aria-hidden="true"></div>';
 const render=()=>{const late=S.tasks.filter(isLate).length;
- $('#shell').innerHTML=`<div class="app"><aside class="side"><div class="brand"><span class="logo">${sv(I.logo,18,'#fff')}</span><b>${esc(S.agency||'Mon Agence')}</b></div><nav>${Object.entries(VIEWS).map(([k,v])=>`<a href="#${k}" class="${k===ui.view?'on':''}" aria-label="${v}">${sv(I[k])}<span>${v}</span>${k==='taches'&&late?`<i class="badge">${late}</i>`:''}</a>`).join('')}</nav><div class="side-foot"><button class="ghost-side" data-act="settings" aria-label="Réglages">${sv(I.gear,18)}<span>Réglages</span></button><div id="save" class="save ${status}"><i></i><span>${SL[status]}</span></div></div></aside><main>${R[ui.view]()}</main></div>`};
+ $('#shell').innerHTML=`<div class="app"><aside class="side"><div class="brand"><span class="logo">${sv(I.logo,18,'#fff')}</span><b>${esc(S.agency||'Mon Agence')}</b></div><nav>${Object.entries(VIEWS).map(([k,v])=>`<a href="#${k}" class="${k===ui.view?'on':''}" aria-label="${v}">${sv(I[k])}<span>${v}</span>${k==='taches'&&late?`<i class="badge">${late}</i>`:''}</a>`).join('')}</nav><div class="side-foot"><button class="ghost-side" data-act="settings" aria-label="Réglages">${sv(I.gear,18)}<span>Réglages</span></button><div id="save" class="save ${status}"><i></i><span>${SL[status]}</span></div></div></aside><main>${R[ui.view]()}</main></div>`;afterRender()};
 
 /* ---------- panneaux ---------- */
 const layer=()=>$('#layer');
 const closeLayer=()=>{layer().innerHTML=''};
-const openDrawer=(title,id,body,foot)=>{layer().innerHTML=`<div class="ov" data-act="close"></div><form class="drawer" id="${id}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="dh"><h2>${esc(title)}</h2><button type="button" class="icon-btn" data-act="close" aria-label="Fermer">${sv(I.x)}</button></div><div class="db">${body}</div><div class="df">${foot}</div></form>`;const f=layer().querySelector('.db input:not([type=hidden]),.db select,.db textarea');if(f)f.focus()};
+const openDrawer=(title,id,body,foot,head,tabs)=>{layer().innerHTML=`<div class="ov" data-act="close"></div><form class="drawer" id="${id}" role="dialog" aria-modal="true" aria-label="${esc(title)}"><div class="dh${head?' hero':''}">${head||`<h2>${esc(title)}</h2>`}<button type="button" class="icon-btn" data-act="close" aria-label="Fermer">${sv(I.x)}</button>${tabs||''}</div><div class="db">${body}</div><div class="df">${foot}</div></form>`;const f=layer().querySelector('.db input:not([type=hidden]):not([type=radio]),.db textarea');if(f&&!head)f.focus()};
 const F=(l,inner,full)=>`<label${full?' class="full"':''}>${l}${inner}</label>`;
+const G=(l,inner,full)=>`<div class="fgroup${full?' full':''}"><span class="flabel">${l}</span>${inner}</div>`;
 const inp=(n,v,t='text',x='')=>`<input class="field" name="${n}" type="${t}" value="${esc(v??'')}" ${x}>`;
-const foot=(delAct,id)=>`${id?`<button type="button" class="btn danger" data-act="${delAct}" data-id="${id}">${sv(I.trash,18)}Supprimer</button>`:''}<span class="sp"></span><button type="button" class="btn" data-act="close">Annuler</button><button class="btn pri">Enregistrer</button>`;
-const openModel=id=>{const m=id?mdl(id):{id:uid(),name:'',handle:'',niche:'',status:'onboarding',pct:40,price:9.99,subs:0,manager:'',start:T0,ig:'',tt:'',x:'',notes:'',rev:{},color:nextColor()};
- openDrawer(id?m.name:'Nouvelle modèle','fm',`<input type="hidden" name="id" value="${m.id}">
- ${F('Nom',inp('name',m.name,'text','required autocomplete="off"'),1)}${F('Pseudo',inp('handle',m.handle,'text','placeholder="sans @"'))}${F('Niche',inp('niche',m.niche))}
- ${F('Statut',`<select class="field" name="status">${opts(ST,m.status)}</select>`)}${F('Manager',inp('manager',m.manager))}
- ${F('Part agence (%)',inp('pct',m.pct,'number','min="0" max="100" step="1"'))}${F('Prix abonnement (€)',inp('price',m.price,'number','min="0" step="0.01"'))}
- ${F('Abonnés',inp('subs',m.subs,'number','min="0" step="1"'))}${F('Début de collaboration',inp('start',m.start,'date'))}
- ${F('Couleur',`<select class="field" name="color">${COLORS.map((c,i)=>`<option value="${c}"${c===m.color?' selected':''}>${['Corail','Bleu','Ambre','Vert','Violet','Cyan','Orange','Fuchsia'][i]}</option>`).join('')}</select>`,1)}
- <h3>Réseaux</h3>${F('Instagram',inp('ig',m.ig))}${F('TikTok',inp('tt',m.tt))}${F('X',inp('x',m.x))}
- <h3>Chiffre d’affaires mensuel (€)</h3><div class="revs">${months().map(k=>F(cap(mL(k))+' '+k.slice(0,4),inp('rev_'+k,(m.rev||{})[k]??'','number','min="0" step="1" inputmode="numeric"'))).join('')}</div>
- ${F('Notes',`<textarea class="field" name="notes" rows="4">${esc(m.notes)}</textarea>`,1)}`,foot('delmodel',id))};
+const seg=(name,o,v,col)=>`<div class="seg" role="radiogroup">${Object.entries(o).map(([k,l])=>`<label class="opt"><input type="radio" name="${name}" value="${esc(k)}"${k===v?' checked':''}><span>${col?`<i class="dot" style="--c:${col[k]}"></i>`:''}${esc(l)}</span></label>`).join('')}</div>`;
+const euroIn=(n,v,x='')=>`<span class="affix">${inp(n,v,'number',x)}<span>€</span></span>`;
+const foot=(delAct,id,label)=>`${id?`<button type="button" class="linkdanger" data-act="${delAct}" data-id="${id}">${sv(I.trash,18)}Supprimer</button>`:''}<span class="sp"></span><button class="btn pri">${label||'Enregistrer'}</button>`;
+const tabsH=t=>`<div class="tabs" role="tablist">${t.map(([k,l],i)=>`<button type="button" class="tab${i?'':' on'}" data-act="tab" data-v="${k}" role="tab">${l}</button>`).join('')}</div>`;
+const STC={active:'#14a37f',onboarding:'#3d7bfd',pause:'#b0a7b1'};
+const openModel=id=>{const m=id?mdl(id):{id:uid(),name:'',handle:'',niche:'',status:'onboarding',pct:40,price:9.99,subs:0,manager:'',start:T0,ig:'',tt:'',x:'',notes:'',rev:{},color:nextColor()};const ms=months();
+ const head=`<span class="av lg" id="fmAv" style="--c:${m.color}">${ini(m.name)}</span><div class="hn"><input class="title-in" name="name" value="${esc(m.name)}" placeholder="Nom de la modèle" required autocomplete="off" aria-label="Nom"><label class="handle-in">@<input name="handle" value="${esc(m.handle)}" placeholder="pseudo_onlyfans" autocomplete="off" aria-label="Pseudo"></label></div>`;
+ const body=`<input type="hidden" name="id" value="${m.id}">
+ <div class="panel" data-p="p">
+  ${G('Statut',seg('status',ST,m.status,STC),1)}
+  ${F('Niche',inp('niche',m.niche,'text','placeholder="fitness, cosplay…"'))}${F('Manager',inp('manager',m.manager,'text','placeholder="Qui s’en occupe ?"'))}
+  ${G('Part agence',`<div class="slider"><input type="range" name="pct" min="0" max="80" step="1" value="${+m.pct||0}" aria-label="Part agence en pourcentage"><output id="pctOut">${+m.pct||0} %</output></div><p class="hint" id="pctHint"></p>`,1)}
+  ${F('Prix de l’abonnement',euroIn('price',m.price,'min="0" step="0.01"'))}${F('Abonnés',inp('subs',m.subs,'number','min="0" step="1"'))}
+  ${F('Début de collaboration',inp('start',m.start,'date'))}
+  ${G('Couleur',`<div class="swatches">${COLORS.map(c=>`<label class="sw"><input type="radio" name="color" value="${c}"${c===m.color?' checked':''} aria-label="Couleur ${c}"><span style="--c:${c}"></span></label>`).join('')}</div>`)}
+ </div>
+ <div class="panel" data-p="r" hidden><p class="hint">Chiffre d’affaires brut de chaque mois, tel qu’affiché sur OnlyFans.</p><div class="revlist">${ms.map(k=>`<div class="revrow"><span class="rm">${cap(mL(k))}</span>${euroIn('rev_'+k,(m.rev||{})[k]??'','min="0" step="1" inputmode="numeric" placeholder="0"')}<div class="rbar"><i></i></div></div>`).join('')}</div><div class="revtot"><span>Total sur 6 mois</span><b id="revTot"></b></div></div>
+ <div class="panel" data-p="n" hidden>${F('Instagram',inp('ig',m.ig,'text','placeholder="pseudo"'))}${F('TikTok',inp('tt',m.tt,'text','placeholder="pseudo"'))}${F('X',inp('x',m.x,'text','placeholder="pseudo"'))}${F('Notes',`<textarea class="field" name="notes" rows="8" placeholder="Préférences, limites, idées de contenu…">${esc(m.notes)}</textarea>`,1)}</div>`;
+ openDrawer(m.name||'Nouvelle modèle','fm',body,foot('delmodel',id,id?'Enregistrer':'Créer la fiche'),head,tabsH([['p','Profil'],['r','Revenus'],['n','Réseaux et notes']]));liveModel();if(!id)$('#fm [name=name]').focus()};
+const liveModel=()=>{const f=$('#fm');if(!f)return;const d=new FormData(f),ms=months(),c=d.get('color')||COLORS[0],av=$('#fmAv');av.style.setProperty('--c',c);av.textContent=ini(d.get('name'))||'+';
+ const p=+d.get('pct')||0,cv=+d.get('rev_'+ms[5])||0;$('#pctOut').textContent=p+' %';$('#pctHint').textContent=cv?`En ${mL(ms[5])} : ${eur(cv*p/100)} pour l’agence, ${eur(cv*(100-p)/100)} pour elle.`:`Sur 1 000 € de CA : ${eur(10*p)} pour l’agence, ${eur(10*(100-p))} pour elle.`;
+ const vals=ms.map(k=>+d.get('rev_'+k)||0),mx=Math.max(1,...vals);f.querySelectorAll('.rbar i').forEach((i,j)=>{i.style.width=vals[j]/mx*100+'%';i.style.background=c});$('#revTot').textContent=eur(vals.reduce((a,b)=>a+b,0))};
 const openContent=(id,date)=>{const c=id?byId(S.content,id):{id:uid(),modelId:ui.pf!=='all'?ui.pf:((S.models[0]||{}).id||''),date:date||T0,time:'18:00',type:'Post mur',title:'',price:'',status:'idee',note:''};
  openDrawer(id?'Modifier le contenu':'Nouveau contenu','fc',`<input type="hidden" name="id" value="${c.id}">
- ${F('Titre',inp('title',c.title,'text','required autocomplete="off"'),1)}
- ${F('Modèle',`<select class="field" name="modelId"><option value="">Agence</option>${modelOpts(c.modelId)}</select>`)}${F('Type',`<select class="field" name="type">${opts(Object.fromEntries(TYPES.map(t=>[t,t])),c.type)}</select>`)}
+ ${F('Titre',inp('title',c.title,'text','required autocomplete="off" placeholder="ex. Teaser shooting"'),1)}
+ ${G('Modèle',seg('modelId',{'':'Agence',...Object.fromEntries(S.models.map(m=>[m.id,m.name]))},c.modelId,{'':GHOST.color,...Object.fromEntries(S.models.map(m=>[m.id,m.color]))}),1)}
+ ${G('Type',seg('type',Object.fromEntries(TYPES.map(t=>[t,t])),c.type),1)}
  ${F('Date',inp('date',c.date,'date','required'))}${F('Heure',inp('time',c.time,'time'))}
- ${F('Prix (PPV, €)',inp('price',c.price,'number','min="0" step="0.01" placeholder="—"'))}${F('Statut',`<select class="field" name="status">${opts(CST,c.status)}</select>`)}
- ${F('Note',`<textarea class="field" name="note" rows="3">${esc(c.note)}</textarea>`,1)}`,foot('delc',id))};
+ ${F('Prix (si PPV)',euroIn('price',c.price,'min="0" step="0.01" placeholder="—"'))}
+ ${G('Statut',seg('status',CST,c.status,CSC),1)}
+ ${F('Note',`<textarea class="field" name="note" rows="3">${esc(c.note)}</textarea>`,1)}`,foot('delc',id,id?'Enregistrer':'Ajouter au planning'))};
 const openTask=id=>{const t=byId(S.tasks,id);if(!t)return;
  openDrawer('Modifier la tâche','ft',`<input type="hidden" name="id" value="${t.id}">
  ${F('Tâche',inp('title',t.title,'text','required autocomplete="off"'),1)}
  ${F('Modèle',`<select class="field" name="modelId"><option value="">Agence (général)</option>${modelOpts(t.modelId)}</select>`)}${F('Responsable',inp('who',t.who))}
- ${F('Échéance',inp('due',t.due,'date'))}${F('Priorité',`<select class="field" name="prio">${opts(PRIO,t.prio)}</select>`)}
- <label class="full checkline"><input type="checkbox" class="chk" name="done"${t.done?' checked':''}>Terminée</label>`,foot('deltask',id))};
+ ${F('Échéance',inp('due',t.due,'date'))}
+ ${G('Priorité',seg('prio',PRIO,t.prio,{haute:'#ff4f6d',moyenne:'#f5a524',basse:'#b0a7b1'}),1)}
+ <label class="agecard"><input type="checkbox" class="chk" name="done"${t.done?' checked':''}><span>Terminée</span></label>`,foot('deltask',id))};
+const openProspect=id=>{const p=byId(S.prospects,id);if(!p)return;const m=mdl(p.modelId);
+ const head=`<span class="av lg" style="--c:${PSC[p.stage]}">${sv(I.prospection,24)}</span><div class="hn"><label class="title-wrap">@<input class="title-in" name="handle" value="${esc(p.handle)}" required autocomplete="off" aria-label="Pseudo Instagram"></label><a class="instalink" href="https://www.instagram.com/${encodeURIComponent(p.handle)}/" target="_blank" rel="noopener">Voir le profil Instagram ↗</a></div>`;
+ openDrawer('@'+p.handle,'fp',`<input type="hidden" name="id" value="${p.id}">
+ ${G('Étape',seg('stage',PS,p.stage,PSC),1)}
+ ${F('Prénom / nom',inp('name',p.name,'text','placeholder="Facultatif"'))}${F('Niche',inp('niche',p.niche,'text','placeholder="fitness, cosplay…"'))}
+ ${F('Abonnés Instagram',inp('followers',p.followers||'','number','min="0" step="1" placeholder="ex. 25000"'))}${F('Relance prévue le',inp('followUp',p.followUp,'date'))}
+ ${F('Dernier contact',inp('lastContact',p.lastContact,'date'))}
+ <label class="agecard"><input type="checkbox" class="chk" name="ageOk"${p.ageOk?' checked':''}><span>Majeure vérifiée<small>Pièce d’identité vue. Obligatoire pour passer en Signée. Au moindre doute sur l’âge, ne va pas plus loin.</small></span></label>
+ ${m?`<p class="hint">Fiche modèle liée : <b>${esc(m.name)}</b></p>`:''}
+ ${F('Notes',`<textarea class="field" name="notes" rows="4" placeholder="Message envoyé, sa réponse, ses attentes…">${esc(p.notes)}</textarea>`,1)}`,foot('delp',id),head)};
 const openSettings=()=>openDrawer('Réglages','fs',`${F('Nom de l’agence',inp('agency',S.agency,'text','required'),1)}
  <h3>Sauvegarde</h3><p class="hint">Copiez ce texte pour garder une copie de vos données, ou collez une sauvegarde pour la restaurer.</p>
  ${F('Exporter',`<textarea class="field" id="exp" rows="3" readonly>${esc(JSON.stringify(S))}</textarea>`,1)}<div class="full"><button type="button" class="btn" data-act="copy">Copier</button></div>
@@ -349,27 +507,67 @@ D.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.t
  else if(a==='add-content')openContent(null,b.dataset.date);
  else if(a==='editc')openContent(id);
  else if(a==='edittask')openTask(id);
+ else if(a==='openp'){if(Date.now()-lastDrag>350)openProspect(id)}
+ else if(a==='delp'){const p=byId(S.prospects,id);closeLayer();commit(()=>{S.prospects=S.prospects.filter(x=>x.id!==id)},`@${p?p.handle:''} retirée de la prospection`)}
  else if(a==='settings')openSettings();
- else if(a==='mf'||a==='tf'){ui[a]=b.dataset.v;keepUI();render()}
+ else if(a==='mf'||a==='tf'||a==='ss'||a==='sort'){ui[a==='sort'?'ss':a]=b.dataset.v;keepUI();render()}
+ else if(a==='sp'){ui.sp=+b.dataset.v;keepUI();render()}
+ else if(a==='togm'){hidden.has(id)?hidden.delete(id):hidden.add(id);if(hidden.size>=S.models.length)hidden.clear();render()}
+ else if(a==='togall'){hidden.clear();render()}
+ else if(a==='tab'){const f=b.closest('form');f.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t===b));f.querySelectorAll('.panel').forEach(p=>p.hidden=p.dataset.p!==b.dataset.v)}
  else if(a==='delc'){const c=byId(S.content,id);closeLayer();commit(()=>{S.content=S.content.filter(x=>x.id!==id)},`« ${c?c.title:'Contenu'} » supprimé`)}
  else if(a==='deltask'){closeLayer();commit(()=>{S.tasks=S.tasks.filter(x=>x.id!==id)},'Tâche supprimée')}
  else if(a==='delmodel'){const m=mdl(id);closeLayer();commit(()=>{S.models=S.models.filter(x=>x.id!==id);S.content=S.content.filter(x=>x.modelId!==id);S.tasks=S.tasks.filter(x=>x.modelId!==id)},`${m?m.name:'Modèle'} supprimée, avec son planning et ses tâches`)}
  else if(a==='copy'){const t=$('#exp');const p=navigator.clipboard&&navigator.clipboard.writeText(t.value);(p||Promise.reject()).then(()=>toast('Sauvegarde copiée'),()=>{t.focus();t.select();toast('Texte sélectionné : copiez avec Ctrl+C')})}
- else if(a==='import'){try{const d=JSON.parse($('#imp').value);if(!Array.isArray(d.models)||!Array.isArray(d.content)||!Array.isArray(d.tasks))throw 0;closeLayer();commit(()=>{S=Object.assign({agency:'Mon Agence'},d)},'Sauvegarde importée')}catch(_){toast('Ce texte n’est pas une sauvegarde valide')}}
- else if(a==='reset'){closeLayer();commit(()=>{S.models=[];S.content=[];S.tasks=[];S.sample=false},'Toutes les données ont été effacées')}
+ else if(a==='import'){try{const d=JSON.parse($('#imp').value);if(!Array.isArray(d.models)||!Array.isArray(d.content)||!Array.isArray(d.tasks))throw 0;closeLayer();commit(()=>{S=Object.assign({agency:'Mon Agence',prospects:[]},d)},'Sauvegarde importée')}catch(_){toast('Ce texte n’est pas une sauvegarde valide')}}
+ else if(a==='reset'){closeLayer();commit(()=>{S.models=[];S.content=[];S.tasks=[];S.prospects=[];S.sample=false},'Toutes les données ont été effacées')}
 });
 D.addEventListener('change',e=>{const el=e.target,a=el.dataset.act,id=el.dataset.id;
  if(a==='toggle'){const t=byId(S.tasks,id);if(t)commit(()=>{t.done=el.checked},el.checked?'Tâche terminée':null)}
  else if(a==='cstatus'){const c=byId(S.content,id);if(c)commit(()=>{c.status=el.value})}
  else if(a==='pf'){ui.pf=el.value;keepUI();render()}
 });
-D.addEventListener('input',e=>{if(e.target.id==='q'){ui.q=e.target.value;keepUI();$('#grid').innerHTML=gridHTML()}});
+D.addEventListener('input',e=>{if(e.target.id==='q'){ui.q=e.target.value;keepUI();$('#grid').innerHTML=gridHTML()}
+ else if(e.target.id==='pq'){ui.pq=e.target.value;keepUI();$('#board').innerHTML=boardHTML()}
+ else if(e.target.closest&&e.target.closest('#fm'))liveModel()});
+
+/* glisser-déposer (souris partout sur la carte, tactile via la poignée) */
+let drag=null,lastDrag=0;
+const endDrag=()=>{if(!drag)return;if(drag.ghost)drag.ghost.remove();drag.card.classList.remove('dragging');D.querySelectorAll('.kcol.over').forEach(c=>c.classList.remove('over'));D.body.classList.remove('dragon');drag=null};
+D.addEventListener('pointerdown',e=>{const card=e.target.closest('.pcard');if(!card||e.button>0||drag)return;const onGrip=!!e.target.closest('.grip');if(e.pointerType!=='mouse'&&!onGrip)return;drag={id:card.dataset.id,card,x:e.clientX,y:e.clientY,pid:e.pointerId,on:false,over:null};if(onGrip)e.preventDefault()});
+D.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.pid)return;
+ if(!drag.on){if(Math.hypot(e.clientX-drag.x,e.clientY-drag.y)<6)return;const r=drag.card.getBoundingClientRect();drag.dx=drag.x-r.left;drag.dy=drag.y-r.top;const g=drag.card.cloneNode(true);g.classList.add('ghost');g.removeAttribute('data-act');g.style.width=r.width+'px';D.body.appendChild(g);drag.ghost=g;drag.card.classList.add('dragging');D.body.classList.add('dragon');drag.on=true}
+ e.preventDefault();
+ drag.ghost.style.transform=`translate(${e.clientX-drag.dx}px,${e.clientY-drag.dy}px) rotate(2deg)`;
+ const el=D.elementFromPoint(e.clientX,e.clientY),col=el&&el.closest('.kcol');
+ if(col!==drag.over){if(drag.over)drag.over.classList.remove('over');drag.over=col;if(col)col.classList.add('over')}
+ const b=$('#board');if(b){const r=b.getBoundingClientRect();if(e.clientX<r.left+60)b.scrollLeft-=14;else if(e.clientX>r.right-60)b.scrollLeft+=14}
+ if(e.clientY<50)scrollBy(0,-12);else if(e.clientY>innerHeight-50)scrollBy(0,12);
+},{passive:false});
+D.addEventListener('pointerup',e=>{if(!drag||e.pointerId!==drag.pid)return;if(!drag.on){drag=null;return}
+ lastDrag=Date.now();const st=drag.over&&drag.over.dataset.stage,id=drag.id;endDrag();const p=st&&byId(S.prospects,id);if(p)moveTo(p,st)});
+D.addEventListener('pointercancel',endDrag);
+
+/* infobulles */
+const hideTip=()=>{const el=$('#tip');if(el)el.classList.remove('on')};
+const showTip=e=>{const el=$('#tip');if(!el)return;const t=e.target.closest?e.target.closest('[data-tip]'):null;if(!t||(drag&&drag.on))return hideTip();
+ el.textContent=t.dataset.tip;const w=el.offsetWidth,h=el.offsetHeight;let x=e.clientX+14,y=e.clientY-h-12;if(x+w>innerWidth-8)x=e.clientX-w-14;if(x<8)x=8;if(y<8)y=e.clientY+18;el.style.transform=`translate(${x}px,${y}px)`;el.classList.add('on')};
+D.addEventListener('pointermove',showTip);D.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')showTip(e)});
+D.addEventListener('mouseleave',hideTip);addEventListener('scroll',hideTip,{passive:true});
 D.addEventListener('submit',e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f)),tr=v=>String(v??'').trim();
  if(f.id==='fm'){const isNew=!mdl(d.id);commit(()=>{let m=mdl(d.id);if(!m){m={id:d.id,rev:{}};S.models.push(m)}
   Object.assign(m,{name:tr(d.name),handle:tr(d.handle).replace(/^@/,''),niche:tr(d.niche),status:d.status,manager:tr(d.manager),pct:+d.pct||0,price:+d.price||0,subs:+d.subs||0,start:d.start,color:d.color,ig:tr(d.ig),tt:tr(d.tt),x:tr(d.x),notes:d.notes||''});
   m.rev=m.rev||{};months().forEach(k=>{const v=d['rev_'+k];if(v===''||v==null)delete m.rev[k];else m.rev[k]=+v})},isNew?`${tr(d.name)} ajoutée`:'Fiche enregistrée');closeLayer()}
  else if(f.id==='fc'){const isNew=!byId(S.content,d.id);commit(()=>{let c=byId(S.content,d.id);if(!c){c={id:d.id};S.content.push(c)}Object.assign(c,{title:tr(d.title),modelId:d.modelId,type:d.type,date:d.date,time:d.time,price:d.price===''?'':+d.price,status:d.status,note:d.note||''})},isNew?'Contenu ajouté au planning':'Contenu enregistré');closeLayer()}
  else if(f.id==='ft'){const t=byId(S.tasks,d.id);if(t)commit(()=>{Object.assign(t,{title:tr(d.title),modelId:d.modelId,who:tr(d.who),due:d.due,prio:d.prio,done:!!d.done})},'Tâche enregistrée');closeLayer()}
+ else if(f.id==='padd'){const hs=[...new Set(String(d.handles).split(/[\s,;]+/).map(cleanHandle).filter(Boolean))],ex=new Set(S.prospects.map(p=>p.handle)),nw=hs.filter(h=>!ex.has(h));
+  if(!nw.length){toast(hs.length?'Ces profils sont déjà dans ta liste':'Aucun pseudo valide');return}
+  const dup=hs.length-nw.length,s=nw.length>1?'s':'';
+  commit(()=>{nw.forEach(h=>S.prospects.push({id:uid(),handle:h,name:'',followers:0,niche:'',stage:'a_contacter',moved:T0,added:T0,lastContact:'',followUp:'',ageOk:false,notes:''}))},`${nw.length} profil${s} ajouté${s}${dup?` (${dup} déjà présent${dup>1?'s':''})`:''}`);
+  const q=$('#padd input');if(q)q.focus()}
+ else if(f.id==='fp'){const p=byId(S.prospects,d.id);if(!p)return;const ageOk=!!d.ageOk;
+  if(d.stage==='signee'&&!ageOk){toast('Coche « Majeure vérifiée » avant de la passer en Signée');return}
+  let x='';commit(()=>{Object.assign(p,{handle:cleanHandle(d.handle)||p.handle,name:tr(d.name),followers:+d.followers||0,niche:tr(d.niche),lastContact:d.lastContact,followUp:d.followUp,ageOk,notes:d.notes||''});x=applyStage(p,d.stage)},()=>'Fiche enregistrée'+x);closeLayer()}
  else if(f.id==='fs'){commit(()=>{S.agency=tr(d.agency)||'Mon Agence'},'Réglages enregistrés');closeLayer()}
  else if(f.id==='qadd'){commit(()=>{S.tasks.push({id:uid(),title:tr(d.title),modelId:d.modelId,due:d.due,prio:d.prio,who:'',done:false})},'Tâche ajoutée');const q=$('#qadd input[name=title]');if(q)q.focus()}
 });
