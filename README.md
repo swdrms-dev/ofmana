@@ -14,7 +14,7 @@ Fonctions principales :
 - **Objectifs** mensuels, avec projection de fin de mois.
 - **Onboarding** : checklist d'arrivée et coffre à documents privé.
 - **Anti-fuite** : suivi des fuites et modèle de demande DMCA.
-- **Assistant IA** (OpenAI, côté serveur) : idées de contenus, analyse des revenus, messages de prospection.
+- **onlyAI**, l’agent IA (OpenAI, côté serveur) : il répond sur les données de l’agence et propose des actions (créer ou modifier des fiches, des tâches, des contenus, le CA, des paiements, des prospects…) que l’admin valide avant qu’elles s’appliquent. Il propose aussi des idées de contenus, des analyses et des messages de prospection.
 
 Interface sombre, effet verre, accents violet et magenta. Le site tient dans un seul fichier, `index.html`, et ne demande aucune étape de build. Il est hébergé sur GitHub Pages, et les comptes et les données sont stockés sur Supabase.
 
