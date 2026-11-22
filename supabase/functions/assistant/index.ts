@@ -30,6 +30,14 @@ const TASKS: Record<string, string> = {
   free: "Réponds à la question de l'agence.",
 };
 
+const pubKey = () => {
+  try {
+    const k = JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS") ?? "{}");
+    if (k.default) return k.default as string;
+  } catch (_) { /* ignore */ }
+  return Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+};
+
 const secretKey = () => {
   try {
     const k = JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") ?? "{}");
@@ -59,28 +67,41 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors });
   if (req.method !== "POST") return json({ error: "Méthode non autorisée" }, 405);
 
-  const admin = createClient(Deno.env.get("SUPABASE_URL")!, secretKey(), { auth: { persistSession: false } });
-
-  // 1. Qui appelle ? Seuls les admins connectés ont accès.
+  const url = Deno.env.get("SUPABASE_URL")!;
   const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
   if (!token) return json({ error: "Non connecté" }, 401);
-  const { data: u, error: ue } = await admin.auth.getUser(token);
+
+  // 1. Qui appelle ? On lit son rôle avec SA session (les règles RLS l'autorisent à lire son propre profil).
+  const userDb = createClient(url, pubKey(), {
+    auth: { persistSession: false, autoRefreshToken: false },
+    global: { headers: { Authorization: `Bearer ${token}` } },
+  });
+  const { data: u, error: ue } = await userDb.auth.getUser(token);
   if (ue || !u?.user) return json({ error: "Session expirée : reconnecte-toi" }, 401);
-  const { data: prof } = await admin.from("profiles").select("role").eq("id", u.user.id).maybeSingle();
+  const { data: prof, error: pe } = await userDb.from("profiles").select("role").eq("id", u.user.id).maybeSingle();
+  if (pe) { console.error("profil", pe); return json({ error: "Lecture du profil impossible : " + pe.message }, 500); }
   if (prof?.role !== "admin") return json({ error: "Réservé aux admins" }, 403);
+
+  // Client serveur (clé secrète) pour le quota et la clé OpenAI.
+  const admin = createClient(url, secretKey(), { auth: { persistSession: false, autoRefreshToken: false } });
 
   // 2. Clé et quota journalier (protège le crédit OpenAI).
   let key = Deno.env.get("OPENAI_API_KEY") ?? "";
+  let vaultErr = "";
   if (!key) {
-    const { data: vk } = await admin.rpc("app_openai_key");
+    const { data: vk, error: ve } = await admin.rpc("app_openai_key");
+    if (ve) { console.error("vault", ve); vaultErr = ve.message; }
     key = typeof vk === "string" ? vk.trim() : "";
   }
   if (!key) {
-    return json({ error: "Clé OpenAI manquante : enregistre-la dans Supabase (SQL Editor, voir SETUP.md) ou dans Edge Functions > Secrets (OPENAI_API_KEY)." }, 500);
+    return json({ error: vaultErr
+      ? "Lecture de la clé OpenAI impossible : " + vaultErr
+      : "Clé OpenAI manquante : enregistre-la dans Supabase (SQL Editor, voir SETUP.md) ou dans Edge Functions > Secrets (OPENAI_API_KEY)." }, 500);
   }
   const limit = Number(Deno.env.get("AI_DAILY_LIMIT") ?? 40);
   const since = new Date(); since.setUTCHours(0, 0, 0, 0);
-  const { count } = await admin.from("ai_usage").select("id", { count: "exact", head: true }).gte("created_at", since.toISOString());
+  const { count, error: ce } = await admin.from("ai_usage").select("id", { count: "exact", head: true }).gte("created_at", since.toISOString());
+  if (ce) console.error("quota", ce);
   const used = count ?? 0;
   if (used >= limit) {
     return json({ error: `Limite de ${limit} demandes par jour atteinte (protection de ton crédit OpenAI). Réessaie demain.` }, 429);
@@ -106,6 +127,7 @@ Deno.serve(async (req) => {
 
   const text: string = res.j.choices?.[0]?.message?.content ?? "";
   const tokens: number = res.j.usage?.total_tokens ?? 0;
-  await admin.from("ai_usage").insert({ user_id: u.user.id, kind, tokens });
+  const { error: ie } = await admin.from("ai_usage").insert({ user_id: u.user.id, kind, tokens });
+  if (ie) console.error("usage", ie);
   return json({ text, tokens, model, remaining: Math.max(0, limit - used - 1), limit });
 });
