@@ -1,21 +1,26 @@
 # ofmana
 
-Application web de gestion d'agence : fiches modèles, prospection, statistiques, planning de contenu et tâches. Interface sombre, effet verre, accents violet et magenta.
+Application web de gestion d'agence, avec deux espaces :
 
-Tout tient dans un seul fichier, `index.html`, sans dépendance ni étape de build. Il suffit de l'ouvrir dans un navigateur.
+- **Admin (agence)** : fiches modèles, prospection en glisser-déposer, statistiques, planning de contenu, tâches.
+- **Modèle** : chaque modèle se connecte et voit uniquement son planning, ses revenus et sa part, et les tâches que l'agence partage avec elle.
 
-## Fonctionnalités
+Interface sombre, effet verre, accents violet et magenta. Le site tient dans un seul fichier, `index.html`, et ne demande aucune étape de build. Il est hébergé sur GitHub Pages, et les comptes et les données sont stockés sur Supabase.
 
-- **Tableau de bord** : CA du mois, part agence, abonnés, tâches en retard, revenus sur 6 mois par modèle, classement.
-- **Modèles** : fiches à onglets (profil, revenus, réseaux et notes), statut en un clic, commission au curseur avec calcul en direct.
-- **Prospection** : tableau en glisser-déposer des @ Instagram, de « À contacter » jusqu'à « Signée » (fiche modèle créée automatiquement, vérification de la majorité obligatoire).
-- **Statistiques** : CA par mois (3, 6 ou 12 mois), CA brut vs part agence, répartition par modèle, entonnoir de recrutement, production, tableau de performance triable. Infobulles au survol.
-- **Planning** : contenus des 14 prochains jours (post, PPV, story, live, promo) avec leur statut.
-- **Tâches** : priorités, échéances, responsables, filtre des tâches en retard.
-- **Réglages** : export et import d'une sauvegarde en JSON.
+**Mise en route : voir [SETUP.md](SETUP.md).**
 
-## Données
+## Fichiers
 
-L'application démarre vide. Hors de claude.ai, elles sont enregistrées dans le `localStorage` du navigateur.
+| Fichier | Rôle |
+|---|---|
+| `index.html` | L'application complète (interface, connexion, synchronisation) |
+| `config.js` | Adresse et clé publique du projet Supabase |
+| `supabase/setup.sql` | Tables, règles de sécurité (Row Level Security) et fonctions |
+| `SETUP.md` | Guide d'installation pas à pas |
 
-Ce repo étant public, n'y versionnez jamais de vraies données de modèles.
+## Sécurité
+
+- Les droits d'accès sont appliqués par la base de données (Row Level Security), pas seulement par l'interface. Une modèle ne peut lire que sa fiche, ses contenus et les tâches marquées « Visible par elle ». Elle ne peut rien modifier, à part cocher ses tâches.
+- Les notes de l'agence sur chaque modèle sont stockées dans une table séparée, réservée à l'admin.
+- Le premier compte créé devient l'admin. Les comptes suivants sont des comptes modèles, reliés à leur fiche par leur email.
+- Ce dépôt ne contient aucune donnée : tout est stocké dans Supabase.
