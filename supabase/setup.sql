@@ -389,3 +389,12 @@ create policy ofmana_uploads_delete on storage.objects for delete to authenticat
 create policy ofmana_documents_admin on storage.objects for all to authenticated
   using (bucket_id = 'documents' and private.is_admin())
   with check (bucket_id = 'documents' and private.is_admin());
+
+-- ---------- Clé OpenAI dans Vault (lecture réservée au serveur) ----------
+create or replace function public.app_openai_key() returns text
+language sql stable security definer set search_path = '' as $$
+  select decrypted_secret from vault.decrypted_secrets
+   where name = 'openai_api_key' order by created_at desc limit 1;
+$$;
+revoke all on function public.app_openai_key() from public, anon, authenticated;
+grant execute on function public.app_openai_key() to service_role;

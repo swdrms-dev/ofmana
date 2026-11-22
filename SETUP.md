@@ -66,7 +66,9 @@ Tu ne peux pas retirer tes propres droits, et il reste toujours au moins un admi
 L'assistant passe par une fonction serveur Supabase (`assistant`, déjà déployée). Ta clé OpenAI n'est **jamais** dans le site.
 
 1. Sur [platform.openai.com/api-keys](https://platform.openai.com/api-keys), crée une clé (elle commence par `sk-`).
-2. Dans Supabase, va dans **Edge Functions > Secrets**, ajoute `OPENAI_API_KEY` avec ta clé, puis enregistre.
+2. Enregistre-la de l'une de ces deux façons :
+   - **SQL Editor** : lance `select vault.create_secret('TA_CLE', 'openai_api_key');`. La clé est chiffrée dans Supabase Vault, et seule la fonction serveur peut la lire. Supprime ensuite la requête de l'historique du SQL Editor. Pour la remplacer plus tard : `select vault.update_secret((select id from vault.secrets where name = 'openai_api_key'), 'NOUVELLE_CLE');`
+   - ou **Edge Functions > Secrets** : ajoute `OPENAI_API_KEY`. Si les deux existent, c'est ce secret qui est utilisé.
 3. Facultatif : `OPENAI_MODEL`, pour changer de modèle (par défaut `gpt-4.1-mini`, environ 0,2 centime par demande), et `AI_DAILY_LIMIT`, pour le nombre maximum de demandes par jour (40 par défaut, pour protéger ton crédit).
 
 Seuls les admins peuvent utiliser l'assistant. Ne colle jamais ta clé OpenAI dans le code, dans `config.js` ou dans une conversation.

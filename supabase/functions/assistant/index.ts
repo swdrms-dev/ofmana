@@ -1,5 +1,6 @@
 // ofmana — assistant IA (réservé aux admins).
-// La clé OpenAI reste côté serveur : secret OPENAI_API_KEY (Supabase > Edge Functions > Secrets).
+// La clé OpenAI reste côté serveur : secret OPENAI_API_KEY (Edge Functions > Secrets)
+// ou, à défaut, secret « openai_api_key » dans Supabase Vault (lu via public.app_openai_key, réservé au serveur).
 // Secrets facultatifs : OPENAI_MODEL (défaut gpt-4.1-mini), AI_DAILY_LIMIT (défaut 40 demandes / jour).
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -69,9 +70,13 @@ Deno.serve(async (req) => {
   if (prof?.role !== "admin") return json({ error: "Réservé aux admins" }, 403);
 
   // 2. Clé et quota journalier (protège le crédit OpenAI).
-  const key = Deno.env.get("OPENAI_API_KEY");
+  let key = Deno.env.get("OPENAI_API_KEY") ?? "";
   if (!key) {
-    return json({ error: "Clé OpenAI manquante : ajoute le secret OPENAI_API_KEY dans Supabase > Edge Functions > Secrets." }, 500);
+    const { data: vk } = await admin.rpc("app_openai_key");
+    key = typeof vk === "string" ? vk.trim() : "";
+  }
+  if (!key) {
+    return json({ error: "Clé OpenAI manquante : enregistre-la dans Supabase (SQL Editor, voir SETUP.md) ou dans Edge Functions > Secrets (OPENAI_API_KEY)." }, 500);
   }
   const limit = Number(Deno.env.get("AI_DAILY_LIMIT") ?? 40);
   const since = new Date(); since.setUTCHours(0, 0, 0, 0);
