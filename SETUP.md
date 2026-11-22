@@ -22,15 +22,10 @@ Dans **Authentication** :
 - **URL Configuration** : mets `https://swdrms-dev.github.io/ofmana/` dans **Site URL** et ajoute la même adresse dans **Redirect URLs**. C'est ce qui permet aux liens de confirmation et de mot de passe oublié de renvoyer vers ton site.
 - **Sign In / Providers > Email** : laisse **Confirm email** activé. C'est indispensable : ainsi personne ne peut créer un compte avec l'email d'une de tes modèles sans avoir accès à sa boîte mail.
 
-## 4. Relier le site au projet
+## 4. Relier le site au projet ✅ (déjà fait)
 
-Dans **Project Settings > API** (ou **Data API**), récupère :
-
-- **Project URL** (ressemble à `https://abcdefgh.supabase.co`)
-- la clé **anon public** (une longue chaîne qui commence par `eyJ`)
-
-Envoie ces deux valeurs à Claude, ou remplace-les toi-même dans [`config.js`](config.js).
-La clé `anon` est faite pour être publique. **Ne donne jamais la clé `service_role`.**
+[`config.js`](config.js) contient l'adresse du projet et sa clé **publishable** (`sb_publishable_…`).
+Cette clé est faite pour être publique. **Ne mets jamais la clé secrète (`sb_secret_…` ou `service_role`) dans le site.**
 
 ## 5. Créer ton compte admin (tout de suite)
 
@@ -50,6 +45,18 @@ Dans son espace, elle voit :
 - les tâches que tu marques **Visible par elle**, qu'elle peut cocher.
 
 Elle ne voit jamais les autres modèles, tes notes, la prospection, les statistiques de l'agence ni les tâches internes. Ces règles sont appliquées par la base de données elle-même, pas seulement par l'interface.
+
+## 7. Ajouter un autre admin
+
+Dans le menu **Équipe**, saisis son email puis clique sur **Nommer admin**.
+
+- Si la personne a déjà un compte, elle devient admin tout de suite. Elle doit simplement recharger la page.
+- Sinon, l'invitation reste en attente, et elle devient admin dès qu'elle crée son compte avec cet email.
+
+Depuis la même page, tu peux retirer les droits d'un admin ou annuler une invitation.
+Tu ne peux pas retirer tes propres droits, et il reste toujours au moins un admin.
+
+> Si tu avais lancé `setup.sql` avant l'ajout de cette page, relance-le une fois : il ajoute les nouvelles fonctions sans toucher à tes données.
 
 ## Bon à savoir
 

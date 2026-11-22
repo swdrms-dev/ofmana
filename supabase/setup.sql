@@ -46,6 +46,13 @@ create table if not exists public.tasks (
   data jsonb not null default '{}'
 );
 
+-- Invitations admin : un email ajouté ici devient admin dès la création de son compte
+create table if not exists public.admin_invites (
+  email text primary key,
+  invited_by uuid references auth.users on delete set null,
+  created_at timestamptz not null default now()
+);
+
 create table if not exists public.prospects (
   id text primary key,
   data jsonb not null default '{}'
@@ -66,17 +73,24 @@ language sql stable security definer set search_path = public as $$
   select id from models where user_id = auth.uid();
 $$;
 
--- Nouveau compte : le tout premier devient admin, les suivants sont des modèles.
--- Si une fiche modèle porte déjà cet email, le compte y est relié automatiquement.
+-- Nouveau compte : le tout premier devient admin, ainsi que les emails invités comme admin.
+-- Les autres sont des modèles ; si une fiche porte déjà cet email, le compte y est relié.
 create or replace function public.handle_new_user() returns trigger
 language plpgsql security definer set search_path = public as $$
+declare r text;
 begin
-  insert into profiles (id, email, role)
-  values (new.id, new.email,
-          case when exists (select 1 from profiles where role = 'admin') then 'model' else 'admin' end)
-  on conflict (id) do nothing;
-  update models set user_id = new.id
-   where user_id is null and email is not null and lower(email) = lower(new.email);
+  r := case
+         when not exists (select 1 from profiles where role = 'admin') then 'admin'
+         when exists (select 1 from admin_invites where email = lower(new.email)) then 'admin'
+         else 'model'
+       end;
+  insert into profiles (id, email, role) values (new.id, new.email, r) on conflict (id) do nothing;
+  if r = 'admin' then
+    delete from admin_invites where email = lower(new.email);
+  else
+    update models set user_id = new.id
+     where user_id is null and email is not null and lower(email) = lower(new.email);
+  end if;
   return new;
 end $$;
 
@@ -125,6 +139,60 @@ end $$;
 revoke all on function public.set_task_done(text, boolean) from public, anon;
 grant execute on function public.set_task_done(text, boolean) to authenticated;
 
+-- ---------- Gestion de l'équipe (admins uniquement) ----------
+create or replace function public.list_accounts()
+returns table (id uuid, email text, role text, created_at timestamptz, model_name text)
+language plpgsql stable security definer set search_path = public as $$
+begin
+  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  return query
+    select p.id, p.email, p.role, p.created_at,
+           (select m.data->>'name' from models m where m.user_id = p.id limit 1)
+      from profiles p
+     order by (p.role = 'admin') desc, p.created_at;
+end $$;
+
+-- Donne les droits admin à un email : immédiatement si le compte existe, sinon à sa création.
+create or replace function public.grant_admin(target_email text) returns text
+language plpgsql security definer set search_path = public as $$
+declare e text := lower(btrim(coalesce(target_email, ''))); uid uuid;
+begin
+  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  if e !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' then raise exception 'Adresse email invalide'; end if;
+  select u.id into uid from auth.users u where lower(u.email) = e limit 1;
+  if uid is not null then
+    update profiles set role = 'admin' where id = uid;
+    return 'promoted';
+  end if;
+  insert into admin_invites (email, invited_by) values (e, auth.uid()) on conflict (email) do nothing;
+  return 'invited';
+end $$;
+
+-- Change le rôle d'un compte. On ne peut pas retirer ses propres droits, ni le dernier admin.
+create or replace function public.set_role(target uuid, new_role text) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if not is_admin() then raise exception 'Réservé aux admins'; end if;
+  if new_role not in ('admin', 'model') then raise exception 'Rôle inconnu'; end if;
+  if target = auth.uid() and new_role <> 'admin' then
+    raise exception 'Tu ne peux pas retirer tes propres droits admin.';
+  end if;
+  if new_role = 'model'
+     and exists (select 1 from profiles where id = target and role = 'admin')
+     and (select count(*) from profiles where role = 'admin') <= 1 then
+    raise exception 'Il doit rester au moins un admin.';
+  end if;
+  update profiles set role = new_role where id = target;
+  if not found then raise exception 'Compte introuvable'; end if;
+end $$;
+
+revoke all on function public.list_accounts() from public, anon;
+revoke all on function public.grant_admin(text) from public, anon;
+revoke all on function public.set_role(uuid, text) from public, anon;
+grant execute on function public.list_accounts() to authenticated;
+grant execute on function public.grant_admin(text) to authenticated;
+grant execute on function public.set_role(uuid, text) to authenticated;
+
 -- ---------- Sécurité : Row Level Security ----------
 alter table public.profiles      enable row level security;
 alter table public.settings      enable row level security;
@@ -133,22 +201,25 @@ alter table public.model_private enable row level security;
 alter table public.content       enable row level security;
 alter table public.tasks         enable row level security;
 alter table public.prospects     enable row level security;
+alter table public.admin_invites enable row level security;
 
 do $$
 declare r record;
 begin
   for r in select policyname, tablename from pg_policies
            where schemaname = 'public'
-             and tablename in ('profiles','settings','models','model_private','content','tasks','prospects')
+             and tablename in ('profiles','settings','models','model_private','content','tasks','prospects','admin_invites')
   loop
     execute format('drop policy if exists %I on public.%I', r.policyname, r.tablename);
   end loop;
 end $$;
 
--- Profils : chacun lit le sien, l'admin lit et modifie tout
+-- Profils : chacun lit le sien, l'admin lit tout. Les rôles ne changent que via set_role / grant_admin.
 create policy profiles_select on public.profiles for select to authenticated
   using (id = auth.uid() or public.is_admin());
-create policy profiles_admin_update on public.profiles for update to authenticated
+
+-- Invitations admin : visibles et gérables par les admins
+create policy admin_invites_admin on public.admin_invites for all to authenticated
   using (public.is_admin()) with check (public.is_admin());
 
 -- Réglages (nom de l'agence) : lisibles par tout compte connecté, modifiables par l'admin
@@ -182,6 +253,8 @@ create policy tasks_self_select on public.tasks for select to authenticated
 
 -- Accès anonyme : aucun
 revoke all on public.profiles, public.settings, public.models, public.model_private,
-              public.content, public.tasks, public.prospects from anon;
-grant select, insert, update, delete on public.profiles, public.settings, public.models,
-      public.model_private, public.content, public.tasks, public.prospects to authenticated;
+              public.content, public.tasks, public.prospects, public.admin_invites from anon;
+grant select, insert, update, delete on public.settings, public.models, public.model_private,
+      public.content, public.tasks, public.prospects, public.admin_invites to authenticated;
+revoke insert, update, delete on public.profiles from authenticated;
+grant select on public.profiles to authenticated;
