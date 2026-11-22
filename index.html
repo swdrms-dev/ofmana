@@ -305,7 +305,14 @@ code{font-size:.92em;background:rgba(255,255,255,.08);padding:1px 6px;border-rad
 .leak{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}.leak:first-child{border-top:0}.leak-t{flex:1;min-width:200px}.leak-t a{color:var(--ink);font-weight:600;text-decoration:none;overflow-wrap:anywhere}.leak-t a:hover{color:var(--accInk)}.leak-t small{display:block;color:var(--mute);font-size:13px}
 /* IA */
 .aicard{display:flex;flex-direction:column;gap:12px}.aicard h2{margin:0}.aiform{display:flex;flex-direction:column;gap:10px}.aiform .btn{align-self:flex-start}
-.aiout{white-space:pre-wrap;font-size:14.5px;line-height:1.6;padding:16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);max-height:520px;overflow:auto}
+.aiout{font-size:14.5px;line-height:1.65;padding:16px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--stroke);max-height:70vh;overflow:auto}
+.md>:first-child{margin-top:0}.md>:last-child{margin-bottom:0}
+.md h2,.md h3,.md h4,.md h5{font-family:Outfit,sans-serif;margin:18px 0 8px;line-height:1.25;color:#fff}.md h3{font-size:18px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;width:fit-content}.md h4{font-size:16px}.md h5{font-size:14.5px;color:var(--accInk)}
+.md p{margin:0 0 10px}.md strong{color:#fff;font-weight:650}.md em{color:#e9d5ff}
+.md ul,.md ol{margin:4px 0 12px;padding-left:22px}.md li{margin:4px 0;padding-left:4px}.md ul li::marker{color:var(--acc)}.md ol li::marker{color:var(--accInk);font-weight:700;font-family:Outfit,sans-serif}.md ul.nest{margin:-4px 0 8px 22px}
+.md hr{border:0;height:1px;background:linear-gradient(90deg,transparent,var(--stroke2),transparent);margin:16px 0}
+.md blockquote{margin:0 0 10px;padding:8px 14px;border-left:3px solid var(--acc);background:rgba(224,64,251,.07);border-radius:0 10px 10px 0;color:var(--ink)}
+.md code{font-size:.9em}
 /* compte et partage */
 .whoami{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid var(--stroke);border-radius:14px;background:var(--glass)}.whoami b{display:block;font-size:14px}.whoami small{color:var(--mute);font-size:12px}.whoami .av.sm{grid-row:auto}
 .userline{display:flex;align-items:center;gap:4px;padding:0 0 0 8px;font-size:13px;color:var(--mute)}.userline span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -744,8 +751,19 @@ const vFuites=()=>{const L=S.leaks,F={open:'En cours',supprime:'Supprimées',ref
 
 /* ---------- 10. assistant IA ---------- */
 let aiOut={},aiBusy=false,aiInfo=null;
+const md=src=>{const inl=s=>s.replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/__([^_]+)__/g,'<strong>$1</strong>').replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\*)/g,'$1<em>$2</em>');
+ let out='',list=null;const close=()=>{if(list){out+=`</${list}>`;list=null}};
+ for(const l of esc(src).split(/\r?\n/)){let m;
+  if(m=l.match(/^\s*(#{1,6})\s+(.*)/)){close();const n=m[1].length<=2?3:Math.min(5,m[1].length+1);out+=`<h${n}>${inl(m[2].replace(/\s*#+\s*$/,''))}</h${n}>`}
+  else if(/^\s*([-*_]\s*){3,}$/.test(l)){close();out+='<hr>'}
+  else if(m=l.match(/^(\s*)[-*•+]\s+(.*)/)){const nest=m[1].length>=2;const tag=nest?'ul class="nest"':'ul';if(list!=='ul'||nest!==(out.lastIndexOf('<ul class="nest">')>out.lastIndexOf('<ul>'))){close();out+=`<${tag}>`;list='ul'}out+=`<li>${inl(m[2])}</li>`}
+  else if(m=l.match(/^\s*(\d+)[.)]\s+(.*)/)){if(list!=='ol'){close();out+=`<ol start="${m[1]}">`;list='ol'}out+=`<li>${inl(m[2])}</li>`}
+  else if(m=l.match(/^\s*&gt;\s?(.*)/)){close();out+=`<blockquote>${inl(m[1])}</blockquote>`}
+  else if(!l.trim())close();
+  else{close();out+=`<p>${inl(l)}</p>`}}
+ close();return out};
 const aiCtxModel=m=>({nom:m.name,niche:m.niche,statut:ST[m.status],prix_abonnement:+m.price||0,abonnes:+m.subs||0,commission_agence_pct:+m.pct||0,objectif_mensuel:+m.goal||0,ca_par_mois:Object.fromEntries(months(6).map(k=>[k,rev(m,k)])),contenus_recents:S.content.filter(c=>c.modelId===m.id).sort(cmpC).slice(-25).map(c=>({date:c.date,type:c.type,titre:c.title,prix:+c.price||0,statut:CST[c.status]}))});
-const aiBox=(key,title,desc,form)=>{const o=aiOut[key]||{};return `<section class="card aicard"><h2>${title}</h2><p class="hint">${desc}</p><form id="fai-${key}" class="aiform">${form}<button class="btn pri"${aiBusy?' disabled':''}>${sv(I.ia,18)}${o.loading?'Réflexion…':'Générer'}</button></form>${o.loading?'<div class="loader"></div>':o.error?`<p class="authmsg">${esc(o.error)}</p>`:o.text?`<div class="aiout">${esc(o.text)}</div><button class="btn sm" data-act="aicopy" data-v="${key}">Copier</button>`:''}</section>`};
+const aiBox=(key,title,desc,form)=>{const o=aiOut[key]||{};return `<section class="card aicard"><h2>${title}</h2><p class="hint">${desc}</p><form id="fai-${key}" class="aiform">${form}<button class="btn pri"${aiBusy?' disabled':''}>${sv(I.ia,18)}${o.loading?'Réflexion…':'Générer'}</button></form>${o.loading?'<div class="loader"></div>':o.error?`<p class="authmsg">${esc(o.error)}</p>`:o.text?`<div class="aiout md">${md(o.text)}</div><button class="btn sm" data-act="aicopy" data-v="${key}">Copier</button>`:''}</section>`};
 const vIA=()=>{const mo=`<select class="field" name="mid" required>${S.models.length?modelOpts():'<option value="">Ajoute d’abord une modèle</option>'}</select>`;
  return `<div class="head"><div><h1>Assistant IA</h1><p>Propulsé par ta clé OpenAI, stockée en secret sur Supabase (jamais dans le site).${aiInfo?` ${aiInfo.remaining} demande${aiInfo.remaining>1?'s':''} restante${aiInfo.remaining>1?'s':''} aujourd’hui sur ${aiInfo.limit}.`:''}</p></div></div>
  <div class="grid2 even">${aiBox('ideas','Idées de contenus','10 idées de posts, PPV et lives adaptées à sa niche et à ce qui a déjà été publié.',`${mo}<input class="field" name="prompt" placeholder="Précision (facultatif) : thème, saison, budget…">`)}
