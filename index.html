@@ -396,6 +396,54 @@ details.tools{border:1px solid var(--stroke);border-radius:var(--r);padding:16px
 @media(max-width:800px){.bellbtn{margin-left:4px}.side{overflow-x:auto}.whoami,.userline span{display:none}.userline{padding:0}.app{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr}.side{height:auto;z-index:10;flex-direction:row;align-items:center;padding:8px 10px;gap:6px;border-right:0;border-bottom:1px solid var(--stroke)}.brand{padding:0}.brand b{display:none}.side nav{flex-direction:row;gap:2px}.side nav a{padding:10px}.side nav a span{display:none}.side nav a.on::before{display:none}.side nav a .badge{position:absolute;top:2px;right:0;padding:0 6px;font-size:11px}.side-foot{margin:0 0 0 auto;flex-direction:row;align-items:center}.save span,.ghost-side span{display:none}.ghost-side{padding:0 12px}}
 @media(max-width:600px){.chat{height:calc(100vh - 210px)}.chatlog{padding:14px}.msg{max-width:100%}.aiav{width:28px;height:28px}.upgrid,.csvmap{grid-template-columns:minmax(0,1fr)}.csvbox{flex-direction:column;align-items:flex-start}.leakform{grid-template-columns:minmax(0,1fr)}.payrow{grid-template-columns:minmax(0,1fr) auto}.payrow .pill{display:none}.calday{min-height:64px;padding:4px}.cchip span{display:none}.cchip{padding:4px;justify-content:center}.calhint{display:none}.monthnav b{min-width:110px}.acct{flex-wrap:wrap}.acct .btn.sm{margin-left:44px}.kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi.hot{grid-column:1/-1}.kpi{padding:16px}.kpi b{font-size:24px}.day{grid-template-columns:minmax(0,1fr);gap:10px}.dlabel{display:flex;gap:10px;align-items:baseline}.dlabel b{font-size:26px}.item{grid-template-columns:4px auto minmax(0,1fr)}.item .act{grid-column:2/-1}.db,.panel{grid-template-columns:minmax(0,1fr)}.db{padding:18px}.quick{grid-template-columns:minmax(0,1fr)}.task{grid-template-columns:auto minmax(0,1fr) auto}.task .pill{display:none}.search input{width:100%}.tools,.search{width:100%}.tools .btn{flex:1;justify-content:center}.revrow{grid-template-columns:90px minmax(0,1fr)}.revrow .rbar{grid-column:1/-1}.dwrap{grid-template-columns:minmax(0,1fr);justify-items:center}.dleg{width:100%}.frow{grid-template-columns:92px minmax(0,1fr) 28px 50px;font-size:13px}.hrow{grid-template-columns:100px minmax(0,1fr) 24px}.dh.hero{padding-left:18px}}
 @media(max-width:420px){.logo{display:none}}
+
+/* v3 */
+.cardhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}.cardhead h2{margin:0}
+.monthnav.sm b{min-width:120px;font-size:14px}
+.sttabs{margin-bottom:16px}
+.krow{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);flex-wrap:wrap}.krow:first-of-type{border-top:0}
+.kic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--glass2);color:var(--acc);flex:none}
+.kt{flex:1;min-width:160px;display:flex;flex-direction:column;gap:2px}.kt small{color:var(--mute);font-size:13px}
+.kact{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ktext{white-space:pre-wrap;font:14px/1.6 Georgia,'Times New Roman',serif;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:18px;max-height:46vh;overflow:auto;color:var(--ink)}
+.sigwrap{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+#sigpad{width:100%;height:170px;background:#fff;border-radius:14px;touch-action:none;cursor:crosshair;box-shadow:inset 0 0 0 2px rgba(168,85,247,.35)}
+.signcta{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:16px;border-color:rgba(224,64,251,.45);background:linear-gradient(135deg,rgba(224,64,251,.16),rgba(124,58,237,.12))}
+.signcta.soft{border-color:var(--stroke);background:var(--glass)}
+.signcta div{display:flex;flex-direction:column;gap:2px}.signcta small{color:var(--mute)}
+.replist{display:flex;flex-direction:column}
+.reprow{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}.reprow:first-child{border-top:0}
+.av.sm{width:34px;height:34px;font-size:12px}
+.mfilters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.mfilters .search{flex:1;min-width:220px}
+.mediagrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.mcell{position:relative;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:1px solid var(--stroke);background:var(--glass);padding:0;cursor:pointer;color:var(--ink);transition:transform .15s,border-color .15s}
+.mcell:hover{transform:translateY(-2px);border-color:var(--c)}
+.mcell img{width:100%;height:100%;object-fit:cover;display:block}
+.mvid{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(160deg,rgba(124,58,237,.35),rgba(224,64,251,.2))}
+.mbadge{position:absolute;top:8px;left:8px;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:rgba(10,6,20,.7);backdrop-filter:blur(6px)}
+.mbadge.used{background:rgba(22,101,52,.8)}
+.minfo{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 9px;font-size:12px;text-align:left;background:linear-gradient(transparent,rgba(8,4,16,.85));display:flex;align-items:center;gap:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.minfo .dot{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.mprev{border-radius:14px;overflow:hidden;background:#000;display:grid;place-items:center;max-height:52vh}
+.mprev img,.mprev video{max-width:100%;max-height:52vh;display:block}
+.simgroup{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}.simgroup h3{font-size:14px;margin:0 0 8px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em}
+.simf{display:flex;flex-direction:column;gap:6px;margin:10px 0;font-size:14px}.simf>span{display:flex;justify-content:space-between;gap:10px}
+.simf input[type=range]{width:100%;accent-color:#c026d3;height:28px}
+.simres{align-self:start;position:sticky;top:16px}
+.simbig small{color:var(--mute)}.simbig b{display:block;font:700 40px/1.1 Outfit,sans-serif;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin:4px 0}
+.delta{font-size:13px;font-weight:600}.delta.up{color:var(--ok)}.delta.down{color:#fb7185}.delta.mutd{color:var(--mute);font-weight:400}
+.simcmp{display:flex;flex-direction:column;gap:8px;margin:16px 0}.simcmp>div{display:grid;grid-template-columns:90px 1fr 90px;gap:10px;align-items:center;font-size:13px}.simcmp b{text-align:right}
+.sbar{height:12px;border-radius:99px;background:var(--line);overflow:hidden}.sbar i{display:block;height:100%;background:var(--grad);border-radius:99px;transition:width .2s}
+.srow{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}.srow>div{border:1px solid var(--stroke);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:2px}.srow small{color:var(--mute);font-size:12px}.srow b{font-size:18px}
+.simres .hrow{grid-template-columns:minmax(0,180px) minmax(0,1fr) 90px}.simres .hrow b{text-align:right}
+.hday h2{font-size:15px;color:var(--mute)}
+.hrow2{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);flex-wrap:wrap}.hrow2:nth-child(2){border-top:0}
+.hrow2 time{font-variant-numeric:tabular-nums;color:var(--mute);font-size:13px;width:44px;flex:none}
+.hrow2 .kt b{font-weight:500}.hrow2.a-insert time{color:var(--ok)}.hrow2.a-delete time{color:#fb7185}
+.apgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.apchk{display:flex!important;flex-direction:row!important;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--mute);cursor:pointer}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+@media (max-width:760px){.apgrid,.srow{grid-template-columns:1fr}.mediagrid{grid-template-columns:repeat(2,1fr);gap:8px}.simres{position:static}.kact{width:100%}.simbig b{font-size:32px}}
 </style>
 </head>
 <body>
@@ -407,14 +455,14 @@ const D=document,$=s=>D.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS='ofmana';
 const CFG=window.OFMANA_CONFIG||{};
-const EMPTY=()=>({agency:'Mon Agence',models:[],content:[],tasks:[],prospects:[],payouts:[],submissions:[],leaks:[]});
+const EMPTY=()=>({agency:'Mon Agence',models:[],content:[],tasks:[],prospects:[],payouts:[],submissions:[],leaks:[],contracts:[],reports:[],media:[]});
 let S=EMPTY();
 let sb=null,session=null,mode=null,myModel=null;
-const VIEWS_A={dashboard:'Tableau de bord',modeles:'Modèles',prospection:'Prospection',stats:'Statistiques',planning:'Planning',taches:'Tâches',depots:'Contenus reçus',paiements:'Paiements',fuites:'Anti-fuite',ia:'onlyAI',equipe:'Équipe'};
+const VIEWS_A={dashboard:'Tableau de bord',modeles:'Modèles',prospection:'Prospection',stats:'Statistiques',planning:'Planning',taches:'Tâches',depots:'Contenus reçus',medias:'Médiathèque',paiements:'Paiements',fuites:'Anti-fuite',ia:'onlyAI',equipe:'Équipe',historique:'Historique'};
 const VIEWS_M={accueil:'Accueil',mplanning:'Mon planning',envoyer:'Envoyer du contenu',revenus:'Mes revenus',mtaches:'Mes tâches'};
 const views=()=>mode==='model'?VIEWS_M:VIEWS_A;
 let VIEWS=VIEWS_A;
-let ui={view:'',mf:'all',pf:'all',tf:'todo',q:'',pq:'',sp:6,ss:'r',msp:6,pv:'list',cm:0,pm:-1,df:'envoye',lf:'open'};
+let ui={st:'charts',mm:'all',mt:'all',mq:'',hf:'all',rm:-1,view:'',mf:'all',pf:'all',tf:'todo',q:'',pq:'',sp:6,ss:'r',msp:6,pv:'list',cm:0,pm:-1,df:'envoye',lf:'open'};
 try{Object.assign(ui,JSON.parse(sessionStorage.getItem(LS+'-ui')||'{}'))}catch(e){}
 const keepUI=()=>{try{sessionStorage.setItem(LS+'-ui',JSON.stringify(ui))}catch(e){}};
 const pickView=()=>{VIEWS=views();const hv=location.hash.slice(1);if(VIEWS[hv])ui.view=hv;else if(!VIEWS[ui.view])ui.view=Object.keys(VIEWS)[0]};
@@ -478,6 +526,8 @@ play:'<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/>',
 check:'<path d="m5 12 5 5L20 7"/>',
 chev:'<path d="m15 18-6-6 6-6"/>',chevr:'<path d="m9 18 6-6-6-6"/>',
 equipe:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+medias:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
+historique:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
 more:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
 eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
 logout:'<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l5-5-5-5M15 12H3"/>',
@@ -497,11 +547,14 @@ const rowOf={
  payouts:p=>{const{id,modelId,...d}=p;return{id,model_id:modelId,data:d}},
  submissions:s=>{const{id,modelId,createdAt,...d}=s;return{id,model_id:modelId,data:d}},
  leaks:l=>{const{id,...d}=l;return{id,model_id:l.modelId||null,data:d}},
+ contracts:c=>{const{id,modelId,createdAt,...d}=c;return{id,model_id:modelId,data:d}},
+ reports:r=>{const{id,modelId,...d}=r;return{id,model_id:modelId,data:d}},
+ media:x=>{const{id,modelId,...d}=x;return{id,model_id:modelId||null,data:d}},
  content:c=>{const{id,...d}=c;return{id,model_id:c.modelId||null,data:d}},
  tasks:t=>{const{id,shared,...d}=t;return{id,model_id:t.modelId||null,shared:!!shared,data:d}},
  prospects:p=>{const{id,...d}=p;return{id,data:d}}};
-const SRC={models:'models',model_private:'models',content:'content',tasks:'tasks',prospects:'prospects',payouts:'payouts',submissions:'submissions',leaks:'leaks'};
-const ORDER=['models','model_private','content','tasks','prospects','payouts','submissions','leaks'];
+const SRC={models:'models',model_private:'models',content:'content',tasks:'tasks',prospects:'prospects',payouts:'payouts',submissions:'submissions',leaks:'leaks',contracts:'contracts',reports:'reports',media:'media'};
+const ORDER=['models','model_private','content','tasks','prospects','payouts','submissions','leaks','contracts','reports','media'];
 const snap=()=>{const o={settings:JSON.stringify({agency:S.agency})};for(const t of ORDER)o[t]=Object.fromEntries(S[SRC[t]].map(x=>{const r=rowOf[t](x);return[r.id,JSON.stringify(r)]}));return o};
 const sync=async()=>{if(mode!=='admin'||!synced)return;if(syncing){again=true;return}syncing=true;setStatus('saving');let relink=[];
  try{do{again=false;const cur=snap();
@@ -564,7 +617,8 @@ const gridHTML=()=>{
 const vModels=()=>{const n=S.models.length,a=S.models.filter(m=>m.status==='active').length;
  return `<div class="head"><div><h1>Modèles</h1><p>${n} modèle${n>1?'s':''}, dont ${a} active${a>1?'s':''}</p></div><div class="tools"><label class="search">${sv(I.search,18)}<input id="q" type="search" placeholder="Nom, pseudo, niche, manager…" value="${esc(ui.q)}" aria-label="Rechercher une modèle"></label><button class="btn pri" data-act="add-model">${sv(I.plus,18)}Ajouter une modèle</button></div></div>
  <div class="chips">${Object.entries({all:'Toutes',...ST}).map(([k,v])=>`<button class="chip${ui.mf===k?' on':''}" data-act="mf" data-v="${k}">${v}<span>${k==='all'?n:S.models.filter(m=>m.status===k).length}</span></button>`).join('')}</div>
- <div class="mgrid" id="grid">${gridHTML()}</div>`};
+ <div class="mgrid" id="grid">${gridHTML()}</div>
+ ${S.contracts.filter(c=>c.status!=='annule').length?`<section class="card" style="margin-top:16px"><h2>Contrats</h2>${S.contracts.filter(c=>c.status!=='annule').sort((a,b)=>String(b.createdAt||'').localeCompare(String(a.createdAt||''))).map(c=>contractRow(c,1)).join('')}</section>`:''}`};
 
 const itemH=(c,showDate)=>{const m=mdl(c.modelId)||GHOST;return `<div class="item" style="--c:${m.color}"><span class="stripe"></span><time>${showDate?dShort(c.date)+' · ':''}${esc(c.time||'')}</time><div class="t"><b>${esc(c.title)}</b><small>${esc(m.name)} · ${esc(c.type)}${+c.price?' · '+eur2(c.price):''}</small></div><div class="act"><select class="stsel p-${c.status}" data-act="cstatus" data-id="${c.id}" aria-label="Statut">${opts(CST,c.status)}</select><button class="icon-btn" data-act="editc" data-id="${c.id}" aria-label="Modifier">${sv(I.edit,18)}</button><button class="icon-btn" data-act="delc" data-id="${c.id}" aria-label="Supprimer">${sv(I.trash,18)}</button></div></div>`};
 const vPlan=()=>{
@@ -592,11 +646,11 @@ const cleanHandle=s=>{s=String(s||'').trim();const m=s.match(/instagram\.com\/([
 const daysAgo=s=>Math.round((TODAY-pISO(s))/864e5);
 const kfmt=n=>n>=1e6?(n/1e6).toLocaleString('fr-FR',{maximumFractionDigits:1})+' M':n>=1000?(n/1000).toLocaleString('fr-FR',{maximumFractionDigits:1})+' k':num(n);
 const needsFollow=p=>p.stage!=='signee'&&p.stage!=='negative'&&((!!p.followUp&&p.followUp<=T0)||((p.stage==='dm'||p.stage==='relance')&&!!p.lastContact&&daysAgo(p.lastContact)>=3));
-const pcard=p=>{const da=p.moved?daysAgo(p.moved):null;return `<div class="pcard" data-act="openp" data-id="${p.id}" style="--c:${PSC[p.stage]}"><div><b>@${esc(p.handle)}</b>${p.name||p.niche?`<small>${esc([p.name,p.niche].filter(Boolean).join(' · '))}</small>`:''}</div><button type="button" class="grip" aria-label="Déplacer @${esc(p.handle)}">${sv(I.grip,18)}</button><div class="pmeta">${p.followers?`<span>${kfmt(p.followers)} abonnés</span>`:''}${da!=null?`<span>${da>0?'depuis '+da+' j':'aujourd’hui'}</span>`:''}${needsFollow(p)?'<span class="pill p-relancer">À relancer</span>':''}${p.ageOk?'<span class="pill p-active">18+ vérifié</span>':''}</div></div>`};
+const pcard=p=>{const da=p.moved?daysAgo(p.moved):null;return `<div class="pcard" data-act="openp" data-id="${p.id}" style="--c:${PSC[p.stage]}"><div><b>@${esc(p.handle)}</b>${p.name||p.niche?`<small>${esc([p.name,p.niche].filter(Boolean).join(' · '))}</small>`:''}</div><button type="button" class="grip" aria-label="Déplacer @${esc(p.handle)}">${sv(I.grip,18)}</button><div class="pmeta">${p.followers?`<span>${kfmt(p.followers)} abonnés</span>`:''}${da!=null?`<span>${da>0?'depuis '+da+' j':'aujourd’hui'}</span>`:''}${p.source==='candidature'?`<span class="pill p-onboarding">${p.isNew?'Nouvelle candidature':'Candidature'}</span>`:''}${needsFollow(p)?'<span class="pill p-relancer">À relancer</span>':''}${p.ageOk?'<span class="pill p-active">18+ vérifié</span>':''}</div></div>`};
 const boardHTML=()=>{const q=(ui.pq||'').trim().toLowerCase().replace(/^@/,''),L=S.prospects.filter(p=>!q||[p.handle,p.name,p.niche].join(' ').toLowerCase().includes(q));
  return Object.entries(PS).map(([k,v])=>{const it=L.filter(p=>p.stage===k).sort((a,b)=>String(b.moved||'').localeCompare(String(a.moved||'')));return `<section class="kcol${k==='negative'?' lost':''}" data-stage="${k}" style="--c:${PSC[k]}"><div class="kh"><i></i>${v}<span class="n">${it.length}</span></div>${it.length?it.map(pcard).join(''):`<div class="kempty">${k==='a_contacter'&&!S.prospects.length?'Ajoute des @ au-dessus':'Dépose un profil ici'}</div>`}</section>`}).join('')};
 const vProspect=()=>{const P=S.prospects,c=P.filter(p=>p.stage!=='a_contacter'),pos=P.filter(p=>POS.includes(p.stage)).length,sg=P.filter(p=>p.stage==='signee').length,fu=P.filter(needsFollow).length,rate=c.length?Math.round(pos/c.length*100):null;
- return `<div class="head"><div><h1>Prospection</h1><p>Glisse chaque profil d’une étape à l’autre. Sur mobile, maintiens la poignée ⋮⋮.${fu?` <span class="late">${fu} à relancer.</span>`:''}</p></div><div class="tools"><label class="search">${sv(I.search,18)}<input id="pq" type="search" placeholder="Chercher un @…" value="${esc(ui.pq)}" aria-label="Chercher un profil"></label></div></div>
+ return `<div class="head"><div><h1>Prospection</h1><p>Glisse chaque profil d’une étape à l’autre. Sur mobile, maintiens la poignée ⋮⋮. Les candidatures reçues via ton lien arrivent en « Réponse positive ».${fu?` <span class="late">${fu} à relancer.</span>`:''}</p></div><div class="tools"><button class="btn" data-act="copyapply" title="Lien du formulaire de candidature à mettre dans ta bio">${sv(I.envoyer,18)}Lien de candidature</button><label class="search">${sv(I.search,18)}<input id="pq" type="search" placeholder="Chercher un @…" value="${esc(ui.pq)}" aria-label="Chercher un profil"></label></div></div>
  <form class="padd card" id="padd"><input class="field" name="handles" placeholder="@pseudo ou lien Instagram, plusieurs à la fois possible" required autocomplete="off" aria-label="Ajouter des profils Instagram"><button class="btn pri">${sv(I.plus,18)}Ajouter</button></form>
  <div class="kpis sm"><div class="card kpi"><small>Profils suivis</small><b>${P.length}</b></div><div class="card kpi"><small>Contactées</small><b>${c.length}</b></div><div class="card kpi"><small>Taux de réponse positive</small><b>${rate==null?'—':rate+' %'}</b><span class="delta mutd">${pos} sur ${c.length} contactée${c.length>1?'s':''}</span></div><div class="card kpi"><small>Signées</small><b>${sg}</b></div></div>
  <div class="board" id="board">${boardHTML()}</div>`};
@@ -610,7 +664,9 @@ const visM=()=>S.models.filter(m=>!hidden.has(m.id));
 const IDX={a_contacter:0,dm:1,relance:2,positive:3,appel:4,contrat:5,signee:6,negative:1};
 const FS=[['Repérées',0,'#9d8fb3'],['Contactées',1,'#818cf8'],['Réponse positive',3,'#34d399'],['Appel / visio',4,'#22d3ee'],['Contrat envoyé',5,'#a78bfa'],['Signées',6,'linear-gradient(90deg,#e040fb,#8b5cf6)']];
 const CSC={idee:'#9d8fb3',pret:'#fbbf24',programme:'#818cf8',publie:'#34d399'};
-const vStats=()=>{
+const statTabs=()=>`<div class="chips sttabs">${[['charts','Graphiques'],['simu','Simulateur'],['reports','Rapports mensuels']].map(([k,l])=>`<button class="chip${(ui.st||'charts')===k?' on':''}" data-act="st" data-v="${k}">${l}</button>`).join('')}</div>`;
+const vStats=()=>{if(ui.st==='simu')return `<div class="head"><div><h1>Simulateur</h1><p>Teste un nouveau prix, une promo, un bundle ou plus de PPV avant de toucher à quoi que ce soit.</p></div></div>${statTabs()}${vSimu()}`;
+ if(ui.st==='reports')return `<div class="head"><div><h1>Rapports mensuels</h1><p>Un rapport PDF par modèle et par mois, disponible automatiquement dans son espace.</p></div></div>${statTabs()}${reportsCard()}`;
  const n=ui.sp||6,ms=months(n),cur=ms[n-1],M=S.models,vis=visM();
  const tot=k=>vis.reduce((a,m)=>a+rev(m,k),0),totals=ms.map(tot),sum=totals.reduce((a,b)=>a+b,0);
  const comm=ms.reduce((a,k)=>a+vis.reduce((b,m)=>b+rev(m,k)*(+m.pct||0)/100,0),0);
@@ -636,7 +692,7 @@ const vStats=()=>{
  const k=ui.ss||'r';rows.sort((a,b)=>k==='name'?a.name.localeCompare(b.name):((b[k]??-1e9)-(a[k]??-1e9)));
  const cols=[['name','Modèle'],['r',`CA ${n} mois`],['c',`CA ${mS(cur)}`],['ev','Évolution'],['pa','CA / abonné'],['ag','Part agence']];
  const table=M.length?`<div class="scroll"><table class="perf"><thead><tr>${cols.map(([c,l])=>`<th><button class="th${k===c?' on':''}" data-act="sort" data-v="${c}">${l}${k===c?' ↓':''}</button></th>`).join('')}<th>Tendance</th></tr></thead><tbody>${rows.map(x=>{const mx=Math.max(1,...ms.map(q=>rev(x.m,q)));return `<tr><td><span class="tname"><span class="av sm" style="--c:${x.m.color}">${ini(x.m.name)}</span>${esc(x.m.name)}</span></td><td>${eur(x.r)}</td><td>${eur(x.c)}</td><td>${x.ev==null?'—':dl(x.ev)}</td><td>${x.pa?eur2(x.pa):'—'}</td><td>${eur(x.ag)}</td><td><span class="spark mini" style="--c:${x.m.color}">${ms.map(q=>`<i style="height:${Math.max(8,rev(x.m,q)/mx*100)}%" data-tip="${mL(q)} : ${eur(rev(x.m,q))}"></i>`).join('')}</span></td></tr>`}).join('')}</tbody></table></div>`:'<p class="empty">Aucune modèle pour l’instant.</p>';
- return `<div class="head"><div><h1>Statistiques</h1><p>${sum?`${eur(sum)} de CA sur ${n} mois, dont ${eur(comm)} pour l’agence.`:'Les graphiques se remplissent au fur et à mesure que tu saisis tes données.'}</p></div><div class="chips" style="margin:0">${[3,6,12].map(v=>`<button class="chip${n===v?' on':''}" data-act="sp" data-v="${v}">${v} mois</button>`).join('')}</div></div>
+ return `<div class="head"><div><h1>Statistiques</h1><p>${sum?`${eur(sum)} de CA sur ${n} mois, dont ${eur(comm)} pour l’agence.`:'Les graphiques se remplissent au fur et à mesure que tu saisis tes données.'}</p></div><div class="chips" style="margin:0">${[3,6,12].map(v=>`<button class="chip${n===v?' on':''}" data-act="sp" data-v="${v}">${v} mois</button>`).join('')}</div></div>${statTabs()}
  <section class="card" style="margin-bottom:16px"><h2>Chiffre d’affaires par mois</h2>${chips}${bars}
   <div class="srow"><div><small>Total sur ${n} mois</small><b>${eur(sum)}</b></div><div><small>Moyenne par mois</small><b>${eur(avg)}</b></div><div><small>Meilleur mois</small><b>${sum?cap(mL(ms[bi])):'—'}</b></div><div><small>Part agence</small><b>${eur(comm)}</b></div></div></section>
  <div class="grid2"><section class="card"><h2>CA brut et part agence</h2><div class="legend" style="margin:0 0 8px"><span><i class="dot" style="--c:var(--acc)"></i>CA brut</span><span><i class="dot" style="--c:#c4b5fd"></i>Part agence</span></div>${sum?'<div class="fig"><svg id="lineSvg"></svg></div>':'<p class="empty">Pas encore de données.</p>'}</section>
@@ -652,7 +708,7 @@ const drawLine=()=>{const s=$('#lineSvg');if(!s)return;const W=s.clientWidth||60
  ms.forEach((k,i)=>{const hw=n>1?step/2:W/2;o+=`<rect class="hit" x="${x(i)-hw}" y="${pt}" width="${hw*2}" height="${H-pt-pb}" data-tip="${cap(mL(k))}\nCA brut : ${eur(g[i])}\nPart agence : ${eur(c[i])}"/><circle cx="${x(i)}" cy="${y(g[i])}" r="4" class="pt1"/><circle cx="${x(i)}" cy="${y(c[i])}" r="3.5" class="pt2"/>`;
   if(!nar||n<=6||i%2===(n-1)%2)o+=`<text x="${x(i)}" y="${H-8}" class="xl">${mS(k)}</text>`});
  s.innerHTML=o};
-const afterRender=()=>{hydrateThumbs();D.querySelectorAll('main table.perf').forEach(t=>{const hs=[...t.querySelectorAll('thead th')].map(th=>th.textContent.replace(/\s*↓$/,'').trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{td.dataset.l=hs[i]||''}))});const cl=$('#chatlog');if(cl){cl.scrollTop=cl.scrollHeight;const ta=$('#fagent textarea');if(ta&&!aiBusy&&ui.view==='ia')ta.focus()}if(lineRO){lineRO.disconnect();lineRO=null}const s=$('#lineSvg');if(!s)return;if(window.ResizeObserver){lineRO=new ResizeObserver(drawLine);lineRO.observe(s)}else drawLine()};
+const afterRender=()=>{hydrateThumbs();hydrateVideo();D.querySelectorAll('main table.perf').forEach(t=>{const hs=[...t.querySelectorAll('thead th')].map(th=>th.textContent.replace(/\s*↓$/,'').trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{td.dataset.l=hs[i]||''}))});const cl=$('#chatlog');if(cl){cl.scrollTop=cl.scrollHeight;const ta=$('#fagent textarea');if(ta&&!aiBusy&&ui.view==='ia')ta.focus()}if(lineRO){lineRO.disconnect();lineRO=null}const s=$('#lineSvg');if(!s)return;if(window.ResizeObserver){lineRO=new ResizeObserver(drawLine);lineRO.observe(s)}else drawLine()};
 
 /* ---------- utilitaires ---------- */
 const safeName=n=>String(n||'fichier').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.\-]+/g,'_').slice(-80);
@@ -761,12 +817,15 @@ const reminders=()=>{const R=[],tom=iso(addD(TODAY,1)),add=(lvl,txt,sub,go)=>R.p
   S.models.filter(m=>m.status==='onboarding').forEach(m=>{const d=OB.filter(([k])=>(m.checklist||{})[k]).length;if(d<OB.length)add(2,`Onboarding de ${m.name} : ${d}/${OB.length}`,OB.filter(([k])=>!(m.checklist||{})[k]).map(x=>x[1]).slice(0,2).join(', '),'#modeles')});
   S.leaks.filter(l=>l.status==='repere').forEach(l=>add(1,`Fuite à signaler (${nm(l.modelId)})`,platOf(l.url),'#fuites'));
   S.leaks.filter(l=>l.status==='demande'&&l.sentAt&&daysTo(l.sentAt)<=-7).forEach(l=>add(1,`Fuite toujours en ligne après ${-daysTo(l.sentAt)} jours`,`${nm(l.modelId)} · ${platOf(l.url)}`,'#fuites'));
+  const nc=S.prospects.filter(p=>p.isNew).length;if(nc)add(1,`${nc} nouvelle${nc>1?'s':''} candidature${nc>1?'s':''}`,'Prospection','#prospection');
+  S.contracts.filter(c=>c.status==='envoye'&&c.sentAt&&daysTo(String(c.sentAt).slice(0,10))<=-7).forEach(c=>add(1,`Contrat de ${nm(c.modelId)} toujours pas signé`,`envoyé le ${longDate(c.sentAt)}`,'#modeles'));
   S.prospects.filter(needsFollow).forEach(p=>add(2,`Relancer @${p.handle}`,PS[p.stage],'#prospection'))}
  else if(myModel){
   S.tasks.filter(isLate).forEach(t=>add(0,`En retard : ${t.title}`,`prévue le ${dShort(t.due)}`,'#mtaches'));
   S.tasks.filter(t=>!t.done&&(t.due===T0||t.due===tom)).forEach(t=>add(1,`${t.due===T0?'Aujourd’hui':'Demain'} : ${t.title}`,'Tâche','#mtaches'));
   S.content.filter(c=>c.date===T0||c.date===tom).forEach(c=>add(1,`${c.date===T0?'Aujourd’hui':'Demain'}${c.time?' à '+c.time:''} : ${c.title}`,c.type,'#mplanning'));
   S.submissions.filter(s=>s.status==='a_refaire').forEach(s=>add(0,`Retouche demandée : ${s.title}`,s.adminNote||'','#envoyer'));
+  S.contracts.filter(c=>c.status==='envoye').forEach(c=>add(0,'Ton contrat est à signer','Accueil','#accueil'));
   S.payouts.filter(p=>p.status==='paye'&&p.paidAt&&daysTo(p.paidAt)>=-7).forEach(p=>add(2,`Paiement reçu : ${eur2(p.amount)}`,`${cap(mL(p.month))} ${p.month.slice(0,4)}`,'#revenus'))}
  return R.sort((a,b)=>a.lvl-b.lvl)};
 const openReminders=()=>{const R=reminders(),N=window.Notification;
@@ -782,7 +841,7 @@ const goalsCard=()=>{const G=S.models.filter(m=>+m.goal);if(!G.length)return '';
 
 /* ---------- 7. onboarding et documents ---------- */
 const OB=[['id','Pièce d’identité vérifiée (18 ans et plus)'],['contrat','Contrat signé'],['acces','Accès OnlyFans configurés'],['reseaux','Réseaux sociaux reliés'],['strategie','Stratégie et prix validés'],['shooting','Premier shooting réalisé'],['contenus','Premiers contenus programmés']];
-const obDone=m=>OB.filter(([k])=>(m.checklist||{})[k]).length;
+const obDone=m=>OB.filter(([k])=>(m.checklist||{})[k]||(k==='contrat'&&hasSigned(m))).length;
 const loadDocs=async mid=>{const box=$('#docBox');if(!box)return;const r=await sb.storage.from('documents').list(mid,{limit:100,sortBy:{column:'created_at',order:'desc'}});if(!$('#docBox'))return;
  if(r.error){box.innerHTML=`<p class="hint">Impossible de lire les documents : ${esc(r.error.message)}</p>`;return}const L=(r.data||[]).filter(f=>f.name&&f.id);
  box.innerHTML=L.length?`<ul class="docs">${L.map(f=>`<li>${sv(I.file,18)}<span>${esc(f.name.replace(/^\d+-/,''))}<small>${f.metadata?fsize(f.metadata.size):''}${f.created_at?' · '+new Date(f.created_at).toLocaleDateString('fr-FR'):''}</small></span><button type="button" class="btn sm" data-act="docopen" data-v="${esc(mid+'/'+f.name)}">Ouvrir</button><button type="button" class="icon-btn" data-act="docdel" data-v="${esc(mid+'/'+f.name)}" aria-label="Supprimer">${sv(I.trash,16)}</button></li>`).join('')}</ul>`:'<p class="hint">Aucun document pour le moment (contrat, pièce d’identité, attestation…).</p>'};
@@ -860,19 +919,25 @@ const AG={
  create_task:{l:a=>`Nouvelle tâche « ${a.title} »${a.model?' · '+mName(a.model):''}${a.due?' · pour le '+(vDate(a.due)?dShort(a.due):a.due):''}${a.shared?' · visible par elle':''}`,run:a=>{const m=a.model?need(findModel(a.model),'modèle introuvable'):null;S.tasks.push({id:uid(),title:String(a.title).trim(),modelId:m?m.id:'',due:vDate(a.due)?a.due:'',prio:PRIO[a.prio]?a.prio:'moyenne',who:a.who||'',done:false,shared:!!a.shared&&!!m})}},
  update_task:{l:a=>{const t=findIn(S.tasks,a.task);return `Tâche « ${t?t.title:a.task} » : ${[a.done!=null?(a.done?'terminée':'à refaire'):'',a.title?'titre → '+a.title:'',a.due?'échéance → '+(vDate(a.due)?dShort(a.due):a.due):'',a.prio?'priorité → '+PRIO[a.prio]:'',a.shared!=null?(a.shared?'visible par elle':'interne'):''].filter(Boolean).join(', ')}`},run:a=>{const t=need(findIn(S.tasks,a.task),'tâche introuvable');if(a.title)t.title=a.title;if(a.done!=null)t.done=!!a.done;if(vDate(a.due))t.due=a.due;if(PRIO[a.prio])t.prio=a.prio;if(a.shared!=null)t.shared=!!a.shared&&!!t.modelId}},
  delete_task:{l:a=>{const t=findIn(S.tasks,a.task);return `Supprimer la tâche « ${t?t.title:a.task} »`},run:a=>{const t=need(findIn(S.tasks,a.task),'tâche introuvable');S.tasks=S.tasks.filter(x=>x.id!==t.id)}},
- create_content:{l:a=>`Planifier « ${a.title} » pour ${mName(a.model)} le ${vDate(a.date)?dShort(a.date):a.date}${a.time?' à '+a.time:''} · ${a.type||'Post mur'}${+a.price?' · '+eur2(a.price):''}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable');if(!vDate(a.date))throw new Error('date invalide');S.content.push({id:uid(),modelId:m.id,date:a.date,time:/^\d{1,2}:\d{2}$/.test(a.time||'')?a.time:'18:00',type:TYPES.includes(a.type)?a.type:'Post mur',title:String(a.title).trim(),price:+a.price||'',status:CST[a.status]?a.status:'idee',note:a.note||''})}},
+ create_content:{l:a=>`Planifier « ${a.title} » pour ${mName(a.model)} le ${vDate(a.date)?dShort(a.date):a.date}${a.time?' à '+a.time:''} · ${a.type||'Post mur'}${+a.price?' · '+eur2(a.price):''}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable');if(!vDate(a.date))throw new Error('date invalide');S.content.push({id:uid(),modelId:m.id,date:a.date,time:/^\d{1,2}:\d{2}$/.test(a.time||'')?a.time:'18:00',type:TYPES.includes(a.type)?a.type:'Post mur',title:String(a.title).trim(),price:+a.price||'',status:CST[a.status]?a.status:'idee',note:a.note||'',mediaIds:(()=>{const x=a.media_id&&byId(S.media,a.media_id);if(!x)return[];x.uses=(x.uses||[]);return[x.id]})()});const cc=S.content[S.content.length-1];(cc.mediaIds||[]).forEach(i=>{const x=byId(S.media,i);x.uses.push({date:cc.date,contentId:cc.id})})}},
  update_content:{l:a=>{const c=findIn(S.content,a.content);return `Contenu « ${c?c.title:a.content} » : ${[a.date?'date → '+(vDate(a.date)?dShort(a.date):a.date):'',a.time?'heure → '+a.time:'',a.status?'statut → '+CST[a.status]:'',a.title?'titre → '+a.title:'',a.type?'type → '+a.type:'',a.price!=null?'prix → '+eur2(a.price):''].filter(Boolean).join(', ')}`},run:a=>{const c=need(findIn(S.content,a.content),'contenu introuvable');if(vDate(a.date))c.date=a.date;if(a.time)c.time=a.time;if(CST[a.status])c.status=a.status;if(a.title)c.title=a.title;if(TYPES.includes(a.type))c.type=a.type;if(a.price!=null)c.price=+a.price||''}},
  delete_content:{l:a=>{const c=findIn(S.content,a.content);return `Supprimer le contenu « ${c?c.title:a.content} »`},run:a=>{const c=need(findIn(S.content,a.content),'contenu introuvable');S.content=S.content.filter(x=>x.id!==c.id)}},
  add_prospects:{l:a=>`Ajouter à la prospection : ${(a.handles||[]).map(h=>'@'+cleanHandle(h)).join(', ')}`,run:a=>{const ex=new Set(S.prospects.map(p=>p.handle));(a.handles||[]).map(cleanHandle).filter(h=>h&&!ex.has(h)).forEach(h=>{ex.add(h);S.prospects.push({id:uid(),handle:h,name:'',followers:0,niche:'',stage:'a_contacter',moved:T0,added:T0,lastContact:'',followUp:'',ageOk:false,notes:''})})}},
  move_prospect:{l:a=>`Passer @${cleanHandle(a.prospect)} en « ${PS[a.stage]||a.stage} »`,run:a=>{const p=need(S.prospects.find(x=>x.id===a.prospect)||S.prospects.find(x=>x.handle===cleanHandle(a.prospect)),'prospect introuvable');if(!PS[a.stage])throw new Error('étape inconnue');if(a.stage==='signee'&&!p.ageOk)throw new Error('majorité non vérifiée : coche-la dans sa fiche');applyStage(p,a.stage)}},
  record_payment:{l:a=>{const m=findModel(a.model);return `Paiement de ${mName(a.model)} pour ${/^\d{4}-\d{2}$/.test(a.month)?mL(a.month)+' '+a.month.slice(0,4):a.month} : ${a.amount!=null?eur2(a.amount):m?eur2(payCalc(m,a.month).amt):'montant calculé (CA − commission)'}${a.method?' · '+(PMETH[a.method]||a.method):''}`},run:a=>{const m=need(findModel(a.model),'modèle introuvable');if(!/^\d{4}-\d{2}$/.test(a.month))throw new Error('mois invalide');const c=payCalc(m,a.month),ex=payFor(m.id,a.month),p=ex||{id:uid(),modelId:m.id,month:a.month};Object.assign(p,{gross:c.g,pct:c.pc,amount:Math.round((a.amount!=null?+a.amount:c.amt)*100)/100,status:'paye',paidAt:vDate(a.paid_at)?a.paid_at:T0,method:PMETH[a.method]?a.method:'virement',note:'Enregistré via onlyAI'});if(!ex)S.payouts.push(p)}},
  add_leak:{l:a=>`Enregistrer une fuite pour ${mName(a.model)} : ${platOf(a.url)}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable');if(S.leaks.some(l=>l.url===a.url))throw new Error('lien déjà enregistré');S.leaks.push({id:uid(),modelId:m.id,url:String(a.url).trim(),status:'repere',found:T0,note:''})}},
+ create_contract:{l:a=>`${a.send?'Créer et envoyer à la signature':'Préparer (brouillon)'} un contrat pour ${mName(a.model)} : ${a.pct!=null?a.pct:'commission actuelle'} % · ${a.months||12} mois à partir du ${vDate(a.start)?dShort(a.start):'aujourd’hui'}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable');if(S.contracts.some(c=>c.modelId===m.id&&c.status==='envoye'))throw new Error('un contrat est déjà en attente de signature');const o={};if(a.pct!=null)o.pct=Math.max(0,Math.min(90,+a.pct));if(vDate(a.start))o.start=a.start;if(+a.months)o.months=Math.round(+a.months);if(a.notice!=null)o.notice=+a.notice;if(a.pay_day)o.payDay=Math.max(1,Math.min(28,+a.pay_day));if(a.legal_name)o.legalName=String(a.legal_name).trim();if(a.extra)o.extra=String(a.extra).trim();S.contracts.push(newContract(m,o,!!a.send))}},
+ send_contract:{l:a=>`Envoyer à la signature le contrat de ${mName(a.model)}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable'),c=need(S.contracts.find(k=>k.modelId===m.id&&k.status==='brouillon'),'aucun brouillon de contrat');c.status='envoye';c.sentAt=new Date().toISOString()}},
+ cancel_contract:{l:a=>`Annuler le contrat en attente de ${mName(a.model)}`,run:a=>{const m=need(findModel(a.model),'modèle introuvable'),c=need(S.contracts.find(k=>k.modelId===m.id&&(k.status==='envoye'||k.status==='brouillon')),'aucun contrat en attente');c.status='annule'}},
  navigate:{l:a=>`Ouvrir la page « ${VIEWS_A[a.view]||a.view} »`,nav:1,run:a=>{if(VIEWS_A[a.view])setTimeout(()=>{location.hash=a.view},50)}}};
 const agentSnapshot=()=>({agence:S.agency,aujourdhui:T0,jour_semaine:TODAY.toLocaleDateString('fr-FR',{weekday:'long'}),mois_en_cours:CUR(),
  modeles:S.models.map(m=>({id:m.id,nom:m.name,pseudo:m.handle,statut:m.status,niche:m.niche,commission_pct:+m.pct||0,prix_abo:+m.price||0,abonnes:+m.subs||0,objectif_mensuel:+m.goal||0,email:m.email||'',compte_relie:!!m._linked,fin_contrat:m.contractEnd||'',onboarding:`${obDone(m)}/${OB.length}`,ca_brut:Object.fromEntries(months(6).map(k=>[k,rev(m,k)]))})),
  contenus:S.content.filter(c=>c.date>=iso(addD(TODAY,-14))).sort(cmpC).slice(0,150).map(c=>({id:c.id,modele:(mdl(c.modelId)||GHOST).name,date:c.date,heure:c.time,type:c.type,titre:c.title,statut:c.status,prix:+c.price||0})),
  taches:S.tasks.filter(t=>!t.done||(t.due&&t.due>=iso(addD(TODAY,-7)))).slice(0,150).map(t=>({id:t.id,titre:t.title,modele:t.modelId?(mdl(t.modelId)||{}).name:'agence',echeance:t.due||'',priorite:t.prio,visible_modele:!!t.shared,faite:!!t.done})),
- prospects:S.prospects.slice(0,200).map(p=>({id:p.id,pseudo:p.handle,etape:p.stage,niche:p.niche||'',abonnes_insta:+p.followers||0,majeure_verifiee:!!p.ageOk})),
+ prospects:S.prospects.slice(0,200).map(p=>({id:p.id,pseudo:p.handle,etape:p.stage,niche:p.niche||'',abonnes_insta:+p.followers||0,majeure_verifiee:!!p.ageOk,candidature:p.source==='candidature'})),
+ contrats:S.contracts.filter(c=>c.status!=='annule').map(c=>({modele:nm(c.modelId),statut:c.status,commission_pct:c.pct,debut:c.start,duree_mois:c.months,fin:c.endDate||'',signe_le:c.signedAt?String(c.signedAt).slice(0,10):''})),
+ medias:S.media.slice(-80).map(x=>({id:x.id,modele:nm(x.modelId),nom:x.name,type:isImg(x.type)?'photo':'video',tags:x.tags||[],theme:x.theme||'',deja_publie:(x.uses||[]).length})),
+
  paiements:S.payouts.filter(p=>p.month>=monthAdd(CUR(),-3)).map(p=>({modele:(mdl(p.modelId)||{}).name,mois:p.month,montant:p.amount,statut:p.status})),
  envois_a_valider:S.submissions.filter(s=>s.status==='envoye').length,fuites_en_cours:S.leaks.filter(l=>l.status==='repere'||l.status==='demande').length});
 const actLabel=a=>{try{return(AG[a.name]||{l:()=>a.name}).l(a.args||{})}catch(e){return a.name}};
@@ -896,6 +961,194 @@ const vIA=()=>{const S0=chat.length;const ic=s=>({done:sv(I.check,15),error:sv(I
  <section class="card chat"><div class="chatlog" id="chatlog">${S0?msgs:`<div class="chatwelcome"><span class="aiav big">${sv(I.ia,30)}</span><h2>Que veux-tu faire ?</h2><p class="hint">onlyAI connaît tes modèles, ton planning, tes tâches, ta prospection et tes paiements.</p><div class="sugg">${SUGG.map(s=>`<button class="chip" data-act="agsugg" data-v="${esc(s)}">${esc(s)}</button>`).join('')}</div></div>`}${aiBusy?'<div class="msg ai"><span class="aiav">'+sv(I.ia,18)+'</span><div class="bubble typing"><i></i><i></i><i></i></div></div>':''}</div>
  <form class="chatbar" id="fagent"><textarea class="field" name="q" rows="1" placeholder="Écris à onlyAI…" aria-label="Message pour onlyAI"${aiBusy?' disabled':''}></textarea><button class="btn pri"${aiBusy?' disabled':''} aria-label="Envoyer">${sv(I.envoyer,18)}</button></form></section>
  <details class="tools"${Object.keys(aiOut).length?' open':''}><summary>Outils rapides : idées de contenus, analyse, message de prospection</summary><div class="grid2 even" style="margin-top:16px">${aiBox('ideas','Idées de contenus','10 idées adaptées à sa niche et à ce qui a déjà été publié.',`<select class="field" name="mid" required>${S.models.length?modelOpts():'<option value="">Ajoute d’abord une modèle</option>'}</select><input class="field" name="prompt" placeholder="Précision (facultatif)">`)}${aiBox('analysis','Analyse des revenus','Tendance, causes et 3 actions pour le mois prochain.',`<select class="field" name="mid"><option value="">Toute l’agence</option>${modelOpts()}</select>`)}</div><div class="grid2 even">${aiBox('prospect','Message de prospection','Un premier message honnête, de la part de l’agence, à relire avant envoi.',`<select class="field" name="pid" required>${S.prospects.filter(p=>p.stage!=='signee'&&p.stage!=='negative').map(p=>`<option value="${p.id}">@${esc(p.handle)}</option>`).join('')||'<option value="">Ajoute d’abord des profils</option>'}</select><select class="field" name="tone"><option>Chaleureux</option><option>Professionnel</option><option>Très court</option></select>`)}${aiBox('free','Question libre','Stratégie, prix, organisation…',`<textarea class="field" name="prompt" rows="2" required></textarea>`)}</div></details>`};
+/* ========== v3 : contrats, candidatures, rapports, médiathèque, simulateur, historique ========== */
+/* ---------- contrats ---------- */
+const KST={brouillon:'Brouillon',envoye:'À signer',signe:'Signé',resilie:'Résilié',annule:'Annulé'},KSC={brouillon:'',envoye:'p-pret',signe:'p-publie',resilie:'p-haute',annule:''};
+const longDate=s=>s?pISO(String(s).slice(0,10)).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}):'';
+const contractText=(m,o)=>`CONTRAT DE PRESTATION DE SERVICES DE MANAGEMENT
+
+Entre : ${S.agency}, ci-après « l’Agence »,
+Et : ${o.legalName||m.name}, ci-après « la Créatrice ».
+
+Article 1 – Objet
+La Créatrice confie à l’Agence une mission d’accompagnement de son activité de création de contenu sur OnlyFans : stratégie, planification, promotion, conseils et suivi des performances. La Créatrice reste seule titulaire de son compte et décide librement des contenus qu’elle produit et publie.
+
+Article 2 – Durée
+Le présent contrat prend effet le ${longDate(o.start)} pour une durée de ${o.months} mois. Il se renouvelle par tacite reconduction pour la même durée, sauf dénonciation par l’une des parties avec un préavis de ${o.notice} jours.
+
+Article 3 – Rémunération
+En contrepartie de ses services, l’Agence perçoit une commission de ${o.pct} % du chiffre d’affaires brut généré sur le compte de la Créatrice pendant la durée du contrat. Un relevé mensuel détaillé est mis à disposition de la Créatrice dans son espace, et sa part (${100-o.pct} %) lui est reversée au plus tard le ${o.payDay} du mois suivant.
+
+Article 4 – Engagements de l’Agence
+L’Agence s’engage à agir avec loyauté, à ne jamais se faire passer pour la Créatrice auprès de ses abonnés sans son accord écrit, à protéger ses contenus (notamment contre les fuites) et à respecter la confidentialité de ses données.
+
+Article 5 – Engagements de la Créatrice
+La Créatrice déclare être majeure et pouvoir le justifier par une pièce d’identité, détenir les droits sur les contenus qu’elle publie et respecter les conditions d’utilisation d’OnlyFans. Elle informe l’Agence de toute indisponibilité prolongée.
+
+Article 6 – Propriété des contenus
+La Créatrice reste propriétaire de l’ensemble de ses contenus, de son image et de ses comptes. Aucune cession de droits n’est consentie à l’Agence, qui ne peut utiliser les contenus qu’aux fins de la mission et avec l’accord de la Créatrice.
+
+Article 7 – Confidentialité et données personnelles
+Chaque partie garde confidentielles les informations échangées. Les données personnelles de la Créatrice sont traitées uniquement pour l’exécution du contrat, conformément au RGPD ; elle peut exercer ses droits d’accès, de rectification et de suppression auprès de l’Agence.
+
+Article 8 – Résiliation
+Chaque partie peut résilier le contrat à tout moment moyennant le préavis prévu à l’article 2. En cas de manquement grave, la résiliation peut être immédiate après une mise en demeure restée sans effet pendant 8 jours. Les commissions restent dues sur le chiffre d’affaires réalisé jusqu’à la date de fin.
+${o.extra?`\nArticle 9 – Clauses particulières\n${o.extra}\n`:''}
+Fait en ligne. La signature électronique de la Créatrice vaut acceptation de l’ensemble des clauses ci-dessus.`;
+const kOpts=(m,k)=>({legalName:k&&k.legalName||'',pct:k?k.pct:(+m.pct||40),start:k&&k.start||T0,months:k?k.months:12,notice:k?k.notice:30,payDay:k?k.payDay:10,extra:k&&k.extra||''});
+const newContract=(m,o,send)=>{const oo={...kOpts(m),...o};const c={id:uid(),modelId:m.id,...oo,text:contractText(m,oo),status:send?'envoye':'brouillon',createdAt:new Date().toISOString(),endDate:iso(new Date(pISO(oo.start).getFullYear(),pISO(oo.start).getMonth()+(+oo.months||12),pISO(oo.start).getDate()))};if(send)c.sentAt=new Date().toISOString();return c};
+const hasSigned=m=>S.contracts.some(c=>c.modelId===m.id&&c.status==='signe');
+const contractRow=(c,admin)=>{const m=mdl(c.modelId)||myModel||GHOST;return `<div class="krow"><span class="kic">${sv(I.file,18)}</span><div class="kt"><b>${admin?esc(m.name)+' · ':''}Contrat ${c.pct} % · ${c.months} mois</b><small>${c.status==='signe'?`Signé le ${longDate(c.signedAt)} par ${esc(c.signerName||'')}`:c.status==='envoye'?`Envoyé le ${longDate(c.sentAt)}, en attente de signature`:c.status==='resilie'?`Résilié le ${longDate(c.endedAt)}`:c.status==='annule'?'Annulé':`Brouillon du ${longDate(c.createdAt)}`} · début ${longDate(c.start)}</small></div><span class="pill ${KSC[c.status]}">${KST[c.status]}</span><div class="kact">${admin?(c.status==='brouillon'?`<button type="button" class="btn sm" data-act="kedit" data-id="${c.id}">Modifier</button><button type="button" class="btn sm pri" data-act="ksend" data-id="${c.id}">Envoyer</button>`:c.status==='envoye'?`<button type="button" class="btn sm" data-act="kcancel" data-id="${c.id}">Annuler</button>`:c.status==='signe'?`<button type="button" class="btn sm" data-act="kend" data-id="${c.id}">Résilier</button>`:''):(c.status==='envoye'?`<button type="button" class="btn sm pri" data-act="ksign" data-id="${c.id}">Lire et signer</button>`:'')}<button type="button" class="btn sm" data-act="kpdf" data-id="${c.id}">${sv(I.file,15)}PDF</button>${admin&&(c.status==='brouillon'||c.status==='annule')?`<button type="button" class="icon-btn" data-act="kdel" data-id="${c.id}" aria-label="Supprimer">${sv(I.trash,16)}</button>`:''}</div></div>`};
+const openContract=(mid,kid)=>{const m=mdl(mid);if(!m)return;const k=kid?byId(S.contracts,kid):null,o=kOpts(m,k);
+ openDrawer(k?'Modifier le contrat':'Nouveau contrat','fk',`<input type="hidden" name="mid" value="${m.id}"><input type="hidden" name="kid" value="${k?k.id:''}">
+ <div class="accbox"><b>${esc(m.name)}</b><p>${m._linked?'Son compte est relié : elle pourra signer depuis son espace.':'<span class="late">Son compte n’est pas encore relié</span> (onglet Accès de la fiche) : elle ne pourra signer qu’une fois connectée.'}</p></div>
+ ${F('Nom légal de la créatrice',inp('legalName',o.legalName,'text',`placeholder="${esc(m.name)}"`),1)}
+ ${F('Commission agence (%)',inp('pct',o.pct,'number','min="0" max="90" step="any" required'))}${F('Début',inp('start',o.start,'date','required'))}
+ ${F('Durée (mois)',inp('months',o.months,'number','min="1" max="60" step="1" required'))}${F('Préavis (jours)',inp('notice',o.notice,'number','min="0" max="180" step="1" required'))}
+ ${F('Jour de reversement',inp('payDay',o.payDay,'number','min="1" max="28" step="1" required'))}<div></div>
+ ${F('Clauses particulières (facultatif)',`<textarea class="field" name="extra" rows="3" placeholder="ex. Exclusivité sur la gestion des réseaux sociaux">${esc(o.extra)}</textarea>`,1)}
+ <p class="hint">Le texte est généré à partir de ces informations : c’est un modèle indicatif, fais-le relire par un professionnel du droit avant de l’utiliser.</p>
+ <div class="full"><button type="button" class="btn sm" data-act="kpreview">Aperçu du texte</button></div><div id="kprev" class="full"></div>`,
+ `<span class="sp"></span><button class="btn" name="go" value="draft">Enregistrer le brouillon</button><button class="btn pri" name="go" value="send">${sv(I.envoyer,16)}Envoyer à la signature</button>`)};
+const kFormOpts=f=>{const d=Object.fromEntries(new FormData(f));return{legalName:String(d.legalName||'').trim(),pct:+d.pct||0,start:d.start||T0,months:+d.months||12,notice:+d.notice||30,payDay:+d.payDay||10,extra:String(d.extra||'').trim()}};
+const printContract=c=>{const m=mdl(c.modelId)||myModel||GHOST,w=window.open('','_blank');if(!w)return toast('Autorise les fenêtres pop-up pour afficher le contrat');
+ w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Contrat ${esc(m.name)}</title><style>body{font:13.5px/1.6 Georgia,'Times New Roman',serif;color:#1b1520;max-width:720px;margin:48px auto;padding:0 28px}h1{font:700 20px Arial,sans-serif;letter-spacing:.02em}.txt{white-space:pre-wrap}.sig{margin-top:36px;padding:18px;border:1px solid #ddd;border-radius:10px;font-family:Arial,sans-serif;font-size:12.5px}.sig img{max-width:260px;max-height:110px;display:block;margin:8px 0;background:#fff}.muted{color:#6e6470}code{font-size:11px;word-break:break-all}.stamp{display:inline-block;padding:3px 10px;border-radius:99px;font-weight:700;background:${c.status==='signe'?'#dcfce7;color:#166534':'#fef3c7;color:#92400e'}}</style></head><body>
+ <div class="txt">${esc(c.text)}</div>
+ <div class="sig">${c.status==='signe'||c.status==='resilie'?`<span class="stamp">Signé électroniquement</span><p>Par <b>${esc(c.signerName||'')}</b> le ${new Date(c.signedAt).toLocaleString('fr-FR')}</p><img src="${esc(c.signature||'')}" alt="Signature"><p class="muted">Empreinte SHA-256 du texte signé :<br><code>${esc(c.textHash||'')}</code></p>${c.status==='resilie'?`<p><b>Contrat résilié le ${longDate(c.endedAt)}</b></p>`:''}`:`<span class="stamp">${KST[c.status]}</span><p class="muted">Ce contrat n’est pas encore signé.</p>`}</div>
+ <p class="muted" style="font-family:Arial,sans-serif;font-size:11px;margin-top:24px">Document généré depuis l’espace ${esc(S.agency)}. Pour l’enregistrer en PDF, choisis « Enregistrer au format PDF » dans la fenêtre d’impression.</p>
+ <script>setTimeout(function(){print()},400)<\/script></body></html>`);w.document.close()};
+/* pavé de signature */
+let sigPad=null;
+const initSigPad=()=>{const cv=$('#sigpad');if(!cv)return;const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;cv.width=r.width*dpr;cv.height=r.height*dpr;const ctx=cv.getContext('2d');ctx.scale(dpr,dpr);ctx.lineWidth=2.4;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#1b1520';
+ sigPad={cv,ctx,drawn:false,down:false};const pos=e=>{const b=cv.getBoundingClientRect();return[e.clientX-b.left,e.clientY-b.top]};
+ cv.addEventListener('pointerdown',e=>{e.preventDefault();cv.setPointerCapture(e.pointerId);sigPad.down=true;const[x,y]=pos(e);ctx.beginPath();ctx.moveTo(x,y)});
+ cv.addEventListener('pointermove',e=>{if(!sigPad.down)return;e.preventDefault();const[x,y]=pos(e);ctx.lineTo(x,y);ctx.stroke();sigPad.drawn=true});
+ const up=()=>{sigPad.down=false};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up)};
+const sigData=()=>{if(!sigPad||!sigPad.drawn)return null;const s=sigPad.cv,t=D.createElement('canvas'),w=Math.min(600,s.width),h=Math.round(s.height*w/s.width);t.width=w;t.height=h;const x=t.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(s,0,0,w,h);return t.toDataURL('image/png')};
+const openSign=kid=>{const c=byId(S.contracts,kid);if(!c)return;
+ openDrawer('Signer mon contrat','fsign',`<input type="hidden" name="kid" value="${c.id}"><div class="ktext full">${esc(c.text)}</div>
+ ${F('Ton nom complet (nom légal)',inp('signer','','text','required autocomplete="name" placeholder="Prénom Nom"'),1)}
+ ${G('Ta signature',`<div class="sigwrap"><canvas id="sigpad" aria-label="Zone de signature : signe avec ton doigt ou ta souris"></canvas><button type="button" class="btn sm" data-act="sigclear">Effacer</button></div><p class="hint">Signe avec ton doigt (téléphone) ou ta souris dans le cadre blanc.</p>`,1)}
+ <label class="agecard"><input type="checkbox" class="chk" name="ok" required><span>J’ai lu le contrat et j’en accepte toutes les clauses<small>Ta signature électronique a la même valeur qu’une signature manuscrite. Tu pourras télécharger le contrat signé à tout moment.</small></span></label>`,
+ `<span class="sp"></span><button class="btn pri">${sv(I.check,18)}Signer le contrat</button>`);setTimeout(initSigPad,60)};
+const doSign=async d=>{const c=byId(S.contracts,d.kid),img=sigData();if(!img)return toast('Dessine ta signature dans le cadre blanc');if(!d.ok)return toast('Coche la case d’acceptation');
+ const btn=$('#fsign button.pri');btn.disabled=true;btn.textContent='Signature…';
+ const r=await sb.rpc('sign_contract',{contract_id:c.id,signature:img,signer_name:String(d.signer||'').trim()});
+ if(r.error){btn.disabled=false;btn.textContent='Signer le contrat';return toast(r.error.message)}
+ Object.assign(c,{status:'signe',signedAt:new Date().toISOString(),signerName:String(d.signer).trim(),signature:img});try{await load();}catch(e){}closeLayer();render();toast('Contrat signé. Merci !')};
+
+/* ---------- candidatures publiques ---------- */
+const applyUrl=()=>location.origin+location.pathname+'#rejoindre';
+const renderApply=async(done)=>{let ag='l’agence';try{const r=await sb.rpc('agency_name');if(!r.error&&r.data)ag=r.data}catch(e){}
+ if(done){screen(`${brandHAg(ag,'Candidature')}<h2>Merci, c’est envoyé !</h2><p class="hint">${esc(ag)} a bien reçu ta candidature et te recontactera par email ou sur Instagram. Pense à vérifier tes messages.</p>`);return}
+ screen(`${brandHAg(ag,'Candidature')}<h2>Rejoins ${esc(ag)}</h2><p class="hint">Tu crées du contenu et tu veux être accompagnée (stratégie, planning, promotion, protection de tes contenus) ? Laisse-nous tes infos, on te recontacte.</p>
+ <form id="fapply" class="authform"><div class="apgrid"><label>Prénom ou pseudo *<input class="field" name="name" required maxlength="80" autocomplete="given-name"></label><label>Date de naissance *<input class="field" type="date" name="birthdate" required max="${iso(new Date(TODAY.getFullYear()-18,TODAY.getMonth(),TODAY.getDate()))}"></label></div>
+ <label>Email *<input class="field" type="email" name="email" required maxlength="160" autocomplete="email"></label>
+ <div class="apgrid"><label>Instagram *<input class="field" name="instagram" required maxlength="80" placeholder="@pseudo"></label><label>Abonnés Instagram<input class="field" name="followers" inputmode="numeric" maxlength="12" placeholder="ex. 15000"></label></div>
+ <div class="apgrid"><label>Ta niche<input class="field" name="niche" maxlength="60" placeholder="fitness, cosplay…"></label><label>Lien OnlyFans (si tu en as un)<input class="field" name="onlyfans" maxlength="160" placeholder="onlyfans.com/…"></label></div>
+ <label>Un mot sur toi et tes attentes<textarea class="field" name="message" rows="3" maxlength="1500"></textarea></label>
+ <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+ <label class="apchk"><input type="checkbox" class="chk" name="adult" required><span>Je certifie avoir 18 ans ou plus. Une pièce d’identité me sera demandée avant toute collaboration.</span></label>
+ <label class="apchk"><input type="checkbox" class="chk" name="consent" required><span>J’accepte que ${esc(ag)} conserve ces informations pour me recontacter. Je peux demander leur suppression à tout moment.</span></label>
+ <p class="authmsg" id="apmsg" hidden></p><button class="btn pri big">${sv(I.envoyer,18)}Envoyer ma candidature</button></form>`)};
+const brandHAg=(ag,sub)=>`<div class="authbrand"><span class="logo">${sv(I.logo,20,'#fff')}</span><div><b>${esc(ag)}</b><small>${sub}</small></div></div>`;
+const sendApply=async d=>{const btn=$('#fapply button.pri'),msg=$('#apmsg');btn.disabled=true;btn.textContent='Envoi…';
+ const r=await sb.rpc('submit_application',{p:{name:d.name,birthdate:d.birthdate,email:d.email,instagram:d.instagram,followers:d.followers,niche:d.niche,onlyfans:d.onlyfans,message:d.message,website:d.website,adult:!!d.adult,consent:!!d.consent}});
+ if(r.error){btn.disabled=false;btn.innerHTML=`${sv(I.envoyer,18)}Envoyer ma candidature`;msg.hidden=false;msg.textContent=r.error.message.replace(/^.*?ERROR:\s*/,'');return}
+ renderApply(true)};
+
+/* ---------- rapports mensuels ---------- */
+const reportFor=(mid,k)=>S.reports.find(r=>r.modelId===mid&&r.month===k);
+const reportData=(m,k)=>{const g=rev(m,k),pv=rev(m,monthAdd(k,-1)),pc=+m.pct||0,c=payCalc(m,k),C=S.content.filter(x=>x.modelId===m.id&&x.date.startsWith(k)),types={};C.forEach(x=>types[x.type]=(types[x.type]||0)+1);
+ return{g,pv,delta:pct(g,pv),share:Math.round(g*(100-pc))/100,ag:Math.round(g*pc)/100,pc,goal:+m.goal||0,C,types,pub:C.filter(x=>x.status==='publie').length,ppv:C.filter(x=>/PPV/.test(x.type)).reduce((a,x)=>a+(+x.price||0),0),paid:c.paid,p:c.p,series:Array.from({length:6},(_,i)=>monthAdd(k,i-5)).map(q=>[q,rev(m,q)])}};
+const printReport=(mid,k)=>{const m=mdl(mid)||myModel;if(!m)return;const R=reportData(m,k),adv=(reportFor(m.id,k)||{}).advice||'',mx=Math.max(1,...R.series.map(x=>x[1])),w=window.open('','_blank');if(!w)return toast('Autorise les fenêtres pop-up pour afficher le rapport');
+ const bars=R.series.map(([q,v],i)=>{const h=v/mx*120,x=20+i*95;return `<rect x="${x}" y="${150-h}" width="56" height="${h}" rx="6" fill="${q===k?'url(#g)':'#e9d5ff'}"/><text x="${x+28}" y="${144-h}" text-anchor="middle" font-size="11" fill="#6e6470">${v?kEur(v):''}</text><text x="${x+28}" y="170" text-anchor="middle" font-size="11" fill="#6e6470">${mS(q)}</text>`}).join('');
+ w.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><title>Rapport ${esc(m.name)} ${mL(k)} ${k.slice(0,4)}</title><style>*{box-sizing:border-box}body{font:14px/1.55 Arial,Helvetica,sans-serif;color:#1b1520;max-width:760px;margin:0 auto;padding:0 0 40px}header{background:linear-gradient(135deg,#e040fb,#7c3aed);color:#fff;padding:32px 36px;border-radius:0 0 24px 24px}header small{opacity:.85}h1{margin:6px 0 0;font-size:28px}main{padding:0 36px}.k{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.k div{border:1px solid #eee;border-radius:14px;padding:14px}.k small{color:#6e6470;display:block}.k b{font-size:22px}h2{font-size:17px;margin:28px 0 10px}table{width:100%;border-collapse:collapse}td{padding:8px 0;border-bottom:1px solid #eee}td:last-child{text-align:right}.bar{height:10px;border-radius:9px;background:#f3e8ff;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#e040fb,#7c3aed)}.adv{background:#faf5ff;border:1px solid #e9d5ff;border-radius:14px;padding:16px 20px}.adv h3,.adv h4{margin:10px 0 6px}.adv p{margin:6px 0}.adv ol,.adv ul{margin:6px 0;padding-left:20px}.up{color:#15803d}.down{color:#be123c}footer{color:#6e6470;font-size:11px;padding:24px 36px 0}@media print{header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body>
+ <header><small>${esc(S.agency)} · Rapport mensuel</small><h1>${esc(m.name)} — ${cap(mL(k))} ${k.slice(0,4)}</h1></header><main>
+ <div class="k"><div><small>CA brut</small><b>${eur(R.g)}</b><br><small class="${R.delta>=0?'up':'down'}">${R.delta==null?'':(R.delta>=0?'+':'')+R.delta+' % vs '+mL(monthAdd(k,-1))}</small></div><div><small>Ta part (${100-R.pc} %)</small><b>${eur(R.share)}</b><br><small>${R.paid?'Versée le '+longDate(R.p.paidAt):'En attente de versement'}</small></div><div><small>Contenus du mois</small><b>${R.C.length}</b><br><small>${R.pub} publiés</small></div></div>
+ ${R.goal?`<h2>Objectif du mois</h2><p>${eur(R.g)} sur ${eur(R.goal)} (${Math.round(R.g/R.goal*100)} %)</p><div class="bar"><i style="width:${Math.min(100,R.g/R.goal*100)}%"></i></div>`:''}
+ <h2>Évolution sur 6 mois</h2><svg viewBox="0 0 600 180" width="100%"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e040fb"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>${bars}</svg>
+ ${R.C.length?`<h2>Contenus par type</h2><table>${Object.entries(R.types).map(([t,n])=>`<tr><td>${esc(t)}</td><td>${n}</td></tr>`).join('')}${R.ppv?`<tr><td><b>Valeur des PPV proposés</b></td><td><b>${eur(R.ppv)}</b></td></tr>`:''}</table>`:''}
+ ${adv?`<h2>Les conseils de ton agence pour le mois prochain</h2><div class="adv">${md(adv)}</div>`:''}
+ </main><footer>Rapport généré le ${new Date().toLocaleDateString('fr-FR')} depuis l’espace ${esc(S.agency)}. Pour l’enregistrer en PDF, choisis « Enregistrer au format PDF » dans la fenêtre d’impression.</footer>
+ <script>setTimeout(function(){print()},500)<\/script></body></html>`);w.document.close()};
+let repBusy=false;
+const genReport=async(mid,k,quiet)=>{const m=mdl(mid);if(!m)return false;const R=reportData(m,k);
+ const r=await sb.functions.invoke('assistant',{body:{kind:'report',context:{...aiCtxModel(m),mois_du_rapport:k,ca_du_mois:R.g,ca_mois_precedent:R.pv,evolution_pct:R.delta,objectif:R.goal,contenus_du_mois:R.C.length,contenus_publies:R.pub,types:R.types}}});
+ if(r.error){let msg=r.error.message||'';try{const j=await r.error.context.json();if(j&&j.error)msg=j.error}catch(e){}if(!quiet)toast('onlyAI : '+msg);return false}
+ commit(()=>{const ex=reportFor(m.id,k),rp=ex||{id:uid(),modelId:m.id,month:k};rp.advice=r.data.text;rp.generatedAt=new Date().toISOString();if(!ex)S.reports.push(rp)},quiet?null:`Conseils de ${mL(k)} générés pour ${m.name}`);return true};
+const reportsCard=()=>{const k=monthAdd(CUR(),ui.rm??-1),M=S.models.filter(m=>rev(m,k)||reportFor(m.id,k));
+ return `<section class="card" style="margin-bottom:16px"><div class="cardhead"><h2>Rapports mensuels</h2><div class="monthnav sm"><button class="icon-btn" data-act="rm" data-v="-1" aria-label="Mois précédent">${sv(I.chev,18)}</button><b>${cap(mL(k))} ${k.slice(0,4)}</b><button class="icon-btn" data-act="rm" data-v="1" aria-label="Mois suivant">${sv(I.chevr,18)}</button></div></div>
+ <p class="hint">Chaque modèle retrouve automatiquement son rapport du mois dans son espace (Mes revenus). Ajoute-y des conseils personnalisés rédigés par onlyAI.</p>
+ ${M.length?`<div class="replist">${M.map(m=>{const rp=reportFor(m.id,k);return `<div class="reprow"><span class="av sm" style="--c:${m.color}">${ini(m.name)}</span><div class="kt"><b>${esc(m.name)}</b><small>${eur(rev(m,k))} · ${rp&&rp.advice?'conseils ajoutés':'sans conseils'}</small></div><button class="btn sm" data-act="repgen" data-id="${m.id}"${repBusy?' disabled':''}>${sv(I.ia,15)}${rp&&rp.advice?'Régénérer':'Conseils onlyAI'}</button><button class="btn sm" data-act="repview" data-id="${m.id}" data-v="${k}">${sv(I.file,15)}Aperçu</button></div>`}).join('')}</div>${M.some(m=>!(reportFor(m.id,k)||{}).advice)?`<button class="btn pri sm" data-act="repall"${repBusy?' disabled':''} style="margin-top:12px">${sv(I.ia,16)}${repBusy?'Génération…':'Générer tous les conseils manquants'}</button>`:''}`:`<p class="empty">Aucun CA saisi pour ${mL(k)}.</p>`}</section>`};
+
+/* ---------- médiathèque ---------- */
+const isImg=t=>/^image\//.test(t||'');
+const mediaFromSub=s=>(s.files||[]).filter(f=>!S.media.some(x=>x.path===f.path)).map(f=>({id:uid(),modelId:s.modelId,path:f.path,name:f.name,type:f.type,size:f.size,tags:(s.title?[s.title.toLowerCase()]:[]),theme:'',outfit:'',place:'',uses:[],from:'envoi',subId:s.id,addedAt:new Date().toISOString()}));
+const vMedia=()=>{const q=lc(ui.mq||''),L=S.media.filter(x=>(ui.mm==='all'||!ui.mm||x.modelId===ui.mm)&&(ui.mt==='all'||!ui.mt||(ui.mt==='photo'?isImg(x.type):ui.mt==='video'?!isImg(x.type):!(x.uses||[]).length))&&(!q||[x.name,x.theme,x.outfit,x.place,...(x.tags||[])].join(' ').toLowerCase().includes(q))).sort((a,b)=>String(b.addedAt||'').localeCompare(String(a.addedAt||''))),
+ importable=S.submissions.filter(s=>s.status==='valide').flatMap(mediaFromSub).length;
+ return `<div class="head"><div><h1>Médiathèque</h1><p>${S.media.length} média${S.media.length>1?'s':''} · ${S.media.filter(x=>!(x.uses||[]).length).length} jamais publié${S.media.filter(x=>!(x.uses||[]).length).length>1?'s':''}. Les envois que tu valides arrivent ici automatiquement.</p></div><div class="tools">${importable?`<button class="btn" data-act="mimport">Importer ${importable} média${importable>1?'s':''} validé${importable>1?'s':''}</button>`:''}<label class="btn pri">${sv(I.plus,18)}Ajouter des fichiers<input type="file" id="mupload" multiple accept="image/*,video/*" hidden></label></div></div>
+ <div class="mfilters"><label class="search">${sv(I.search,18)}<input id="mq" type="search" placeholder="Rechercher un tag, un thème, une tenue…" value="${esc(ui.mq||'')}" aria-label="Rechercher"></label><select class="sel" data-act="mm" aria-label="Modèle"><option value="all">Toutes les modèles</option>${modelOpts(ui.mm)}</select></div>
+ <div class="chips">${Object.entries({all:'Tout',photo:'Photos',video:'Vidéos',unused:'Jamais publiés'}).map(([k,v])=>`<button class="chip${(ui.mt||'all')===k?' on':''}" data-act="mt" data-v="${k}">${v}</button>`).join('')}</div>
+ ${L.length?`<div class="mediagrid">${L.map(x=>{const m=mdl(x.modelId)||GHOST,u=(x.uses||[]).length;return `<button class="mcell" data-act="mopen" data-id="${x.id}" style="--c:${m.color}">${isImg(x.type)?`<img data-sign="${esc(x.path)}" alt="${esc(x.name)}" loading="lazy">`:`<span class="mvid">${sv(I.play,30)}</span>`}<span class="mbadge ${u?'used':''}">${u?`Publié ${u}×`:'Jamais publié'}</span><span class="minfo"><i class="dot"></i>${esc(m.name)}${(x.tags||[]).length?' · '+esc(x.tags.slice(0,2).join(', ')):''}</span></button>`}).join('')}</div>`:`<div class="card"><p class="empty">${S.media.length?'Aucun média ne correspond.':'Ta médiathèque est vide. Valide des envois de tes modèles ou ajoute des fichiers.'}</p></div>`}`};
+const openMedia=id=>{const x=byId(S.media,id);if(!x)return;const m=mdl(x.modelId)||GHOST;
+ openDrawer('Média','fmed',`<input type="hidden" name="id" value="${x.id}"><div class="mprev full">${isImg(x.type)?`<img data-sign="${esc(x.path)}" alt="${esc(x.name)}">`:`<video controls playsinline preload="metadata" data-signv="${esc(x.path)}"></video>`}</div>
+ <p class="hint full">${esc(x.name)} · ${fsize(x.size||0)} · ${esc(m.name)} · ${x.from==='envoi'?'envoyé par la modèle':'ajouté par l’agence'}</p>
+ ${F('Modèle',`<select class="field" name="modelId">${modelOpts(x.modelId)}</select>`)}${F('Tags (séparés par des virgules)',inp('tags',(x.tags||[]).join(', '),'text','placeholder="plage, été, lingerie…"'))}
+ ${F('Thème',inp('theme',x.theme))}${F('Tenue',inp('outfit',x.outfit))}${F('Lieu',inp('place',x.place))}<div></div>
+ ${G('Utilisations',(x.uses||[]).length?`<ul class="docs">${x.uses.map(u=>{const c=byId(S.content,u.contentId);return `<li>${sv(I.cal,16)}<span>${c?esc(c.title):'Contenu supprimé'}<small>${dShort(u.date)}</small></span></li>`}).join('')}</ul>`:'<p class="hint">Jamais publié pour l’instant.</p>',1)}
+ <div class="full subact"><button type="button" class="btn pri sm" data-act="muse" data-id="${x.id}">${sv(I.cal,16)}Planifier un contenu avec</button><button type="button" class="btn sm" data-act="mdl" data-id="${x.id}">${sv(I.download,16)}Télécharger</button></div>`,foot('mdel',x.id))};
+const uploadMedia=async files=>{const mid=ui.mm&&ui.mm!=='all'?ui.mm:(S.models[0]||{}).id;if(!mid)return toast('Ajoute d’abord une modèle');const ok=[...files].filter(f=>f.size<=MAXF&&/^(image|video)\//.test(f.type));if(!ok.length)return toast('Photos ou vidéos de 50 Mo maximum');
+ toast(`Envoi de ${ok.length} fichier${ok.length>1?'s':''}…`);const added=[];for(const f of ok){const path=`${mid}/bibliotheque/${Date.now()}-${safeName(f.name)}`;const r=await sb.storage.from('uploads').upload(path,f,{contentType:f.type});if(r.error){toast('Échec : '+r.error.message);continue}added.push({id:uid(),modelId:mid,path,name:f.name,type:f.type,size:f.size,tags:[],theme:'',outfit:'',place:'',uses:[],from:'agence',addedAt:new Date().toISOString()})}
+ if(added.length)commit(()=>{S.media.push(...added)},`${added.length} média${added.length>1?'s':''} ajouté${added.length>1?'s':''}${ui.mm&&ui.mm!=='all'?'':' à '+(mdl(mid)||GHOST).name}`)};
+const hydrateVideo=async()=>{const v=D.querySelector('video[data-signv]');if(!v||!sb)return;const [u]=await signUrls([v.dataset.signv]);if(u)v.src=u};
+
+/* ---------- simulateur ---------- */
+let sim={};
+const simDefaults=m=>{const k=monthAdd(CUR(),-1),base=rev(m,k)||rev(m,CUR());return{mid:m.id,price:+m.price||9.99,elast:'0.6',growth:0,promoN:0,promoD:30,bundleA:0,bundleD:25,ppvN:0,ppvP:15,ppvR:8,base}};
+const simCalc=(m,s)=>{const subs=+m.subs||0,p0=+m.price||0,base=+s.base||0,sub0=subs*p0,other=Math.max(0,base-sub0),pch=p0?(s.price-p0)/p0:0;
+ const subs1=Math.max(0,subs*(1-(+s.elast)*pch)*(1+(+s.growth)/100)),a=Math.min(1,(+s.bundleA)/100);
+ const subRev=subs1*(1-a)*s.price,bunRev=subs1*a*s.price*(1-(+s.bundleD)/100),promo=(+s.promoN)*s.price*(1-(+s.promoD)/100),oth=subs?other*(subs1/subs):other,ppv=(+s.ppvN)*(+s.ppvP)*((+s.ppvR)/100)*subs1;
+ const tot=subRev+bunRev+promo+oth+ppv,pc=+m.pct||0;return{subs,subs1,base,tot,parts:[['Abonnements',subRev],['Bundles 3 mois',bunRev],['Promo nouveaux abonnés',promo],['Autres revenus actuels (tips, PPV…)',oth],['PPV supplémentaires',ppv]],ag:tot*pc/100,mo:tot*(100-pc)/100,agBase:base*pc/100,pc}};
+const simResult=()=>{const m=mdl(sim.mid);if(!m)return '';const r=simCalc(m,sim),d=r.base?Math.round((r.tot-r.base)/r.base*100):null,mx=Math.max(r.tot,r.base,1);
+ return `<div class="simbig"><small>CA mensuel estimé</small><b>${eur(r.tot)}</b>${d==null?'':`<span class="delta ${d>=0?'up':'down'}">${d>=0?'+':''}${d} % vs ${eur(r.base)} aujourd’hui</span>`}</div>
+ <div class="simcmp"><div><small>Aujourd’hui</small><div class="sbar"><i style="width:${r.base/mx*100}%;background:rgba(255,255,255,.25)"></i></div><b>${eur(r.base)}</b></div><div><small>Scénario</small><div class="sbar"><i style="width:${r.tot/mx*100}%"></i></div><b>${eur(r.tot)}</b></div></div>
+ <div class="srow"><div><small>Part agence (${r.pc} %)</small><b>${eur(r.ag)}</b><span class="delta ${r.ag>=r.agBase?'up':'down'}">${r.ag>=r.agBase?'+':''}${eur(r.ag-r.agBase)}</span></div><div><small>Part de ${esc(m.name.split(' ')[0])}</small><b>${eur(r.mo)}</b></div><div><small>Abonnés estimés</small><b>${num(Math.round(r.subs1))}</b><span class="delta mutd">aujourd’hui ${num(r.subs)}</span></div></div>
+ <div class="hbars">${r.parts.filter(p=>p[1]>0.5).map(([l,v])=>`<div class="hrow"><span>${l}</span><div><i style="width:${v/mx*100}%"></i></div><b class="num">${eur(v)}</b></div>`).join('')}</div>`};
+const vSimu=()=>{if(!S.models.length)return '<div class="card"><p class="empty">Ajoute une modèle pour utiliser le simulateur.</p></div>';if(!mdl(sim.mid))sim=simDefaults(S.models[0]);const m=mdl(sim.mid),R=(n,l,min,max,step,suf)=>`<label class="simf"><span>${l}<b id="sv-${n}">${sim[n]}${suf}</b></span><input type="range" data-sim="${n}" min="${min}" max="${max}" step="${step}" value="${sim[n]}"></label>`;
+ return `<div class="grid2"><section class="card"><h2>Scénario</h2>${F('Modèle',`<select class="field" data-act="simm">${modelOpts(sim.mid)}</select>`)}
+ ${+m.subs?'':`<p class="authmsg">Renseigne le nombre d’abonnés et le prix de l’abonnement dans la fiche de ${esc(m.name)} pour un calcul fiable.</p>`}
+ <p class="hint">Base : ${num(m.subs)} abonnés à ${eur2(m.price)} et ${eur(sim.base)} de CA brut le mois dernier.</p>
+ <div class="simgroup"><h3>Prix de l’abonnement</h3>${R('price','Nouveau prix (€)',3,50,0.5,' €')}<label class="simf"><span>Sensibilité des abonnés au prix</span><select class="field" data-sim="elast"><option value="0.3"${sim.elast==='0.3'?' selected':''}>Faible (fans très fidèles)</option><option value="0.6"${sim.elast==='0.6'?' selected':''}>Moyenne</option><option value="1"${sim.elast==='1'?' selected':''}>Forte</option></select></label>${R('growth','Croissance des abonnés (%)',-30,100,1,' %')}</div>
+ <div class="simgroup"><h3>Promo nouveaux abonnés</h3>${R('promoN','Nouveaux abonnés / mois',0,1000,10,'')}${R('promoD','Remise le 1er mois (%)',0,80,5,' %')}</div>
+ <div class="simgroup"><h3>Bundle 3 mois</h3>${R('bundleA','Abonnés qui le prennent (%)',0,60,1,' %')}${R('bundleD','Remise du bundle (%)',0,60,5,' %')}</div>
+ <div class="simgroup"><h3>PPV supplémentaires</h3>${R('ppvN','PPV envoyés / mois',0,30,1,'')}${R('ppvP','Prix d’un PPV (€)',3,100,1,' €')}${R('ppvR','Abonnés qui achètent (%)',0,40,1,' %')}</div></section>
+ <section class="card simres"><h2>Résultat</h2><div id="simres">${simResult()}</div><p class="hint" style="margin-top:14px">Estimation simple : la sensibilité au prix fait varier le nombre d’abonnés quand le prix change. Les autres revenus suivent le nombre d’abonnés. À utiliser comme ordre de grandeur, pas comme une promesse.</p>
+ <div class="subact" style="margin-top:12px">${sim.price!==+m.price?`<button class="btn sm" data-act="simapply">Appliquer ${eur2(sim.price)} à la fiche</button>`:''}<button class="btn pri sm" data-act="simai">${sv(I.ia,16)}Demander l’avis d’onlyAI</button><button class="btn sm" data-act="simreset">Réinitialiser</button></div></section></div>`};
+
+/* ---------- historique ---------- */
+let audit=null,auditBusy=false;
+const LABT={models:'la fiche',model_private:'les infos privées de',content:'le contenu',tasks:'la tâche',prospects:'le prospect',payouts:'le paiement',leaks:'la fuite',contracts:'le contrat',media:'le média',settings:'les réglages',submissions:'l’envoi',reports:'le rapport'};
+const HF={all:'Tout',models:'Modèles',content:'Planning',tasks:'Tâches',prospects:'Prospection',payouts:'Paiements',contracts:'Contrats',media:'Médias'};
+const loadAudit=async()=>{if(auditBusy)return;auditBusy=true;let q=sb.from('audit_log').select('*').order('at',{ascending:false}).limit(300);if(ui.hf&&ui.hf!=='all')q=q.eq('tbl',ui.hf);const r=await q;audit=r.error?{error:r.error.message}:r.data;auditBusy=false;if(ui.view==='historique')render()};
+const rowLabel=(t,r)=>{if(!r)return '';const d=r.data||{};const nm=d.name||d.title||(d.handle?'@'+d.handle:'')||(d.url?platOf(d.url):'')||'';const m=r.model_id&&mdl(r.model_id);if(t==='payouts')return `${m?m.name+' · ':''}${d.month?mL(d.month)+' '+d.month.slice(0,4):''}`;if(t==='contracts')return `${m?m.name:''} (${KST[d.status]||''})`;if(t==='model_private'){const mm=mdl(r.id);return mm?mm.name:''}if(t==='settings')return '';return nm||(m?m.name:'')||r.id};
+const FLAB={name:'nom',pct:'commission',price:'prix',subs:'abonnés',status:'statut',goal:'objectif',title:'titre',date:'date',time:'heure',due:'échéance',done:'terminée',prio:'priorité',stage:'étape',amount:'montant',notes:'notes',email:'email',rev:'CA mensuel',checklist:'onboarding',agency:'nom de l’agence',type:'type',niche:'niche',tags:'tags',shared:'visibilité',uses:'utilisations',mediaIds:'médias',theme:'thème',outfit:'tenue',place:'lieu',advice:'conseils',months:'durée',start:'début',sentAt:'envoi',signedAt:'signature',isNew:'nouvelle',followers:'abonnés',handle:'pseudo'};
+const fval=v=>v==null||v===''?'∅':typeof v==='object'?'…':typeof v==='boolean'?(v?'oui':'non'):String(v).length>28?String(v).slice(0,26)+'…':String(v);
+const diffOf=(o,n)=>{if(!o||!n)return '';const a={...(o.data||{}),email:o.email,shared:o.shared},b={...(n.data||{}),email:n.email,shared:n.shared};return Object.keys({...a,...b}).filter(k=>!['updated_at','moved','signature','text','_linked','textHash','signerUser'].includes(k)&&JSON.stringify(a[k])!==JSON.stringify(b[k])).slice(0,4).map(k=>`${FLAB[k]||k} : ${fval(a[k])} → ${fval(b[k])}`).join(' · ')};
+const FROM={models:r=>{const ex=mdl(r.id)||{};return{...r.data,id:r.id,email:r.email||'',_linked:!!r.user_id,notes:ex.notes||'',checklist:ex.checklist||{},contractEnd:ex.contractEnd||''}},content:r=>({...r.data,id:r.id}),tasks:r=>({...r.data,id:r.id,shared:r.shared}),prospects:r=>({...r.data,id:r.id}),payouts:r=>({...r.data,id:r.id,modelId:r.model_id}),leaks:r=>({...r.data,id:r.id,modelId:r.model_id||''}),contracts:r=>({...r.data,id:r.id,modelId:r.model_id}),media:r=>({...r.data,id:r.id,modelId:r.model_id}),reports:r=>({...r.data,id:r.id,modelId:r.model_id})};
+const restoreAudit=e=>{const row=e.old_data,t=e.tbl;if(!row)return;
+ if(t==='settings')return commit(()=>{S.agency=(row.data||{}).agency||S.agency},'Réglages restaurés');
+ if(t==='model_private'){const m=mdl(row.id);if(!m)return toast('Restaure d’abord la fiche modèle');return commit(()=>{Object.assign(m,{notes:(row.data||{}).notes||'',checklist:(row.data||{}).checklist||{},contractEnd:(row.data||{}).contractEnd||''})},'Infos privées restaurées')}
+ if(!FROM[t])return toast('Cet élément ne peut pas être restauré ici');
+ if(row.model_id&&!mdl(row.model_id))return toast('Restaure d’abord la fiche modèle de cet élément');
+ if(t==='contracts'&&['signe','resilie'].includes((row.data||{}).status))return toast('Un contrat signé ne se restaure pas : il est conservé tel quel');
+ const obj=FROM[t](row),arr=S[t==='content'?'content':t];commit(()=>{const i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj)},`${cap(LABT[t].replace(/^l[ae’] ?|^les /,''))} restauré${e.action==='delete'?'':' à cette version'}`);setTimeout(()=>{audit=null;loadAudit()},1500)};
+const vHisto=()=>{if(!audit){loadAudit();return `<div class="head"><div><h1>Historique</h1><p>Chargement…</p></div></div><div class="card"><div class="loader"></div></div>`}
+ if(audit.error)return `<div class="head"><div><h1>Historique</h1></div></div><div class="card"><p class="empty">Erreur : ${esc(audit.error)}</p></div>`;
+ const V={insert:'a créé',update:'a modifié',delete:'a supprimé'},byDay={};audit.forEach(e=>{const d=String(e.at).slice(0,10);(byDay[d]=byDay[d]||[]).push(e)});
+ return `<div class="head"><div><h1>Historique</h1><p>Toutes les modifications des 180 derniers jours, enregistrées automatiquement par la base de données. Tu peux restaurer un élément supprimé ou revenir à une version précédente.</p></div><button class="btn" data-act="hrefresh">Actualiser</button></div>
+ <div class="chips">${Object.entries(HF).map(([k,v])=>`<button class="chip${(ui.hf||'all')===k?' on':''}" data-act="hf" data-v="${k}">${v}</button>`).join('')}</div>
+ ${audit.length?Object.entries(byDay).map(([d,L])=>`<section class="card hday"><h2>${cap(pISO(d).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}))}</h2>${L.map(e=>{const r=e.new_data||e.old_data,lab=rowLabel(e.tbl,r),df=e.action==='update'?diffOf(e.old_data,e.new_data):'';return `<div class="hrow2 a-${e.action}"><time>${new Date(e.at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</time><div class="kt"><b>${esc((e.user_email||'Système').split('@')[0])} ${V[e.action]} ${LABT[e.tbl]||e.tbl} ${lab?`« ${esc(lab)} »`:''}</b>${df?`<small>${esc(df)}</small>`:''}</div>${(e.old_data&&FROM[e.tbl]&&!(e.tbl==='contracts'&&[e.old_data,e.new_data].some(x=>x&&['signe','resilie'].includes((x.data||{}).status))))||(e.tbl==='model_private'&&e.old_data)||(e.tbl==='settings'&&e.old_data)?`<button class="btn sm" data-act="hrest" data-id="${e.id}">${e.action==='delete'?'Restaurer':'Revenir à avant'}</button>`:''}</div>`}).join('')}</section>`).join(''):'<div class="card"><p class="empty">Aucune modification enregistrée pour le moment.</p></div>'}`};
 /* ---------- espace modèle ---------- */
 const myShare=m=>(100-(+m.pct||0))/100;
 const itemRO=(c,showDate)=>`<div class="item ro" style="--c:${myModel.color}"><span class="stripe"></span><time>${showDate?dShort(c.date)+' · ':''}${esc(c.time||'')}</time><div class="t"><b>${esc(c.title)}</b><small>${esc(c.type)}${+c.price?' · '+eur2(c.price):''}${c.note?' · '+esc(c.note):''}</small></div><span class="pill p-${c.status}">${CST[c.status]||''}</span></div>`;
@@ -910,10 +1163,13 @@ const vMHome=()=>{const m=myModel,ms=months(),cur=ms[5],pv=ms[4],sh=myShare(m),f
   <div class="card kpi"><small>CA brut, ${mL(cur)}</small><b>${eur(rev(m,cur))}</b><span class="delta mutd">Tu touches ${Math.round(sh*100)} %</span></div>
   <div class="card kpi"><small>Abonnés</small><b>${num(m.subs)}</b><span class="delta mutd">Abonnement ${+m.price?eur2(m.price):'gratuit'}</span></div>
   <div class="card kpi"><small>À faire</small><b class="${todo.some(isLate)?'late':''}">${todo.length}</b><span class="delta mutd">${todo.filter(isLate).length} en retard</span></div></div>
+ ${S.contracts.filter(c=>c.status==='envoye').map(c=>`<section class="card signcta"><div><b>Ton contrat est prêt à être signé</b><small>Commission ${c.pct} % · ${c.months} mois à partir du ${longDate(c.start)}</small></div><button class="btn pri" data-act="ksign" data-id="${c.id}">${sv(I.file,18)}Lire et signer</button></section>`).join('')}
+ ${new Date().getDate()<=7&&rev(m,monthAdd(cur,-1))?`<section class="card signcta soft"><div><b>Ton rapport de ${mL(monthAdd(cur,-1))} est disponible</b><small>Tes chiffres du mois${reportFor(m.id,monthAdd(cur,-1))?' et les conseils de ton agence':''}</small></div><button class="btn" data-act="repview" data-id="${m.id}" data-v="${monthAdd(cur,-1)}">${sv(I.file,18)}Voir le rapport</button></section>`:''}
  ${+m.goal?`<section class="card" style="margin-bottom:16px"><h2>Ton objectif de ${mL(cur)}</h2>${goalRow(m)}</section>`:''}
  <div class="grid2"><section class="card"><h2>Tes revenus, 6 derniers mois</h2>${revBars(6)}</section>
   <section class="card"><h2>Cette semaine</h2>${up.length?`<div class="items">${up.map(c=>itemRO(c,1)).join('')}</div>`:'<p class="empty">Rien de prévu cette semaine.</p>'}<a class="more" href="#mplanning">Tout mon planning →</a></section></div>
- <section class="card"><h2>Ce que l’agence attend de toi</h2>${todo.length?todo.slice(0,6).map(taskRowM).join(''):'<p class="empty">Rien à faire pour le moment.</p>'}${todo.length>6?'<a class="more" href="#mtaches">Voir tout →</a>':''}</section>`};
+ <section class="card"><h2>Ce que l’agence attend de toi</h2>${todo.length?todo.slice(0,6).map(taskRowM).join(''):'<p class="empty">Rien à faire pour le moment.</p>'}${todo.length>6?'<a class="more" href="#mtaches">Voir tout →</a>':''}</section>
+ ${S.contracts.filter(c=>c.status!=='envoye').length?`<section class="card" style="margin-top:16px"><h2>Mes contrats</h2>${S.contracts.filter(c=>c.status!=='envoye').map(c=>contractRow(c,0)).join('')}</section>`:''}`};
 const vMPlan=()=>{const L=S.content.slice().sort(cmpC),end=iso(addD(TODAY,30)),fut=L.filter(c=>c.date>=T0&&c.date<=end),later=L.filter(c=>c.date>end),past=L.filter(c=>c.date<T0).reverse().slice(0,10);
  let days='';const ds=[...new Set(fut.map(c=>c.date))];for(const d of ds){const dd=pISO(d),it=fut.filter(c=>c.date===d);days+=`<div class="day${d===T0?' today':''}"><div class="dlabel"><b>${dd.getDate()}</b><small>${d===T0?'Aujourd’hui':cap(dd.toLocaleDateString('fr-FR',{weekday:'long'}))} · ${MS[dd.getMonth()]}</small></div><div class="items">${it.map(c=>itemRO(c)).join('')}</div></div>`}
  return `<div class="head"><div><h1>Mon planning</h1><p>${fut.length} contenu${fut.length>1?'s':''} prévu${fut.length>1?'s':''} sur les 30 prochains jours. Ton agence le met à jour pour toi.</p></div><div class="tools">${viewToggle()}<button class="btn" data-act="ics">${sv(I.download,18)}Ajouter à mon agenda</button></div></div>
@@ -924,6 +1180,7 @@ const vMRev=()=>{const m=myModel,n=ui.msp||6,ms=months(n),sh=myShare(m),vals=ms.
  return `<div class="head"><div><h1>Mes revenus</h1><p>${tot?`${eur(tot*sh)} pour toi sur ${n} mois (${Math.round(sh*100)} % de ${eur(tot)} de CA brut).`:'Ton agence n’a pas encore renseigné de chiffre d’affaires.'}</p></div><div class="chips" style="margin:0">${[3,6,12].map(v=>`<button class="chip${n===v?' on':''}" data-act="msp" data-v="${v}">${v} mois</button>`).join('')}</div></div>
  <section class="card" style="margin-bottom:16px"><h2>Mois par mois</h2>${revBars(n,1)}<div class="srow"><div><small>Ta part sur ${n} mois</small><b>${eur(tot*sh)}</b></div><div><small>Moyenne par mois</small><b>${eur(fl?tot*sh/fl:0)}</b></div><div><small>CA brut total</small><b>${eur(tot)}</b></div><div><small>Ton pourcentage</small><b>${Math.round(sh*100)} %</b></div></div></section>
  <section class="card"><h2>Détail</h2><div class="scroll"><table class="perf"><thead><tr><th>Mois</th><th>CA brut</th><th>Part agence</th><th>Ta part</th></tr></thead><tbody>${ms.slice().reverse().map(k=>`<tr><td>${cap(mL(k))} ${k.slice(0,4)}</td><td>${rev(m,k)?eur(rev(m,k)):'—'}</td><td>${rev(m,k)?eur(rev(m,k)*(1-sh)):'—'}</td><td><b>${rev(m,k)?eur(rev(m,k)*sh):'—'}</b></td></tr>`).join('')}</tbody></table></div></section>
+ <section class="card" style="margin-top:16px"><h2>Mes rapports mensuels</h2>${(()=>{const ks=months(12).slice(0,11).filter(k=>rev(m,k)).reverse();return ks.length?ks.map(k=>`<div class="payrow"><div><b>${cap(mL(k))} ${k.slice(0,4)}</b><small>${eur(rev(m,k))} de CA${reportFor(m.id,k)?' · avec les conseils de ton agence':''}</small></div><span></span><span></span><button class="btn sm" data-act="repview" data-id="${m.id}" data-v="${k}">${sv(I.file,15)}Rapport</button></div>`).join(''):'<p class="empty">Ton premier rapport arrivera à la fin du mois.</p>'})()}</section>
  <section class="card" style="margin-top:16px"><h2>Mes paiements</h2>${(()=>{const ks=[...new Set([...S.payouts.map(p=>p.month),...months(12).slice(0,11).filter(k=>rev(m,k))])].sort().reverse();return ks.length?ks.map(k=>{const c=payCalc(m,k);return `<div class="payrow"><div><b>${cap(mL(k))} ${k.slice(0,4)}</b><small>${c.paid?`Payé le ${dShort(c.p.paidAt||T0)}${c.p.method?' par '+PMETH[c.p.method].toLowerCase():''}`:'En attente de paiement'}</small></div><b class="num">${eur2(c.amt)}</b><span class="pill ${c.paid?'p-publie':'p-pret'}">${c.paid?'Payé':'À venir'}</span><button class="btn sm" data-act="stmt" data-id="${m.id}" data-v="${k}">${sv(I.file,15)}Relevé</button></div>`}).join(''):'<p class="empty">Aucun paiement pour le moment.</p>'})()}</section>`};
 const vMTasks=()=>{const L=S.tasks.slice().sort(cmpT),open=L.filter(t=>!t.done),done=L.filter(t=>t.done);
  return `<div class="head"><div><h1>Mes tâches</h1><p>${open.length} à faire. Coche-les quand c’est fait : ton agence le voit tout de suite.</p></div></div>
@@ -946,7 +1203,7 @@ const vTeam=()=>{const me=session.user.id;
  <section class="card" style="margin-bottom:16px"><h2>Admins</h2>${adm.map(row).join('')}</section>
  <section class="card"><h2>Comptes modèles</h2>${mod.length?mod.map(row).join(''):'<p class="empty">Aucune modèle n’a encore créé son compte.</p>'}</section>`};
 
-const R={equipe:vTeam,dashboard:vDash,modeles:vModels,prospection:vProspect,stats:vStats,planning:vPlan,taches:vTasks,accueil:vMHome,mplanning:vMPlan,revenus:vMRev,mtaches:vMTasks,depots:vDepots,paiements:vPay,fuites:vFuites,ia:vIA,envoyer:vEnv};
+const R={equipe:vTeam,dashboard:vDash,modeles:vModels,prospection:vProspect,stats:vStats,planning:vPlan,taches:vTasks,accueil:vMHome,mplanning:vMPlan,revenus:vMRev,mtaches:vMTasks,depots:vDepots,paiements:vPay,fuites:vFuites,ia:vIA,envoyer:vEnv,medias:vMedia,historique:vHisto};
 const root=$('#root');
 root.innerHTML='<div id="shell"></div><div id="layer"></div><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="tip" class="tip" aria-hidden="true"></div>';
 const badges=()=>{const late=mode==='admin'?S.tasks.filter(isLate).length:S.tasks.filter(t=>!t.done).length;return{taches:late,mtaches:late,depots:S.submissions.filter(s=>s.status==='envoye').length,envoyer:S.submissions.filter(s=>s.status==='a_refaire').length,fuites:S.leaks.filter(l=>l.status==='repere').length}};
@@ -984,12 +1241,12 @@ const renderMsg=(title,txt,actions)=>screen(`${brandH(session?esc(session.user.e
 /* ---------- chargement ---------- */
 const must=r=>{if(r.error)throw r.error;return r.data};
 const load=async()=>{
- if(mode==='admin'){const[st,mo,pr,co,ta,ps,po,su,lk]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,email,user_id,data'),sb.from('model_private').select('id,data'),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('prospects').select('id,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('leaks').select('id,model_id,data')].map(p=>p.then(must)));
+ if(mode==='admin'){const[st,mo,pr,co,ta,ps,po,su,lk,kc,rp,me]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,email,user_id,data'),sb.from('model_private').select('id,data'),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('prospects').select('id,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('leaks').select('id,model_id,data'),sb.from('contracts').select('id,model_id,data,created_at'),sb.from('reports').select('id,model_id,data'),sb.from('media').select('id,model_id,data')].map(p=>p.then(must)));
   const pv=Object.fromEntries(pr.map(r=>[r.id,r.data||{}]));
-  S={agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>{const p=pv[r.id]||{};return{...r.data,id:r.id,email:r.email||'',_linked:!!r.user_id,notes:p.notes||'',checklist:p.checklist||{},contractEnd:p.contractEnd||''}}),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),prospects:ps.map(r=>({...r.data,id:r.id})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),leaks:lk.map(r=>({...r.data,id:r.id,modelId:r.model_id||''}))};
+  S={agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>{const p=pv[r.id]||{};return{...r.data,id:r.id,email:r.email||'',_linked:!!r.user_id,notes:p.notes||'',checklist:p.checklist||{},contractEnd:p.contractEnd||''}}),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),prospects:ps.map(r=>({...r.data,id:r.id})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),leaks:lk.map(r=>({...r.data,id:r.id,modelId:r.model_id||''})),contracts:kc.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),reports:rp.map(r=>({...r.data,id:r.id,modelId:r.model_id})),media:me.map(r=>({...r.data,id:r.id,modelId:r.model_id||''}))};
   synced=snap()}
- else{const[st,mo,co,ta,po,su]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,data').eq('user_id',session.user.id),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at')].map(p=>p.then(must)));
-  S={...EMPTY(),agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>({...r.data,id:r.id})),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at}))};
+ else{const[st,mo,co,ta,po,su,kc,rp]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,data').eq('user_id',session.user.id),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('contracts').select('id,model_id,data,created_at'),sb.from('reports').select('id,model_id,data')].map(p=>p.then(must)));
+  S={...EMPTY(),contracts:kc.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),reports:rp.map(r=>({...r.data,id:r.id,modelId:r.model_id})),agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>({...r.data,id:r.id})),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at}))};
   myModel=S.models[0]||null}};
 const start=async s=>{session=s;if(!s)return renderAuth('login');
  screen(`${brandH('Chargement…')}<div class="loader"></div>`);
@@ -1029,16 +1286,17 @@ const openModel=id=>{const m=id?mdl(id):{id:uid(),name:'',handle:'',niche:'',sta
  <div class="panel" data-p="o" hidden>${G('Checklist d’arrivée',`<div class="obl">${OB.map(([k,l])=>`<label class="obi"><input type="checkbox" class="chk" name="ob_${k}"${(m.checklist||{})[k]?' checked':''}><span>${l}</span></label>`).join('')}</div>`,1)}
   ${F('Fin de contrat',inp('contractEnd',m.contractEnd,'date'))}<div></div>
   ${G('Documents (contrat, pièce d’identité…)',synced&&synced.models[m.id]?`<div id="docBox" data-mid="${m.id}"><p class="hint">Chargement…</p></div><label class="btn sm" style="align-self:flex-start">${sv(I.file,16)}Ajouter un document<input type="file" id="docFile" data-mid="${m.id}" hidden></label><p class="hint">Stockés de façon privée : seuls les admins y ont accès. 20 Mo maximum.</p>`:'<p class="hint">Enregistre d’abord la fiche pour pouvoir y ajouter des documents.</p>',1)}</div>
+ <div class="panel" data-p="k" hidden>${synced&&synced.models[m.id]?`${S.contracts.filter(c=>c.modelId===m.id).length?S.contracts.filter(c=>c.modelId===m.id).map(c=>contractRow(c,1)).join(''):'<p class="hint full">Aucun contrat pour l’instant.</p>'}<div class="full"><button type="button" class="btn pri sm" data-act="knew" data-id="${m.id}">${sv(I.plus,16)}Nouveau contrat</button></div><p class="hint full">Tu génères le contrat, tu l’envoies, elle le signe au doigt depuis son espace. Un contrat signé est figé : personne ne peut plus le modifier.</p>`:'<p class="hint full">Enregistre d’abord la fiche pour créer un contrat.</p>'}</div>
  <div class="panel" data-p="a" hidden>${F('Email de connexion',inp('email',m.email,'email','placeholder="email de la modèle" autocomplete="off"'),1)}
   <div class="accbox">${m._linked?`<span class="pill p-active">Compte relié</span><p>Elle a accès à son espace avec cet email.</p>`:m.email?`<span class="pill p-pret">En attente</span><p>Envoie-lui le lien du site : elle clique sur « Créer mon compte » avec <b>cet email exact</b>. Son espace s’ouvre automatiquement.</p>`:`<span class="pill">Pas d’accès</span><p>Ajoute son email pour lui ouvrir un espace personnel.</p>`}</div>
   ${G('Lien à lui envoyer',`<div class="copyrow"><input class="field" id="siteUrl" readonly value="${esc(location.origin+location.pathname)}"><button type="button" class="btn" data-act="copyurl">Copier</button></div>`,1)}
   <div class="seeslist"><b>Ce qu’elle voit</b><span>Son planning de contenu, son CA mois par mois et sa part, ses abonnés et les tâches que tu marques « Visible par elle ».</span><b>Ce qu’elle ne voit jamais</b><span>Les autres modèles, tes notes, la prospection, les statistiques de l’agence et les tâches internes.</span></div></div>
  <div class="panel" data-p="n" hidden>${F('Instagram',inp('ig',m.ig,'text','placeholder="pseudo"'))}${F('TikTok',inp('tt',m.tt,'text','placeholder="pseudo"'))}${F('X',inp('x',m.x,'text','placeholder="pseudo"'))}${F('Notes',`<textarea class="field" name="notes" rows="8" placeholder="Préférences, limites, idées de contenu…">${esc(m.notes)}</textarea>`,1)}</div>`;
- openDrawer(m.name||'Nouvelle modèle','fm',body,foot('delmodel',id,id?'Enregistrer':'Créer la fiche'),head,tabsH([['p','Profil'],['r','Revenus'],['o','Onboarding'],['a','Accès'],['n','Réseaux et notes']]));csvState=null;liveModel();if(!id)$('#fm [name=name]').focus();else if(synced&&synced.models[m.id])loadDocs(m.id)};
+ openDrawer(m.name||'Nouvelle modèle','fm',body,foot('delmodel',id,id?'Enregistrer':'Créer la fiche'),head,tabsH([['p','Profil'],['r','Revenus'],['o','Onboarding'],['k','Contrat'],['a','Accès'],['n','Réseaux et notes']]));csvState=null;liveModel();if(!id)$('#fm [name=name]').focus();else if(synced&&synced.models[m.id])loadDocs(m.id)};
 const liveModel=()=>{const f=$('#fm');if(!f)return;const d=new FormData(f),ms=months(),c=d.get('color')||COLORS[0],av=$('#fmAv');av.style.setProperty('--c',c);av.textContent=ini(d.get('name'))||'+';
  const p=+d.get('pct')||0,cv=+d.get('rev_'+ms[5])||0;$('#pctOut').textContent=p+' %';$('#pctHint').textContent=cv?`En ${mL(ms[5])} : ${eur(cv*p/100)} pour l’agence, ${eur(cv*(100-p)/100)} pour elle.`:`Sur 1 000 € de CA : ${eur(10*p)} pour l’agence, ${eur(10*(100-p))} pour elle.`;
  const vals=ms.map(k=>+d.get('rev_'+k)||0),mx=Math.max(1,...vals);f.querySelectorAll('.rbar i').forEach((i,j)=>{i.style.width=vals[j]/mx*100+'%';i.style.background=c});$('#revTot').textContent=eur(vals.reduce((a,b)=>a+b,0))};
-const openContent=(id,date)=>{const c=id?byId(S.content,id):{id:uid(),modelId:ui.pf!=='all'?ui.pf:((S.models[0]||{}).id||''),date:date||T0,time:'18:00',type:'Post mur',title:'',price:'',status:'idee',note:''};
+const openContent=(id,date,pre)=>{const c=id?byId(S.content,id):{id:uid(),modelId:ui.pf!=='all'?ui.pf:((S.models[0]||{}).id||''),date:date||T0,time:'18:00',type:'Post mur',title:'',price:'',status:'idee',note:'',mediaIds:[],...(pre||{})};const ML=(c.mediaIds||[]).map(i=>byId(S.media,i)).filter(Boolean);
  openDrawer(id?'Modifier le contenu':'Nouveau contenu','fc',`<input type="hidden" name="id" value="${c.id}">
  ${F('Titre',inp('title',c.title,'text','required autocomplete="off" placeholder="ex. Teaser shooting"'),1)}
  ${G('Modèle',seg('modelId',{'':'Agence',...Object.fromEntries(S.models.map(m=>[m.id,m.name]))},c.modelId,{'':GHOST.color,...Object.fromEntries(S.models.map(m=>[m.id,m.color]))}),1)}
@@ -1046,7 +1304,8 @@ const openContent=(id,date)=>{const c=id?byId(S.content,id):{id:uid(),modelId:ui
  ${F('Date',inp('date',c.date,'date','required'))}${F('Heure',inp('time',c.time,'time'))}
  ${F('Prix (si PPV)',euroIn('price',c.price,'min="0" step="0.01" placeholder="—"'))}
  ${G('Statut',seg('status',CST,c.status,CSC),1)}
- ${F('Note',`<textarea class="field" name="note" rows="3">${esc(c.note)}</textarea>`,1)}`,foot('delc',id,id?'Enregistrer':'Ajouter au planning'))};
+ ${F('Note',`<textarea class="field" name="note" rows="3">${esc(c.note)}</textarea>`,1)}
+ <input type="hidden" name="mediaIds" value="${esc((c.mediaIds||[]).join(','))}">${ML.length?G('Médias liés',`<div class="thumbs">${ML.map(x=>isImg(x.type)?`<span class="thumb"><img data-sign="${esc(x.path)}" alt="${esc(x.name)}"></span>`:`<span class="thumb vid">${sv(I.play,22)}<span>${esc(x.name)}</span></span>`).join('')}</div>`,1):''}`,foot('delc',id,id?'Enregistrer':'Ajouter au planning'));hydrateThumbs()};
 const openTask=id=>{const t=byId(S.tasks,id);if(!t)return;
  openDrawer('Modifier la tâche','ft',`<input type="hidden" name="id" value="${t.id}">
  ${F('Tâche',inp('title',t.title,'text','required autocomplete="off"'),1)}
@@ -1055,9 +1314,10 @@ const openTask=id=>{const t=byId(S.tasks,id);if(!t)return;
  ${G('Priorité',seg('prio',PRIO,t.prio,{haute:'#f472b6',moyenne:'#fbbf24',basse:'#9d8fb3'}),1)}
  <label class="agecard"><input type="checkbox" class="chk" name="shared"${t.shared?' checked':''}><span>Visible par la modèle<small>Elle la verra dans son espace et pourra la cocher quand c’est fait. Sinon, la tâche reste interne à l’agence.</small></span></label>
  <label class="agecard"><input type="checkbox" class="chk" name="done"${t.done?' checked':''}><span>Terminée</span></label>`,foot('deltask',id))};
-const openProspect=id=>{const p=byId(S.prospects,id);if(!p)return;const m=mdl(p.modelId);
+const openProspect=id=>{const p=byId(S.prospects,id);if(!p)return;const m=mdl(p.modelId);if(p.isNew)commit(()=>{p.isNew=false},null);
  const head=`<span class="av lg" style="--c:${PSC[p.stage]}">${sv(I.prospection,24)}</span><div class="hn"><label class="title-wrap">@<input class="title-in" name="handle" value="${esc(p.handle)}" required autocomplete="off" aria-label="Pseudo Instagram"></label><a class="instalink" href="https://www.instagram.com/${encodeURIComponent(p.handle)}/" target="_blank" rel="noopener">Voir le profil Instagram ↗</a></div>`;
  openDrawer('@'+p.handle,'fp',`<input type="hidden" name="id" value="${p.id}">
+ ${p.source==='candidature'?`<div class="accbox"><span class="pill p-onboarding">Candidature du ${longDate(p.appliedAt)}</span><p>Email : <b>${esc(p.email||'')}</b>${p.birthYear?` · née en ${p.birthYear} (âge déclaré, à vérifier avec une pièce d’identité)`:''}${p.onlyfans?` · OnlyFans : ${esc(p.onlyfans)}`:''}</p></div>`:''}
  ${G('Étape',seg('stage',PS,p.stage,PSC),1)}
  ${F('Prénom / nom',inp('name',p.name,'text','placeholder="Facultatif"'))}${F('Niche',inp('niche',p.niche,'text','placeholder="fitness, cosplay…"'))}
  ${F('Abonnés Instagram',inp('followers',p.followers||'','number','min="0" step="1" placeholder="ex. 25000"'))}${F('Relance prévue le',inp('followUp',p.followUp,'date'))}
@@ -1100,6 +1360,34 @@ D.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.t
  else if(a==='togm'){hidden.has(id)?hidden.delete(id):hidden.add(id);if(hidden.size>=S.models.length)hidden.clear();render()}
  else if(a==='togall'){hidden.clear();render()}
  else if(a==='rem')openReminders();
+ else if(a==='knew')openContract(id);
+ else if(a==='kedit'){const c=byId(S.contracts,id);openContract(c.modelId,id)}
+ else if(a==='kpreview'){const f=$('#fk'),m=mdl(f.querySelector('[name=mid]').value);$('#kprev').innerHTML=`<div class="ktext">${esc(contractText(m,kFormOpts(f)))}</div>`}
+ else if(a==='ksend'){const c=byId(S.contracts,id),m=mdl(c.modelId);askConfirm('Envoyer à la signature ?',`${esc(m.name)} pourra lire et signer ce contrat depuis son espace${m._linked?'':' dès qu’elle aura relié son compte'}. Tu ne pourras plus le modifier.`,'Envoyer',()=>commit(()=>{c.status='envoye';c.sentAt=new Date().toISOString()},'Contrat envoyé à la signature'))}
+ else if(a==='kcancel'){const c=byId(S.contracts,id);askConfirm('Annuler ce contrat ?','Il ne pourra plus être signé. Tu pourras en créer un nouveau.','Annuler le contrat',()=>commit(()=>{c.status='annule'},'Contrat annulé'),1)}
+ else if(a==='kend'){const c=byId(S.contracts,id);askConfirm('Résilier ce contrat ?','Le contrat signé reste archivé tel quel, avec la date de résiliation. Pense à respecter le préavis prévu.','Résilier',()=>commit(()=>{c.status='resilie';c.endedAt=T0},'Contrat résilié'),1)}
+ else if(a==='kdel'){commit(()=>{S.contracts=S.contracts.filter(x=>x.id!==id)},'Contrat supprimé')}
+ else if(a==='kpdf')printContract(byId(S.contracts,id));
+ else if(a==='ksign')openSign(id);
+ else if(a==='sigclear'){if(sigPad){sigPad.ctx.clearRect(0,0,sigPad.cv.width,sigPad.cv.height);sigPad.drawn=false}}
+ else if(a==='copyapply')copyText(applyUrl(),'Lien de candidature copié : colle-le dans ta bio Instagram');
+ else if(a==='st'){ui.st=b.dataset.v;keepUI();render()}
+ else if(a==='rm'){ui.rm=(ui.rm??-1)+(+b.dataset.v);keepUI();render()}
+ else if(a==='repview')printReport(id,b.dataset.v);
+ else if(a==='repgen'){if(repBusy)return;repBusy=true;render();genReport(id,monthAdd(CUR(),ui.rm??-1)).finally(()=>{repBusy=false;render()})}
+ else if(a==='repall'){if(repBusy)return;repBusy=true;render();(async()=>{const k=monthAdd(CUR(),ui.rm??-1);let n=0;for(const m of S.models.filter(m=>rev(m,k)&&!(reportFor(m.id,k)||{}).advice)){if(await genReport(m.id,k,1))n++}repBusy=false;render();toast(`${n} rapport${n>1?'s':''} enrichi${n>1?'s':''} par onlyAI`)})()}
+ else if(a==='mt'){ui.mt=b.dataset.v;keepUI();render()}
+ else if(a==='mopen')openMedia(id);
+ else if(a==='mimport'){const add=S.submissions.filter(s=>s.status==='valide').flatMap(mediaFromSub);commit(()=>{S.media.push(...add)},`${add.length} média${add.length>1?'s':''} importé${add.length>1?'s':''}`)}
+ else if(a==='muse'){const x=byId(S.media,id);closeLayer();openContent(null,T0,{modelId:x.modelId,mediaIds:[x.id],note:'Média : '+x.name})}
+ else if(a==='mdl')openFile(byId(S.media,id).path,true);
+ else if(a==='mdel'){const x=byId(S.media,id);closeLayer();commit(()=>{S.media=S.media.filter(y=>y.id!==id)},'Retiré de la médiathèque');if(x&&x.from==='agence')sb.storage.from('uploads').remove([x.path])}
+ else if(a==='hf'){ui.hf=b.dataset.v;keepUI();audit=null;render()}
+ else if(a==='hrefresh'){audit=null;render()}
+ else if(a==='hrest'){const e=(audit||[]).find(x=>String(x.id)===String(id));if(e)askConfirm(e.action==='delete'?'Restaurer cet élément ?':'Revenir à la version précédente ?','L’élément reprend son état d’avant cette modification. Cette restauration sera elle-même enregistrée dans l’historique.','Restaurer',()=>restoreAudit(e))}
+ else if(a==='simapply'){const m=mdl(sim.mid);commit(()=>{m.price=sim.price},`Prix de ${m.name} passé à ${eur2(sim.price)}`)}
+ else if(a==='simreset'){sim=simDefaults(mdl(sim.mid));render()}
+ else if(a==='simai'){const m=mdl(sim.mid),r=simCalc(m,sim);ui.view='ia';location.hash='ia';sendAgent(`Analyse ce scénario pour ${m.name} : abonnement ${eur2(m.price)} → ${eur2(sim.price)} (sensibilité ${sim.elast}), croissance ${sim.growth} %, promo ${sim.promoN} nouveaux abonnés à -${sim.promoD} %, bundle 3 mois pris par ${sim.bundleA} % à -${sim.bundleD} %, ${sim.ppvN} PPV/mois à ${sim.ppvP} € achetés par ${sim.ppvR} %. CA estimé ${eur(r.tot)} contre ${eur(r.base)} aujourd’hui. Est-ce réaliste, quels risques, et que recommandes-tu ?`)}
  else if(a==='more')openMore();
  else if(a==='notifon'){window.Notification.requestPermission().then(p=>{closeLayer();toast(p==='granted'?'C’est noté : tu seras averti des rappels à l’ouverture du site':'Notifications refusées par le navigateur');notifyOnce()})}
  else if(a==='pv'){ui.pv=b.dataset.v;keepUI();render()}
@@ -1113,7 +1401,7 @@ D.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.t
  else if(a==='df'||a==='lf'){ui[a]=b.dataset.v;keepUI();render()}
  else if(a==='refresh'){load().then(()=>{render();toast('À jour')}).catch(e=>toast('Erreur : '+e.message))}
  else if(a==='openfile')openFile(b.dataset.v);
- else if(a==='subok'){const s=byId(S.submissions,id);commit(()=>{s.status='valide';s.reviewedAt=new Date().toISOString();s.adminNote=''},`« ${s.title} » validé`)}
+ else if(a==='subok'){const s=byId(S.submissions,id);commit(()=>{s.status='valide';s.reviewedAt=new Date().toISOString();s.adminNote='';S.media.push(...mediaFromSub(s))},`« ${s.title} » validé`)}
  else if(a==='subfix'){const s=byId(S.submissions,id);openDrawer('Demander une retouche','ffix',`<input type="hidden" name="id" value="${s.id}"><div class="accbox"><b>${esc(s.title)}</b><p>${esc((mdl(s.modelId)||GHOST).name)} verra ta demande dans son espace.</p></div>${F('Ce qu’il faut changer',`<textarea class="field" name="note" rows="4" required placeholder="ex. Lumière trop sombre, refaire 3 photos en extérieur">${esc(s.adminNote||'')}</textarea>`,1)}`,`<span class="sp"></span><button class="btn pri">Envoyer la demande</button>`)}
  else if(a==='subdl'){const s=byId(S.submissions,id);sb.storage.from('uploads').createSignedUrls((s.files||[]).map(f=>f.path),3600,{download:true}).then(r=>{if(r.error)return toast('Erreur : '+r.error.message);(r.data||[]).forEach((x,i)=>setTimeout(()=>{const l=D.createElement('a');l.href=x.signedUrl;l.download='';D.body.appendChild(l);l.click();l.remove()},i*400));toast(`${(r.data||[]).length} fichier${(r.data||[]).length>1?'s':''} en téléchargement`)})}
  else if(a==='subdel'){const s=byId(S.submissions,id);askConfirm('Supprimer cet envoi ?',`Les ${(s.files||[]).length} fichier${(s.files||[]).length>1?'s':''} de « ${esc(s.title)} » seront supprimés définitivement.`,'Supprimer',async()=>{await sb.storage.from('uploads').remove((s.files||[]).map(f=>f.path));commit(()=>{S.submissions=S.submissions.filter(x=>x.id!==id)},null);toast('Envoi supprimé')},1)}
@@ -1146,6 +1434,10 @@ D.addEventListener('change',e=>{const el=e.target,a=el.dataset.act,id=el.dataset
  else if(a==='csvmode'&&csvState){csvState.mode=el.value}
  else if(el.id==='subFiles'){pickedFiles.push(...el.files);el.value='';renderPicked()}
  else if(el.id==='docFile'&&el.files[0]){uploadDoc(el.dataset.mid,el.files[0]);el.value=''}
+ else if(el.id==='mupload'&&el.files.length){uploadMedia(el.files);el.value=''}
+ else if(a==='mm'){ui.mm=el.value;keepUI();render()}
+ else if(a==='simm'){sim=simDefaults(mdl(el.value));render()}
+ else if(el.dataset.sim==='elast'){sim.elast=el.value;$('#simres').innerHTML=simResult()}
  else if(a==='lstatus'){const l=byId(S.leaks,id);if(l)commit(()=>{l.status=el.value;if(el.value==='demande'&&!l.sentAt)l.sentAt=T0;if(el.value==='supprime')l.removedAt=T0},`Statut : ${LST[el.value]}`)}
 });
 D.addEventListener('invalid',e=>{const p=e.target.closest&&e.target.closest('.panel');if(p&&p.hidden){const f=p.closest('form'),t=f&&f.querySelector(`.tab[data-v="${p.dataset.p}"]`);if(t)t.click();setTimeout(()=>e.target.focus(),50)}},true);
@@ -1154,6 +1446,8 @@ D.addEventListener('dragleave',e=>{const z=e.target.closest&&e.target.closest('#
 D.addEventListener('drop',e=>{const z=e.target.closest&&e.target.closest('#dropzone');if(z){e.preventDefault();z.classList.remove('over');pickedFiles.push(...e.dataTransfer.files);renderPicked()}});
 D.addEventListener('input',e=>{if(e.target.id==='q'){ui.q=e.target.value;keepUI();$('#grid').innerHTML=gridHTML()}
  else if(e.target.id==='pq'){ui.pq=e.target.value;keepUI();$('#board').innerHTML=boardHTML()}
+ else if(e.target.id==='mq'){ui.mq=e.target.value;keepUI();clearTimeout(window.__mq);window.__mq=setTimeout(()=>{const p=e.target.selectionStart;render();const i=$('#mq');if(i){i.focus();i.setSelectionRange(p,p)}},250)}
+ else if(e.target.dataset&&e.target.dataset.sim&&e.target.type==='range'){const k=e.target.dataset.sim;sim[k]=+e.target.value;const o=$('#sv-'+k);if(o)o.textContent=sim[k]+({price:' €',ppvP:' €',growth:' %',promoD:' %',bundleA:' %',bundleD:' %',ppvR:' %'}[k]||'');$('#simres').innerHTML=simResult()}
  else if(e.target.closest&&e.target.closest('#fm'))liveModel()});
 
 /* glisser-déposer (souris partout sur la carte, tactile via la poignée) */
@@ -1184,9 +1478,15 @@ D.addEventListener('submit',e=>{e.preventDefault();const f=e.target,fid=f.getAtt
  if(fid==='fadmin'&&mode==='admin'){const em=String(d.email||'').trim().toLowerCase();const known=(team&&team.accounts||[]).find(x=>(x.email||'').toLowerCase()===em);
   const go=async()=>{const r=await sb.rpc('grant_admin',{target_email:em});if(r.error)return toast(r.error.message);toast(r.data==='promoted'?`${em} est maintenant admin`:`Invitation enregistrée : ${em} sera admin dès la création de son compte`);team=null;render()};
   askConfirm('Nommer admin ?',`<b>${esc(em)}</b> aura accès à toute l’agence : toutes les modèles, leurs revenus, tes notes, la prospection et l’équipe.${known&&known.model_name?` Ce compte est relié à la fiche de <b>${esc(known.model_name)}</b>.`:''}${known?'':' Cette personne n’a pas encore de compte : elle deviendra admin en le créant avec cet email.'}`,'Nommer admin',go);return}
+ if(fid==='fapply'){sendApply(d);return}
+ if(fid==='fsign'&&mode==='model'){doSign(d);return}
  if(fid==='fsub'&&mode==='model'){sendSubmission(d);return}
  if(mode!=='admin')return;
  if(fid==='fagent'){sendAgent(d.q);return}
+ if(fid==='fk'){const m=mdl(d.mid),o=kFormOpts(f),send=e.submitter&&e.submitter.value==='send',ex=d.kid&&byId(S.contracts,d.kid);
+  const save=()=>{commit(()=>{if(ex&&ex.status==='brouillon'){const n=newContract(m,o,send);Object.assign(ex,{...n,id:ex.id,createdAt:ex.createdAt})}else S.contracts.push(newContract(m,o,send))},send?`Contrat envoyé à ${m.name}`:'Brouillon enregistré');closeLayer()};
+  if(send)askConfirm('Envoyer à la signature ?',`${esc(m.name)} pourra lire et signer ce contrat depuis son espace. Tu ne pourras plus le modifier.`,'Envoyer',save);else save();return}
+ if(fid==='fmed'){const x=byId(S.media,d.id);commit(()=>{Object.assign(x,{modelId:d.modelId,tags:String(d.tags||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean),theme:tr(d.theme),outfit:tr(d.outfit),place:tr(d.place)})},'Média enregistré');closeLayer();return}
  if(fid&&fid.startsWith('fai-')){callAI(fid.slice(4),d);return}
  if(fid==='fpay'){const m=mdl(d.mid),c=payCalc(m,d.month);commit(()=>{const ex=payFor(m.id,d.month);const p=ex||{id:uid(),modelId:m.id,month:d.month};Object.assign(p,{gross:c.g,pct:c.pc,amount:Math.round((+d.amount||0)*100)/100,status:'paye',paidAt:d.paidAt,method:d.method,note:tr(d.note)});if(!ex)S.payouts.push(p)},`Paiement de ${m.name} enregistré`);closeLayer();return}
  if(fid==='ffix'){const s=byId(S.submissions,d.id);commit(()=>{s.status='a_refaire';s.adminNote=tr(d.note);s.reviewedAt=new Date().toISOString()},'Demande de retouche envoyée');closeLayer();return}
@@ -1194,7 +1494,7 @@ D.addEventListener('submit',e=>{e.preventDefault();const f=e.target,fid=f.getAtt
  if(fid==='fm'){const isNew=!mdl(d.id);commit(()=>{let m=mdl(d.id);if(!m){m={id:d.id,rev:{}};S.models.push(m)}
   Object.assign(m,{name:tr(d.name),handle:tr(d.handle).replace(/^@/,''),niche:tr(d.niche),status:d.status,manager:tr(d.manager),pct:+d.pct||0,price:+d.price||0,subs:+d.subs||0,start:d.start,color:d.color,ig:tr(d.ig),tt:tr(d.tt),x:tr(d.x),notes:d.notes||'',email:tr(d.email).toLowerCase()});
   m.goal=+d.goal||0;m.checklist=Object.fromEntries(OB.map(([k])=>[k,!!d['ob_'+k]]));m.contractEnd=d.contractEnd||'';m.rev=m.rev||{};if(d.revImport){try{Object.assign(m.rev,JSON.parse(d.revImport))}catch(e){}}months().forEach(k=>{const v=d['rev_'+k];if(v===''||v==null)delete m.rev[k];else m.rev[k]=+v})},isNew?`${tr(d.name)} ajoutée`:'Fiche enregistrée');closeLayer()}
- else if(fid==='fc'){const isNew=!byId(S.content,d.id);commit(()=>{let c=byId(S.content,d.id);if(!c){c={id:d.id};S.content.push(c)}Object.assign(c,{title:tr(d.title),modelId:d.modelId,type:d.type,date:d.date,time:d.time,price:d.price===''?'':+d.price,status:d.status,note:d.note||''})},isNew?'Contenu ajouté au planning':'Contenu enregistré');closeLayer()}
+ else if(fid==='fc'){const isNew=!byId(S.content,d.id);commit(()=>{let c=byId(S.content,d.id);if(!c){c={id:d.id};S.content.push(c)}Object.assign(c,{title:tr(d.title),modelId:d.modelId,type:d.type,date:d.date,time:d.time,price:d.price===''?'':+d.price,status:d.status,note:d.note||'',mediaIds:String(d.mediaIds||'').split(',').filter(Boolean)});(c.mediaIds||[]).forEach(mi=>{const x=byId(S.media,mi);if(x){x.uses=(x.uses||[]).filter(u=>u.contentId!==c.id);x.uses.push({date:c.date,contentId:c.id})}})},isNew?'Contenu ajouté au planning':'Contenu enregistré');closeLayer()}
  else if(fid==='ft'){const t=byId(S.tasks,d.id);if(t)commit(()=>{Object.assign(t,{title:tr(d.title),modelId:d.modelId,who:tr(d.who),due:d.due,prio:d.prio,done:!!d.done,shared:!!d.shared&&!!d.modelId})},'Tâche enregistrée');closeLayer()}
  else if(fid==='padd'){const hs=[...new Set(String(d.handles).split(/[\s,;]+/).map(cleanHandle).filter(Boolean))],ex=new Set(S.prospects.map(p=>p.handle)),nw=hs.filter(h=>!ex.has(h));
   if(!nw.length){toast(hs.length?'Ces profils sont déjà dans ta liste':'Aucun pseudo valide');return}
@@ -1208,13 +1508,14 @@ D.addEventListener('submit',e=>{e.preventDefault();const f=e.target,fid=f.getAtt
  else if(fid==='qadd'){commit(()=>{S.tasks.push({id:uid(),title:tr(d.title),modelId:d.modelId,due:d.due,prio:d.prio,who:'',done:false,shared:!!d.shared&&!!d.modelId})},'Tâche ajoutée');const q=$('#qadd input[name=title]');if(q)q.focus()}
 });
 D.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&e.target.closest&&e.target.closest('#fagent')){e.preventDefault();e.target.closest('form').requestSubmit();return}if(e.key==='Escape'&&layer().innerHTML)closeLayer()});
-addEventListener('hashchange',()=>{if(!mode)return;const v=location.hash.slice(1);if(VIEWS[v]&&v!==ui.view){ui.view=v;keepUI();closeLayer();render();scrollTo(0,0)}});
+addEventListener('hashchange',()=>{if(location.hash==='#rejoindre'&&sb){renderApply();return}if(location.hash==='#historique')audit=null;if(!mode)return;const v=location.hash.slice(1);if(VIEWS[v]&&v!==ui.view){ui.view=v;keepUI();closeLayer();render();scrollTo(0,0)}});
 D.addEventListener('visibilitychange',async()=>{if(D.visibilityState==='visible'&&mode==='model'){try{await load();if(myModel)render()}catch(e){}}});
 
 (async()=>{
  if(!CFG.url||!CFG.anonKey||/VOTRE|YOUR/.test(CFG.url+CFG.anonKey)||!window.supabase)return renderSetup();
  sb=window.supabase.createClient(CFG.url,CFG.anonKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
  sb.auth.onAuthStateChange((ev,s)=>{if(ev==='PASSWORD_RECOVERY'){session=s;renderAuth('reset')}else if(ev==='SIGNED_OUT'&&mode){mode=null;renderAuth('login')}});
+ if(location.hash==='#rejoindre')return renderApply();
  if(/type=recovery/.test(location.hash))return;
  const{data}=await sb.auth.getSession();if(/type=recovery/.test(location.hash)||authMode==='reset')return;await start(data.session);
 })();

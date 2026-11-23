@@ -73,6 +73,12 @@ L'assistant passe par une fonction serveur Supabase (`assistant`, déjà déploy
 
 Seuls les admins peuvent utiliser l'assistant. Ne colle jamais ta clé OpenAI dans le code, dans `config.js` ou dans une conversation.
 
+## 9. Mise à jour v3 ✅ (déjà faite le 23/11/2026)
+
+Contrats, candidatures, rapports, médiathèque et historique : les tables et fonctions sont dans `supabase/setup.sql` (partie v3), déjà appliquées sur ton projet. La fonction onlyAI a été redéployée.
+
+Ton lien de candidature : `https://swdrms-dev.github.io/ofmana/#rejoindre` (bouton « Lien de candidature » dans Prospection).
+
 ## Bon à savoir
 
 - Sur l'offre gratuite, Supabase n'envoie que quelques emails par heure (confirmation, mot de passe oublié). Si tu ajoutes beaucoup de modèles d'un coup, configure ton propre service d'envoi dans **Authentication > Emails > SMTP Settings**, par exemple Resend ou Brevo.

@@ -398,3 +398,221 @@ language sql stable security definer set search_path = '' as $$
 $$;
 revoke all on function public.app_openai_key() from public, anon, authenticated;
 grant execute on function public.app_openai_key() to service_role;
+-- ============================================================
+--  ofmana v3 : contrats signés en ligne, candidatures publiques,
+--  rapports mensuels, médiathèque, historique des modifications
+-- ============================================================
+
+create table if not exists public.contracts (
+  id text primary key,
+  model_id text not null references public.models on delete cascade,
+  data jsonb not null default '{}',
+  created_at timestamptz not null default now()
+);
+create table if not exists public.reports (
+  id text primary key,
+  model_id text not null references public.models on delete cascade,
+  data jsonb not null default '{}'
+);
+create table if not exists public.media (
+  id text primary key,
+  model_id text references public.models on delete cascade,
+  data jsonb not null default '{}'
+);
+create table if not exists public.audit_log (
+  id bigint generated always as identity primary key,
+  at timestamptz not null default now(),
+  user_id uuid,
+  user_email text,
+  tbl text not null,
+  row_id text,
+  action text not null,
+  old_data jsonb,
+  new_data jsonb
+);
+create index if not exists contracts_model_idx on public.contracts (model_id);
+create index if not exists reports_model_idx on public.reports (model_id);
+create index if not exists media_model_idx on public.media (model_id);
+create index if not exists audit_log_at_idx on public.audit_log (at desc);
+
+alter table public.contracts enable row level security;
+alter table public.reports   enable row level security;
+alter table public.media     enable row level security;
+alter table public.audit_log enable row level security;
+
+do $$
+declare r record;
+begin
+  for r in select policyname, tablename from pg_policies
+           where schemaname = 'public' and tablename in ('contracts','reports','media','audit_log')
+  loop
+    execute format('drop policy if exists %I on public.%I', r.policyname, r.tablename);
+  end loop;
+end $$;
+
+-- Contrats : l'admin gère ; la modèle lit ses contrats envoyés ou signés (jamais les brouillons)
+create policy contracts_admin on public.contracts for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+create policy contracts_self_select on public.contracts for select to authenticated
+  using (model_id in (select private.my_model_ids()) and data->>'status' in ('envoye','signe','resilie'));
+-- Rapports : l'admin gère, la modèle lit les siens
+create policy reports_admin on public.reports for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+create policy reports_self_select on public.reports for select to authenticated
+  using (model_id in (select private.my_model_ids()));
+-- Médiathèque : admin uniquement
+create policy media_admin on public.media for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+-- Historique : lecture admin (écrit uniquement par les déclencheurs)
+create policy audit_admin_select on public.audit_log for select to authenticated
+  using (private.is_admin());
+
+revoke all on public.contracts, public.reports, public.media, public.audit_log from anon;
+grant select, insert, update, delete on public.contracts, public.reports, public.media to authenticated;
+revoke insert, update, delete on public.audit_log from authenticated;
+grant select on public.audit_log to authenticated;
+
+-- ---------- Contrats : une signature ne se falsifie pas et un contrat signé est figé ----------
+create or replace function private.contracts_guard() returns trigger
+language plpgsql set search_path = '' as $$
+begin
+  if tg_op = 'DELETE' then
+    if old.data->>'status' in ('signe','resilie') then
+      raise exception 'Un contrat signé ne peut pas être supprimé.';
+    end if;
+    return old;
+  end if;
+  if tg_op = 'UPDATE' and old.data->>'status' in ('signe','resilie') then
+    -- contrat signé : seul le passage en « résilié » est accepté, le reste est conservé tel quel
+    if new.data->>'status' = 'resilie' then
+      new.data := old.data || jsonb_build_object('status','resilie','endedAt', coalesce(new.data->'endedAt', to_jsonb(current_date)));
+    else
+      new.data := old.data;
+    end if;
+    new.model_id := old.model_id;
+    return new;
+  end if;
+  if new.data->>'status' = 'signe' and coalesce(current_setting('ofmana.signing', true), '') <> 'on' then
+    raise exception 'Seule la modèle peut signer son contrat.';
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists contracts_guard_trg on public.contracts;
+create trigger contracts_guard_trg before insert or update or delete on public.contracts
+  for each row execute function private.contracts_guard();
+
+create or replace function public.sign_contract(contract_id text, signature text, signer_name text) returns void
+language plpgsql security definer set search_path = public, extensions as $$
+declare c record;
+begin
+  select * into c from contracts where id = contract_id for update;
+  if not found or c.model_id not in (select private.my_model_ids()) then
+    raise exception 'Contrat introuvable.';
+  end if;
+  if c.data->>'status' <> 'envoye' then raise exception 'Ce contrat n''est pas en attente de signature.'; end if;
+  if signature is null or length(signature) > 400000 or signature !~ '^data:image/png;base64,' then
+    raise exception 'Signature invalide.';
+  end if;
+  if length(btrim(coalesce(signer_name, ''))) < 3 then raise exception 'Indique ton nom complet.'; end if;
+  perform set_config('ofmana.signing', 'on', true);
+  update contracts set data = data || jsonb_build_object(
+      'status', 'signe', 'signedAt', now(), 'signerName', left(btrim(signer_name), 120), 'signature', signature,
+      'signerUser', (select auth.uid()),
+      'textHash', encode(digest(coalesce(data->>'text', ''), 'sha256'), 'hex'))
+   where id = contract_id;
+  perform set_config('ofmana.signing', 'off', true);
+end $$;
+revoke all on function public.sign_contract(text, text, text) from public, anon;
+grant execute on function public.sign_contract(text, text, text) to authenticated;
+
+-- ---------- Candidatures publiques ----------
+create or replace function public.agency_name() returns text
+language sql stable security definer set search_path = '' as $$
+  select coalesce(data->>'agency', 'Agence') from public.settings where id = 1;
+$$;
+revoke all on function public.agency_name() from public;
+grant execute on function public.agency_name() to anon, authenticated;
+
+create or replace function public.submit_application(p jsonb) returns text
+language plpgsql security definer set search_path = public, extensions as $$
+declare
+  ip text; born date; h text; nm text; em text; n int; fol bigint;
+begin
+  if p is null or jsonb_typeof(p) <> 'object' or length(p::text) > 8000 then raise exception 'Formulaire invalide.'; end if;
+  if coalesce(p->>'website', '') <> '' then return 'ok'; end if;  -- piège à robots
+  ip := btrim(split_part(coalesce(nullif(current_setting('request.headers', true), '')::jsonb->>'x-forwarded-for', ''), ',', 1));
+  select count(*) into n from prospects
+   where data->>'source' = 'candidature' and data->>'ipHash' = md5(ip)
+     and (data->>'appliedAt')::timestamptz > now() - interval '1 hour';
+  if n >= 3 then raise exception 'Trop de candidatures envoyées depuis cette connexion. Réessaie dans une heure.'; end if;
+
+  nm := left(btrim(coalesce(p->>'name', '')), 80);
+  if length(nm) < 2 then raise exception 'Indique ton prénom ou ton pseudo.'; end if;
+  begin born := (p->>'birthdate')::date; exception when others then born := null; end;
+  if born is null or born > current_date - interval '18 years' or born < current_date - interval '100 years' then
+    raise exception 'Tu dois avoir 18 ans ou plus pour candidater.';
+  end if;
+  if coalesce(p->>'adult', '') <> 'true' or coalesce(p->>'consent', '') <> 'true' then
+    raise exception 'Merci de cocher les deux cases de confirmation.';
+  end if;
+  em := lower(btrim(coalesce(p->>'email', '')));
+  if em !~ '^[^@\s]+@[^@\s]+\.[^@\s]+$' or length(em) > 160 then raise exception 'Adresse email invalide.'; end if;
+  h := left(regexp_replace(lower(regexp_replace(coalesce(p->>'instagram', ''), '^.*instagram\.com/', '')), '[^a-z0-9._]', '', 'g'), 30);
+  if h = '' then raise exception 'Indique ton pseudo Instagram.'; end if;
+  if exists (select 1 from prospects where data->>'handle' = h) then
+    raise exception 'Nous avons déjà ta candidature : l''agence te recontactera.';
+  end if;
+  fol := nullif(regexp_replace(coalesce(p->>'followers', ''), '\D', '', 'g'), '')::bigint;
+
+  insert into prospects (id, data) values (
+    'cand' || substr(md5(random()::text || clock_timestamp()::text), 1, 10),
+    jsonb_build_object(
+      'handle', h, 'name', nm, 'niche', left(coalesce(p->>'niche', ''), 60),
+      'followers', least(coalesce(fol, 0), 1000000000), 'stage', 'positive',
+      'moved', current_date, 'added', current_date, 'lastContact', '', 'followUp', '',
+      'ageOk', false, 'ageDeclared', true, 'birthYear', extract(year from born)::int,
+      'email', em, 'onlyfans', left(coalesce(p->>'onlyfans', ''), 160),
+      'notes', left(coalesce(p->>'message', ''), 1500),
+      'source', 'candidature', 'appliedAt', now(), 'ipHash', md5(ip), 'isNew', true));
+  return 'ok';
+end $$;
+revoke all on function public.submit_application(jsonb) from public;
+grant execute on function public.submit_application(jsonb) to anon, authenticated;
+
+-- ---------- Historique automatique des modifications ----------
+create or replace function private.audit() returns trigger
+language plpgsql security definer set search_path = public as $$
+declare uid uuid := (select auth.uid()); em text;
+begin
+  if tg_op = 'UPDATE' and to_jsonb(old) = to_jsonb(new) then return null; end if;
+  select email into em from profiles where id = uid;
+  insert into audit_log (user_id, user_email, tbl, row_id, action, old_data, new_data)
+  values (uid, em, tg_table_name,
+          coalesce((case when tg_op = 'DELETE' then to_jsonb(old) else to_jsonb(new) end)->>'id', ''),
+          lower(tg_op),
+          case when tg_op <> 'INSERT' then to_jsonb(old) end,
+          case when tg_op <> 'DELETE' then to_jsonb(new) end);
+  return null;
+end $$;
+revoke all on function private.audit() from public, anon, authenticated;
+
+do $$
+declare t text;
+begin
+  foreach t in array array['models','model_private','content','tasks','prospects','payouts','leaks','contracts','media','settings','submissions','reports']
+  loop
+    execute format('drop trigger if exists audit_trg on public.%I', t);
+    execute format('create trigger audit_trg after insert or update or delete on public.%I for each row execute function private.audit()', t);
+  end loop;
+end $$;
+
+-- Ménage : l'historique garde 180 jours
+create or replace function private.audit_cleanup() returns trigger
+language plpgsql security definer set search_path = public as $$
+begin
+  if random() < 0.01 then delete from audit_log where at < now() - interval '180 days'; end if;
+  return null;
+end $$;
+drop trigger if exists audit_cleanup_trg on public.audit_log;
+create trigger audit_cleanup_trg after insert on public.audit_log for each statement execute function private.audit_cleanup();
