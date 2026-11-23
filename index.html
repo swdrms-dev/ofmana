@@ -935,8 +935,8 @@ const agentSnapshot=()=>({agence:S.agency,aujourdhui:T0,jour_semaine:TODAY.toLoc
  contenus:S.content.filter(c=>c.date>=iso(addD(TODAY,-14))).sort(cmpC).slice(0,150).map(c=>({id:c.id,modele:(mdl(c.modelId)||GHOST).name,date:c.date,heure:c.time,type:c.type,titre:c.title,statut:c.status,prix:+c.price||0})),
  taches:S.tasks.filter(t=>!t.done||(t.due&&t.due>=iso(addD(TODAY,-7)))).slice(0,150).map(t=>({id:t.id,titre:t.title,modele:t.modelId?(mdl(t.modelId)||{}).name:'agence',echeance:t.due||'',priorite:t.prio,visible_modele:!!t.shared,faite:!!t.done})),
  prospects:S.prospects.slice(0,200).map(p=>({id:p.id,pseudo:p.handle,etape:p.stage,niche:p.niche||'',abonnes_insta:+p.followers||0,majeure_verifiee:!!p.ageOk,candidature:p.source==='candidature'})),
- contrats:S.contracts.filter(c=>c.status!=='annule').map(c=>({modele:nm(c.modelId),statut:c.status,commission_pct:c.pct,debut:c.start,duree_mois:c.months,fin:c.endDate||'',signe_le:c.signedAt?String(c.signedAt).slice(0,10):''})),
- medias:S.media.slice(-80).map(x=>({id:x.id,modele:nm(x.modelId),nom:x.name,type:isImg(x.type)?'photo':'video',tags:x.tags||[],theme:x.theme||'',deja_publie:(x.uses||[]).length})),
+ contrats:S.contracts.filter(c=>c.status!=='annule').map(c=>({modele:(mdl(c.modelId)||GHOST).name,statut:c.status,commission_pct:c.pct,debut:c.start,duree_mois:c.months,fin:c.endDate||'',signe_le:c.signedAt?String(c.signedAt).slice(0,10):''})),
+ medias:S.media.slice(-80).map(x=>({id:x.id,modele:(mdl(x.modelId)||GHOST).name,nom:x.name,type:isImg(x.type)?'photo':'video',tags:x.tags||[],theme:x.theme||'',deja_publie:(x.uses||[]).length})),
 
  paiements:S.payouts.filter(p=>p.month>=monthAdd(CUR(),-3)).map(p=>({modele:(mdl(p.modelId)||{}).name,mois:p.month,montant:p.amount,statut:p.status})),
  envois_a_valider:S.submissions.filter(s=>s.status==='envoye').length,fuites_en_cours:S.leaks.filter(l=>l.status==='repere'||l.status==='demande').length});
