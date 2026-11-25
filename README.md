@@ -20,6 +20,7 @@ Fonctions principales :
 - **Médiathèque** : tous les médias validés, avec tags, et compteur d’utilisation pour repérer ce qui n’a jamais été publié.
 - **Simulateur** de prix et de promos (abonnement, promo nouveaux abonnés, bundle, PPV) avec l’impact sur le CA et les parts.
 - **Historique** : chaque modification est enregistrée par la base de données (180 jours), avec restauration d’un élément supprimé ou d’une version précédente.
+- **Photos Insta** : banque de posts Instagram partagée entre admins (carrousels, légende, date prévue, statut posté). Les fichiers sont stockés et téléchargés en qualité d’origine, octet pour octet, sans aucune compression.
 - **onlyAI**, l’agent IA (OpenAI, côté serveur) : il répond sur les données de l’agence et propose des actions (créer ou modifier des fiches, des tâches, des contenus, le CA, des paiements, des prospects…) que l’admin valide avant qu’elles s’appliquent. Il propose aussi des idées de contenus, des analyses et des messages de prospection.
 
 Interface sombre, effet verre, accents violet et magenta. Le site tient dans un seul fichier, `index.html`, et ne demande aucune étape de build. Il est hébergé sur GitHub Pages, et les comptes et les données sont stockés sur Supabase.

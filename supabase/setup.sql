@@ -616,3 +616,28 @@ begin
 end $$;
 drop trigger if exists audit_cleanup_trg on public.audit_log;
 create trigger audit_cleanup_trg after insert on public.audit_log for each statement execute function private.audit_cleanup();
+-- ========== v4 : Photos Insta (partage entre admins, fichiers originaux) ==========
+create table if not exists public.insta (
+  id text primary key,
+  data jsonb not null default '{}',
+  created_at timestamptz not null default now()
+);
+alter table public.insta enable row level security;
+drop policy if exists insta_admin on public.insta;
+create policy insta_admin on public.insta for all to authenticated
+  using (private.is_admin()) with check (private.is_admin());
+revoke all on public.insta from anon;
+grant select, insert, update, delete on public.insta to authenticated;
+drop trigger if exists audit_trg on public.insta;
+create trigger audit_trg after insert or update or delete on public.insta
+  for each row execute function private.audit();
+
+-- Bucket privé : fichiers stockés tels quels (aucune compression), admin uniquement
+insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
+values ('insta', 'insta', false, 52428800, array['image/*','video/*'])
+on conflict (id) do update set public = false, file_size_limit = excluded.file_size_limit,
+                               allowed_mime_types = excluded.allowed_mime_types;
+drop policy if exists ofmana_insta_admin on storage.objects;
+create policy ofmana_insta_admin on storage.objects for all to authenticated
+  using (bucket_id = 'insta' and private.is_admin())
+  with check (bucket_id = 'insta' and private.is_admin());

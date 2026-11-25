@@ -444,6 +444,28 @@ details.tools{border:1px solid var(--stroke);border-radius:var(--r);padding:16px
 .apchk{display:flex!important;flex-direction:row!important;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--mute);cursor:pointer}
 .hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
 @media (max-width:760px){.apgrid,.srow{grid-template-columns:1fr}.mediagrid{grid-template-columns:repeat(2,1fr);gap:8px}.simres{position:static}.kact{width:100%}.simbig b{font-size:32px}}
+
+/* v4 photos insta */
+.igdrop{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}.igdrop small{color:var(--mute)}
+.iggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.igcard{display:flex;flex-direction:column;padding:0;border-radius:18px;overflow:hidden;border:1px solid var(--stroke);background:var(--glass);color:var(--ink);cursor:pointer;text-align:left;transition:transform .15s,border-color .15s}
+.igcard:hover{transform:translateY(-2px);border-color:rgba(224,64,251,.5)}
+.igcover{position:relative;aspect-ratio:4/5;background:rgba(0,0,0,.35);display:block;overflow:hidden}
+.igcover img,.igcover video{width:100%;height:100%;object-fit:cover;display:block}
+.igcover .pill{position:absolute;top:10px;left:10px}
+.igcount{position:absolute;top:10px;right:10px;display:flex;gap:4px;align-items:center;font-size:12px;font-weight:700;padding:3px 8px;border-radius:99px;background:rgba(10,6,20,.7);backdrop-filter:blur(6px)}
+.igmeta{display:flex;flex-direction:column;gap:3px;padding:12px 14px 14px}.igmeta small{color:var(--mute);font-size:13px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.igmeta .igby{font-size:12px;-webkit-line-clamp:1}
+.ignoprev{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--mute);text-align:center;padding:16px;font-size:12px}
+.igpicks{display:flex;flex-direction:column;gap:8px;min-height:40px;border-radius:14px}.igpicks.over{outline:2px dashed var(--acc)}
+.igpick{display:flex;align-items:center;gap:12px;padding:8px;border:1px solid var(--stroke);border-radius:14px}
+.igpt{width:56px;height:56px;border-radius:10px;overflow:hidden;flex:none;display:grid;place-items:center;background:rgba(0,0,0,.3)}.igpt img,.igpt video{width:100%;height:100%;object-fit:cover}.igpt .ignoprev small{display:none}
+.igstage{position:relative;background:#000;border-radius:16px;overflow:hidden;display:grid;place-items:center;min-height:240px}
+.igfull{max-width:100%;max-height:62vh;display:block;image-rendering:auto}
+.igstage .ignoprev{min-height:240px}
+.ignav{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:0;background:rgba(10,6,20,.6);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px)}.ignav.l{left:10px}.ignav.r{right:10px}
+.igdots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:5px}.igdots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}.igdots i.on{background:#fff}
+.igcap{white-space:pre-wrap;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:12px 14px;font-size:14px;max-height:220px;overflow:auto}
+@media (max-width:760px){.iggrid{grid-template-columns:repeat(2,1fr);gap:10px}.igmeta{padding:9px 10px 11px}.igdrop{padding:20px 12px}}
 </style>
 </head>
 <body>
@@ -455,14 +477,14 @@ const D=document,$=s=>D.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LS='ofmana';
 const CFG=window.OFMANA_CONFIG||{};
-const EMPTY=()=>({agency:'Mon Agence',models:[],content:[],tasks:[],prospects:[],payouts:[],submissions:[],leaks:[],contracts:[],reports:[],media:[]});
+const EMPTY=()=>({agency:'Mon Agence',models:[],content:[],tasks:[],prospects:[],payouts:[],submissions:[],leaks:[],contracts:[],reports:[],media:[],insta:[]});
 let S=EMPTY();
 let sb=null,session=null,mode=null,myModel=null;
-const VIEWS_A={dashboard:'Tableau de bord',modeles:'Modèles',prospection:'Prospection',stats:'Statistiques',planning:'Planning',taches:'Tâches',depots:'Contenus reçus',medias:'Médiathèque',paiements:'Paiements',fuites:'Anti-fuite',ia:'onlyAI',equipe:'Équipe',historique:'Historique'};
+const VIEWS_A={dashboard:'Tableau de bord',modeles:'Modèles',prospection:'Prospection',stats:'Statistiques',planning:'Planning',taches:'Tâches',depots:'Contenus reçus',medias:'Médiathèque',insta:'Photos Insta',paiements:'Paiements',fuites:'Anti-fuite',ia:'onlyAI',equipe:'Équipe',historique:'Historique'};
 const VIEWS_M={accueil:'Accueil',mplanning:'Mon planning',envoyer:'Envoyer du contenu',revenus:'Mes revenus',mtaches:'Mes tâches'};
 const views=()=>mode==='model'?VIEWS_M:VIEWS_A;
 let VIEWS=VIEWS_A;
-let ui={st:'charts',mm:'all',mt:'all',mq:'',hf:'all',rm:-1,view:'',mf:'all',pf:'all',tf:'todo',q:'',pq:'',sp:6,ss:'r',msp:6,pv:'list',cm:0,pm:-1,df:'envoye',lf:'open'};
+let ui={igs:'a_poster',iga:'all',st:'charts',mm:'all',mt:'all',mq:'',hf:'all',rm:-1,view:'',mf:'all',pf:'all',tf:'todo',q:'',pq:'',sp:6,ss:'r',msp:6,pv:'list',cm:0,pm:-1,df:'envoye',lf:'open'};
 try{Object.assign(ui,JSON.parse(sessionStorage.getItem(LS+'-ui')||'{}'))}catch(e){}
 const keepUI=()=>{try{sessionStorage.setItem(LS+'-ui',JSON.stringify(ui))}catch(e){}};
 const pickView=()=>{VIEWS=views();const hv=location.hash.slice(1);if(VIEWS[hv])ui.view=hv;else if(!VIEWS[ui.view])ui.view=Object.keys(VIEWS)[0]};
@@ -526,6 +548,7 @@ play:'<circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/>',
 check:'<path d="m5 12 5 5L20 7"/>',
 chev:'<path d="m15 18-6-6 6-6"/>',chevr:'<path d="m9 18 6-6-6-6"/>',
 equipe:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+insta:'<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/>',
 medias:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>',
 historique:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/>',
 more:'<circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/>',
@@ -550,11 +573,12 @@ const rowOf={
  contracts:c=>{const{id,modelId,createdAt,...d}=c;return{id,model_id:modelId,data:d}},
  reports:r=>{const{id,modelId,...d}=r;return{id,model_id:modelId,data:d}},
  media:x=>{const{id,modelId,...d}=x;return{id,model_id:modelId||null,data:d}},
+ insta:x=>{const{id,createdAt,...d}=x;return{id,data:d}},
  content:c=>{const{id,...d}=c;return{id,model_id:c.modelId||null,data:d}},
  tasks:t=>{const{id,shared,...d}=t;return{id,model_id:t.modelId||null,shared:!!shared,data:d}},
  prospects:p=>{const{id,...d}=p;return{id,data:d}}};
-const SRC={models:'models',model_private:'models',content:'content',tasks:'tasks',prospects:'prospects',payouts:'payouts',submissions:'submissions',leaks:'leaks',contracts:'contracts',reports:'reports',media:'media'};
-const ORDER=['models','model_private','content','tasks','prospects','payouts','submissions','leaks','contracts','reports','media'];
+const SRC={models:'models',model_private:'models',content:'content',tasks:'tasks',prospects:'prospects',payouts:'payouts',submissions:'submissions',leaks:'leaks',contracts:'contracts',reports:'reports',media:'media',insta:'insta'};
+const ORDER=['models','model_private','content','tasks','prospects','payouts','submissions','leaks','contracts','reports','media','insta'];
 const snap=()=>{const o={settings:JSON.stringify({agency:S.agency})};for(const t of ORDER)o[t]=Object.fromEntries(S[SRC[t]].map(x=>{const r=rowOf[t](x);return[r.id,JSON.stringify(r)]}));return o};
 const sync=async()=>{if(mode!=='admin'||!synced)return;if(syncing){again=true;return}syncing=true;setStatus('saving');let relink=[];
  try{do{again=false;const cur=snap();
@@ -708,7 +732,7 @@ const drawLine=()=>{const s=$('#lineSvg');if(!s)return;const W=s.clientWidth||60
  ms.forEach((k,i)=>{const hw=n>1?step/2:W/2;o+=`<rect class="hit" x="${x(i)-hw}" y="${pt}" width="${hw*2}" height="${H-pt-pb}" data-tip="${cap(mL(k))}\nCA brut : ${eur(g[i])}\nPart agence : ${eur(c[i])}"/><circle cx="${x(i)}" cy="${y(g[i])}" r="4" class="pt1"/><circle cx="${x(i)}" cy="${y(c[i])}" r="3.5" class="pt2"/>`;
   if(!nar||n<=6||i%2===(n-1)%2)o+=`<text x="${x(i)}" y="${H-8}" class="xl">${mS(k)}</text>`});
  s.innerHTML=o};
-const afterRender=()=>{hydrateThumbs();hydrateVideo();D.querySelectorAll('main table.perf').forEach(t=>{const hs=[...t.querySelectorAll('thead th')].map(th=>th.textContent.replace(/\s*↓$/,'').trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{td.dataset.l=hs[i]||''}))});const cl=$('#chatlog');if(cl){cl.scrollTop=cl.scrollHeight;const ta=$('#fagent textarea');if(ta&&!aiBusy&&ui.view==='ia')ta.focus()}if(lineRO){lineRO.disconnect();lineRO=null}const s=$('#lineSvg');if(!s)return;if(window.ResizeObserver){lineRO=new ResizeObserver(drawLine);lineRO.observe(s)}else drawLine()};
+const afterRender=()=>{hydrateThumbs();hydrateIg();hydrateVideo();D.querySelectorAll('main table.perf').forEach(t=>{const hs=[...t.querySelectorAll('thead th')].map(th=>th.textContent.replace(/\s*↓$/,'').trim());t.querySelectorAll('tbody tr').forEach(tr=>[...tr.children].forEach((td,i)=>{td.dataset.l=hs[i]||''}))});const cl=$('#chatlog');if(cl){cl.scrollTop=cl.scrollHeight;const ta=$('#fagent textarea');if(ta&&!aiBusy&&ui.view==='ia')ta.focus()}if(lineRO){lineRO.disconnect();lineRO=null}const s=$('#lineSvg');if(!s)return;if(window.ResizeObserver){lineRO=new ResizeObserver(drawLine);lineRO.observe(s)}else drawLine()};
 
 /* ---------- utilitaires ---------- */
 const safeName=n=>String(n||'fichier').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w.\-]+/g,'_').slice(-80);
@@ -817,6 +841,7 @@ const reminders=()=>{const R=[],tom=iso(addD(TODAY,1)),add=(lvl,txt,sub,go)=>R.p
   S.models.filter(m=>m.status==='onboarding').forEach(m=>{const d=OB.filter(([k])=>(m.checklist||{})[k]).length;if(d<OB.length)add(2,`Onboarding de ${m.name} : ${d}/${OB.length}`,OB.filter(([k])=>!(m.checklist||{})[k]).map(x=>x[1]).slice(0,2).join(', '),'#modeles')});
   S.leaks.filter(l=>l.status==='repere').forEach(l=>add(1,`Fuite à signaler (${nm(l.modelId)})`,platOf(l.url),'#fuites'));
   S.leaks.filter(l=>l.status==='demande'&&l.sentAt&&daysTo(l.sentAt)<=-7).forEach(l=>add(1,`Fuite toujours en ligne après ${-daysTo(l.sentAt)} jours`,`${nm(l.modelId)} · ${platOf(l.url)}`,'#fuites'));
+  S.insta.filter(p=>(p.status||'a_poster')==='a_poster'&&p.date&&p.date<=tom).forEach(p=>add(p.date<T0?0:1,`Post Insta à publier (${igAcc(p)})`,p.date<T0?'en retard':p.date===T0?'aujourd’hui':'demain','#insta'));
   const nc=S.prospects.filter(p=>p.isNew).length;if(nc)add(1,`${nc} nouvelle${nc>1?'s':''} candidature${nc>1?'s':''}`,'Prospection','#prospection');
   S.contracts.filter(c=>c.status==='envoye'&&c.sentAt&&daysTo(String(c.sentAt).slice(0,10))<=-7).forEach(c=>add(1,`Contrat de ${nm(c.modelId)} toujours pas signé`,`envoyé le ${longDate(c.sentAt)}`,'#modeles'));
   S.prospects.filter(needsFollow).forEach(p=>add(2,`Relancer @${p.handle}`,PS[p.stage],'#prospection'))}
@@ -936,6 +961,7 @@ const agentSnapshot=()=>({agence:S.agency,aujourdhui:T0,jour_semaine:TODAY.toLoc
  taches:S.tasks.filter(t=>!t.done||(t.due&&t.due>=iso(addD(TODAY,-7)))).slice(0,150).map(t=>({id:t.id,titre:t.title,modele:t.modelId?(mdl(t.modelId)||{}).name:'agence',echeance:t.due||'',priorite:t.prio,visible_modele:!!t.shared,faite:!!t.done})),
  prospects:S.prospects.slice(0,200).map(p=>({id:p.id,pseudo:p.handle,etape:p.stage,niche:p.niche||'',abonnes_insta:+p.followers||0,majeure_verifiee:!!p.ageOk,candidature:p.source==='candidature'})),
  contrats:S.contracts.filter(c=>c.status!=='annule').map(c=>({modele:(mdl(c.modelId)||GHOST).name,statut:c.status,commission_pct:c.pct,debut:c.start,duree_mois:c.months,fin:c.endDate||'',signe_le:c.signedAt?String(c.signedAt).slice(0,10):''})),
+ posts_insta_a_poster:S.insta.filter(p=>(p.status||'a_poster')==='a_poster').map(p=>({compte:igAcc(p),date:p.date||'',photos:(p.files||[]).length,legende:String(p.caption||'').slice(0,80)})),
  medias:S.media.slice(-80).map(x=>({id:x.id,modele:(mdl(x.modelId)||GHOST).name,nom:x.name,type:isImg(x.type)?'photo':'video',tags:x.tags||[],theme:x.theme||'',deja_publie:(x.uses||[]).length})),
 
  paiements:S.payouts.filter(p=>p.month>=monthAdd(CUR(),-3)).map(p=>({modele:(mdl(p.modelId)||{}).name,mois:p.month,montant:p.amount,statut:p.status})),
@@ -1128,7 +1154,7 @@ const vSimu=()=>{if(!S.models.length)return '<div class="card"><p class="empty">
 
 /* ---------- historique ---------- */
 let audit=null,auditBusy=false;
-const LABT={models:'la fiche',model_private:'les infos privées de',content:'le contenu',tasks:'la tâche',prospects:'le prospect',payouts:'le paiement',leaks:'la fuite',contracts:'le contrat',media:'le média',settings:'les réglages',submissions:'l’envoi',reports:'le rapport'};
+const LABT={models:'la fiche',model_private:'les infos privées de',content:'le contenu',tasks:'la tâche',prospects:'le prospect',payouts:'le paiement',leaks:'la fuite',contracts:'le contrat',media:'le média',settings:'les réglages',insta:'le post Insta',submissions:'l’envoi',reports:'le rapport'};
 const HF={all:'Tout',models:'Modèles',content:'Planning',tasks:'Tâches',prospects:'Prospection',payouts:'Paiements',contracts:'Contrats',media:'Médias'};
 const loadAudit=async()=>{if(auditBusy)return;auditBusy=true;let q=sb.from('audit_log').select('*').order('at',{ascending:false}).limit(300);if(ui.hf&&ui.hf!=='all')q=q.eq('tbl',ui.hf);const r=await q;audit=r.error?{error:r.error.message}:r.data;auditBusy=false;if(ui.view==='historique')render()};
 const rowLabel=(t,r)=>{if(!r)return '';const d=r.data||{};const nm=d.name||d.title||(d.handle?'@'+d.handle:'')||(d.url?platOf(d.url):'')||'';const m=r.model_id&&mdl(r.model_id);if(t==='payouts')return `${m?m.name+' · ':''}${d.month?mL(d.month)+' '+d.month.slice(0,4):''}`;if(t==='contracts')return `${m?m.name:''} (${KST[d.status]||''})`;if(t==='model_private'){const mm=mdl(r.id);return mm?mm.name:''}if(t==='settings')return '';return nm||(m?m.name:'')||r.id};
@@ -1149,6 +1175,56 @@ const vHisto=()=>{if(!audit){loadAudit();return `<div class="head"><div><h1>Hist
  return `<div class="head"><div><h1>Historique</h1><p>Toutes les modifications des 180 derniers jours, enregistrées automatiquement par la base de données. Tu peux restaurer un élément supprimé ou revenir à une version précédente.</p></div><button class="btn" data-act="hrefresh">Actualiser</button></div>
  <div class="chips">${Object.entries(HF).map(([k,v])=>`<button class="chip${(ui.hf||'all')===k?' on':''}" data-act="hf" data-v="${k}">${v}</button>`).join('')}</div>
  ${audit.length?Object.entries(byDay).map(([d,L])=>`<section class="card hday"><h2>${cap(pISO(d).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'}))}</h2>${L.map(e=>{const r=e.new_data||e.old_data,lab=rowLabel(e.tbl,r),df=e.action==='update'?diffOf(e.old_data,e.new_data):'';return `<div class="hrow2 a-${e.action}"><time>${new Date(e.at).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</time><div class="kt"><b>${esc((e.user_email||'Système').split('@')[0])} ${V[e.action]} ${LABT[e.tbl]||e.tbl} ${lab?`« ${esc(lab)} »`:''}</b>${df?`<small>${esc(df)}</small>`:''}</div>${(e.old_data&&FROM[e.tbl]&&!(e.tbl==='contracts'&&[e.old_data,e.new_data].some(x=>x&&['signe','resilie'].includes((x.data||{}).status))))||(e.tbl==='model_private'&&e.old_data)||(e.tbl==='settings'&&e.old_data)?`<button class="btn sm" data-act="hrest" data-id="${e.id}">${e.action==='delete'?'Restaurer':'Revenir à avant'}</button>`:''}</div>`}).join('')}</section>`).join(''):'<div class="card"><p class="empty">Aucune modification enregistrée pour le moment.</p></div>'}`};
+/* ---------- Photos Insta (entre admins, fichiers originaux) ---------- */
+const IGST={a_poster:'À poster',poste:'Posté'};
+let igPick=[],igKeep=[],igBusy=false,igIdx=0;const igCache={};
+const igSign=async(paths,dl)=>{const now=Date.now();if(dl){const r=await sb.storage.from('insta').createSignedUrl(paths[0],3600,{download:dl});return[r.error?null:r.data.signedUrl]}
+ const need=paths.filter(p=>!igCache[p]||igCache[p].exp<now);if(need.length){const r=await sb.storage.from('insta').createSignedUrls(need,3600);if(!r.error)(r.data||[]).forEach(x=>{if(x.signedUrl)igCache[x.path]={url:x.signedUrl,exp:now+3e6}})}return paths.map(p=>igCache[p]&&igCache[p].url)};
+const hydrateIg=async()=>{const els=[...D.querySelectorAll('[data-igsign]')];if(!els.length||!sb)return;const urls=await igSign(els.map(e=>e.dataset.igsign));els.forEach((e,i)=>{if(urls[i])e.src=urls[i]})};
+const canShow=t=>/^image\/(jpeg|png|webp|gif|avif)$/.test(t||'')||/^video\/(mp4|webm|quicktime)$/.test(t||'');
+const igAcc=p=>p.modelId?(mdl(p.modelId)||GHOST).name:'Agence';
+const igMedia=(f,attr,cls)=>/^video\//.test(f.type)?`<video ${attr} class="${cls||''}" muted playsinline preload="metadata"${cls==='igfull'?' controls':''}></video>`:canShow(f.type)?`<img ${attr} class="${cls||''}" alt="${esc(f.name)}" loading="lazy" decoding="async">`:`<span class="ignoprev ${cls||''}">${sv(I.insta,28)}<b>${esc((f.name.split('.').pop()||'').toUpperCase())}</b><small>Aperçu indisponible, fichier original conservé</small></span>`;
+const igRes=f=>f.w?`${f.w}×${f.h} px · `:'';
+const vInsta=()=>{const L=S.insta.filter(p=>(ui.igs==='all'||(p.status||'a_poster')===(ui.igs||'a_poster'))&&(ui.iga==='all'||!ui.iga||(ui.iga==='agence'?!p.modelId:p.modelId===ui.iga)))
+ .sort((a,b)=>(ui.igs==='poste'?String(b.postedAt||'').localeCompare(String(a.postedAt||'')):String(a.date||'9999').localeCompare(String(b.date||'9999'))||String(b.createdAt||'').localeCompare(String(a.createdAt||''))));
+ const todo=S.insta.filter(p=>(p.status||'a_poster')==='a_poster').length;
+ return `<div class="head"><div><h1>Photos Insta</h1><p>${todo} post${todo>1?'s':''} à publier. Banque partagée entre admins : les fichiers sont gardés tels quels, en qualité d’origine, sans aucune compression.</p></div><button class="btn pri" data-act="ignew">${sv(I.plus,18)}Nouveau post</button></div>
+ <label class="drop igdrop" id="igdrop">${sv(I.insta,26)}<b>Dépose tes photos ici pour créer un post</b><small>Plusieurs photos = un carrousel · JPG, PNG, HEIC, vidéos · 50 Mo max par fichier</small><input type="file" id="igFiles" multiple accept="image/*,video/*" hidden></label>
+ <div class="mfilters"><div class="chips" style="margin:0">${Object.entries({a_poster:'À poster',poste:'Postés',all:'Tout'}).map(([k,v])=>`<button class="chip${(ui.igs||'a_poster')===k?' on':''}" data-act="igs" data-v="${k}">${v}</button>`).join('')}</div><select class="sel" data-act="iga" aria-label="Compte"><option value="all">Tous les comptes</option><option value="agence"${ui.iga==='agence'?' selected':''}>Agence</option>${modelOpts(ui.iga)}</select></div>
+ ${L.length?`<div class="iggrid">${L.map(p=>{const f=(p.files||[])[0]||{},late=(p.status||'a_poster')==='a_poster'&&p.date&&p.date<T0;return `<button class="igcard" data-act="igopen" data-id="${p.id}"><span class="igcover">${f.path?igMedia(f,`data-igsign="${esc(f.path)}"`):''}${(p.files||[]).length>1?`<span class="igcount">${sv(I.medias,13)}${p.files.length}</span>`:''}<span class="pill ${p.status==='poste'?'p-publie':late?'p-haute':'p-pret'}">${p.status==='poste'?'Posté':late?'En retard':p.date?dShort(p.date):'À poster'}</span></span><span class="igmeta"><b>${esc(igAcc(p))}</b><small>${esc((p.caption||'Sans légende').slice(0,90))}</small><small class="igby">Ajouté par ${esc((p.by||'').split('@')[0])}</small></span></button>`}).join('')}</div>`:`<div class="card"><p class="empty">${S.insta.length?'Aucun post dans ce filtre.':'Aucune photo pour l’instant. Dépose tes premières photos ci-dessus : tous les admins les verront.'}</p></div>`}`};
+const igPickList=()=>`${[...igKeep.map((f,i)=>({f,i,k:'keep'})),...igPick.map((f,i)=>({f,i,k:'new'}))].map(({f,i,k})=>`<div class="igpick"><span class="igpt">${k==='new'?(f.url&&canShow(f.type)?(/^video/.test(f.type)?`<video src="${f.url}" muted></video>`:`<img src="${f.url}" alt="">`):sv(I.insta,22)):igMedia(f,`data-igsign="${esc(f.path)}"`)}</span><span class="kt"><b>${esc(f.name)}</b><small>${igRes(f)}${fsize(f.size||0)}${k==='new'?' · nouveau':''}</small></span><button type="button" class="icon-btn" data-act="igrm" data-k="${k}" data-v="${i}" aria-label="Retirer">${sv(I.x,16)}</button></div>`).join('')||'<p class="hint">Aucun fichier.</p>'}`;
+const igAddFiles=async files=>{const ok=[...files].filter(f=>/^(image|video)\//.test(f.type)||/\.(heic|heif)$/i.test(f.name)),big=ok.filter(f=>f.size>MAXF);if(big.length)toast(`${big.length} fichier${big.length>1?'s':''} de plus de 50 Mo ignoré${big.length>1?'s':''}`);
+ for(const f of ok.filter(f=>f.size<=MAXF)){const o={file:f,name:f.name,type:f.type||'image/heic',size:f.size,url:URL.createObjectURL(f)};
+  if(/^image\//.test(f.type)&&canShow(f.type))await new Promise(r=>{const im=new Image();im.onload=()=>{o.w=im.naturalWidth;o.h=im.naturalHeight;r()};im.onerror=r;im.src=o.url});
+  else if(/^video\//.test(f.type))await new Promise(r=>{const v=D.createElement('video');v.preload='metadata';v.onloadedmetadata=()=>{o.w=v.videoWidth;o.h=v.videoHeight;r()};v.onerror=r;v.src=o.url});
+  igPick.push(o)}const z=$('#igpicks');if(z)z.innerHTML=igPickList()};
+const openIg=(id,files)=>{const p=id?byId(S.insta,id):null;igPick.forEach(f=>URL.revokeObjectURL(f.url));igPick=[];igKeep=p?[...(p.files||[])]:[];
+ openDrawer(p?'Modifier le post':'Nouveau post Insta','fig',`<input type="hidden" name="id" value="${p?p.id:''}">
+ ${G('Photos et vidéos',`<div id="igpicks" class="igpicks">${igPickList()}</div><label class="btn sm" style="margin-top:8px">${sv(I.plus,16)}Ajouter des fichiers<input type="file" id="igMore" multiple accept="image/*,video/*" hidden></label><p class="hint">Les fichiers sont envoyés tels quels : même résolution, même poids, aucune recompression. L’ordre ici est l’ordre du carrousel.</p>`,1)}
+ ${F('Compte',`<select class="field" name="modelId"><option value="">Agence</option>${modelOpts(p?p.modelId:'')}</select>`)}${F('À poster le',inp('date',p?p.date||'':'','date'))}
+ ${F('Légende',`<textarea class="field" name="caption" rows="5" maxlength="2200" placeholder="Légende, hashtags, mentions…">${esc(p?p.caption||'':'')}</textarea>`,1)}
+ ${F('Note pour les autres admins',inp('note',p?p.note||'':'','text','placeholder="ex. à poster après la story de 18h"'),1)}`,
+ `${p?`<button type="button" class="btn danger" data-act="igdel" data-id="${p.id}">${sv(I.trash,16)}Supprimer</button>`:''}<span class="sp"></span><button class="btn pri">${p?'Enregistrer':'Ajouter le post'}</button>`);
+ if(files)igAddFiles(files);else hydrateIg()};
+const saveIg=async d=>{if(igBusy)return;if(!igKeep.length&&!igPick.length)return toast('Ajoute au moins une photo');const btn=$('#fig button.pri');igBusy=true;btn.disabled=true;
+ const ex=d.id&&byId(S.insta,d.id),id=ex?ex.id:uid(),up=[];let i=0;
+ for(const f of igPick){i++;btn.textContent=`Envoi ${i}/${igPick.length}…`;const path=`${id}/${Date.now()}-${i}-${safeName(f.name)}`;
+  const r=await sb.storage.from('insta').upload(path,f.file,{contentType:f.type,cacheControl:'31536000',upsert:false});
+  if(r.error){igBusy=false;btn.disabled=false;btn.textContent='Réessayer';if(up.length)sb.storage.from('insta').remove(up.map(x=>x.path));return toast('Échec de l’envoi de '+f.name+' : '+r.error.message)}
+  up.push({path,name:f.name,type:f.type,size:f.size,w:f.w||0,h:f.h||0})}
+ const removed=ex?(ex.files||[]).filter(f=>!igKeep.some(k=>k.path===f.path)).map(f=>f.path):[];
+ commit(()=>{const o=ex||{id,by:session&&session.user.email||'',createdAt:new Date().toISOString(),status:'a_poster'};Object.assign(o,{files:[...igKeep,...up],modelId:d.modelId||'',date:d.date||'',caption:String(d.caption||''),note:String(d.note||'').trim(),editedBy:ex?(session&&session.user.email||''):''});if(!ex)S.insta.push(o)},ex?'Post modifié':'Post ajouté : les autres admins le voient');
+ if(removed.length)sb.storage.from('insta').remove(removed);igPick.forEach(f=>URL.revokeObjectURL(f.url));igPick=[];igBusy=false;closeLayer()};
+const viewIg=id=>{const p=byId(S.insta,id);if(!p)return;igIdx=Math.min(igIdx,(p.files||[]).length-1);const f=(p.files||[])[igIdx]||{};
+ openDrawer(igAcc(p),'figv',`<div class="igstage full">${f.path?igMedia(f,`data-igsign="${esc(f.path)}"`,'igfull'):''}${p.files.length>1?`<button type="button" class="ignav l" data-act="igprev" data-id="${p.id}" aria-label="Précédente">${sv(I.chev,22)}</button><button type="button" class="ignav r" data-act="ignext" data-id="${p.id}" aria-label="Suivante">${sv(I.chevr,22)}</button><span class="igdots">${p.files.map((_,i)=>`<i class="${i===igIdx?'on':''}"></i>`).join('')}</span>`:''}</div>
+ <p class="hint full">${esc(f.name||'')} · ${igRes(f)}${fsize(f.size||0)} · fichier original</p>
+ <div class="full subact"><button type="button" class="btn pri sm" data-act="igdl" data-id="${p.id}">${sv(I.download,16)}Télécharger l’original</button>${p.files.length>1?`<button type="button" class="btn sm" data-act="igdlall" data-id="${p.id}">${sv(I.download,16)}Tout télécharger (${p.files.length})</button>`:''}${navigator.canShare?`<button type="button" class="btn sm" data-act="igshare" data-id="${p.id}">${sv(I.envoyer,16)}Partager vers Insta</button>`:''}</div>
+ ${G('Légende',p.caption?`<div class="igcap">${esc(p.caption)}</div><button type="button" class="btn sm" data-act="igcopy" data-id="${p.id}" style="margin-top:8px">Copier la légende</button>`:'<p class="hint">Pas de légende.</p>',1)}
+ <p class="hint full">${p.date?`À poster le ${longDate(p.date)} · `:''}Ajouté par ${esc(p.by||'?')} le ${longDate(p.createdAt)}${p.status==='poste'?` · posté le ${longDate(p.postedAt)}${p.postedBy?' par '+esc(p.postedBy.split('@')[0]):''}`:''}${p.note?`<br>Note : ${esc(p.note)}`:''}</p>`,
+ `<button type="button" class="btn sm" data-act="igedit" data-id="${p.id}">Modifier</button><span class="sp"></span>${p.status==='poste'?`<button type="button" class="btn" data-act="igunpost" data-id="${p.id}">Remettre à poster</button>`:`<button type="button" class="btn pri" data-act="igpost" data-id="${p.id}">${sv(I.check,18)}Marquer comme posté</button>`}`);hydrateIg()};
+const igDownload=async(f)=>{const[u]=await igSign([f.path],f.name);if(!u)return toast('Fichier introuvable');const a=D.createElement('a');a.href=u;a.download=f.name;a.rel='noopener';D.body.appendChild(a);a.click();a.remove()};
+const igShare=async p=>{try{toast('Préparation des fichiers originaux…');const urls=await igSign(p.files.map(f=>f.path));const files=await Promise.all(p.files.map(async(f,i)=>new File([await (await fetch(urls[i])).blob()],f.name,{type:f.type})));
+ if(!navigator.canShare({files}))return toast('Ton appareil ne permet pas de partager ces fichiers : télécharge-les');if(p.caption)await copyText(p.caption,'Légende copiée');await navigator.share({files})}catch(e){if(e&&e.name!=='AbortError')toast('Partage impossible : '+(e.message||e))}};
 /* ---------- espace modèle ---------- */
 const myShare=m=>(100-(+m.pct||0))/100;
 const itemRO=(c,showDate)=>`<div class="item ro" style="--c:${myModel.color}"><span class="stripe"></span><time>${showDate?dShort(c.date)+' · ':''}${esc(c.time||'')}</time><div class="t"><b>${esc(c.title)}</b><small>${esc(c.type)}${+c.price?' · '+eur2(c.price):''}${c.note?' · '+esc(c.note):''}</small></div><span class="pill p-${c.status}">${CST[c.status]||''}</span></div>`;
@@ -1203,7 +1279,7 @@ const vTeam=()=>{const me=session.user.id;
  <section class="card" style="margin-bottom:16px"><h2>Admins</h2>${adm.map(row).join('')}</section>
  <section class="card"><h2>Comptes modèles</h2>${mod.length?mod.map(row).join(''):'<p class="empty">Aucune modèle n’a encore créé son compte.</p>'}</section>`};
 
-const R={equipe:vTeam,dashboard:vDash,modeles:vModels,prospection:vProspect,stats:vStats,planning:vPlan,taches:vTasks,accueil:vMHome,mplanning:vMPlan,revenus:vMRev,mtaches:vMTasks,depots:vDepots,paiements:vPay,fuites:vFuites,ia:vIA,envoyer:vEnv,medias:vMedia,historique:vHisto};
+const R={equipe:vTeam,dashboard:vDash,modeles:vModels,prospection:vProspect,stats:vStats,planning:vPlan,taches:vTasks,accueil:vMHome,mplanning:vMPlan,revenus:vMRev,mtaches:vMTasks,depots:vDepots,paiements:vPay,fuites:vFuites,ia:vIA,envoyer:vEnv,medias:vMedia,insta:vInsta,historique:vHisto};
 const root=$('#root');
 root.innerHTML='<div id="shell"></div><div id="layer"></div><div id="toast" class="toast" role="status" aria-live="polite"></div><div id="tip" class="tip" aria-hidden="true"></div>';
 const badges=()=>{const late=mode==='admin'?S.tasks.filter(isLate).length:S.tasks.filter(t=>!t.done).length;return{taches:late,mtaches:late,depots:S.submissions.filter(s=>s.status==='envoye').length,envoyer:S.submissions.filter(s=>s.status==='a_refaire').length,fuites:S.leaks.filter(l=>l.status==='repere').length}};
@@ -1241,9 +1317,9 @@ const renderMsg=(title,txt,actions)=>screen(`${brandH(session?esc(session.user.e
 /* ---------- chargement ---------- */
 const must=r=>{if(r.error)throw r.error;return r.data};
 const load=async()=>{
- if(mode==='admin'){const[st,mo,pr,co,ta,ps,po,su,lk,kc,rp,me]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,email,user_id,data'),sb.from('model_private').select('id,data'),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('prospects').select('id,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('leaks').select('id,model_id,data'),sb.from('contracts').select('id,model_id,data,created_at'),sb.from('reports').select('id,model_id,data'),sb.from('media').select('id,model_id,data')].map(p=>p.then(must)));
+ if(mode==='admin'){const[st,mo,pr,co,ta,ps,po,su,lk,kc,rp,me,ig]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,email,user_id,data'),sb.from('model_private').select('id,data'),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('prospects').select('id,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('leaks').select('id,model_id,data'),sb.from('contracts').select('id,model_id,data,created_at'),sb.from('reports').select('id,model_id,data'),sb.from('media').select('id,model_id,data'),sb.from('insta').select('id,data,created_at')].map(p=>p.then(must)));
   const pv=Object.fromEntries(pr.map(r=>[r.id,r.data||{}]));
-  S={agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>{const p=pv[r.id]||{};return{...r.data,id:r.id,email:r.email||'',_linked:!!r.user_id,notes:p.notes||'',checklist:p.checklist||{},contractEnd:p.contractEnd||''}}),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),prospects:ps.map(r=>({...r.data,id:r.id})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),leaks:lk.map(r=>({...r.data,id:r.id,modelId:r.model_id||''})),contracts:kc.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),reports:rp.map(r=>({...r.data,id:r.id,modelId:r.model_id})),media:me.map(r=>({...r.data,id:r.id,modelId:r.model_id||''}))};
+  S={agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>{const p=pv[r.id]||{};return{...r.data,id:r.id,email:r.email||'',_linked:!!r.user_id,notes:p.notes||'',checklist:p.checklist||{},contractEnd:p.contractEnd||''}}),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),prospects:ps.map(r=>({...r.data,id:r.id})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),leaks:lk.map(r=>({...r.data,id:r.id,modelId:r.model_id||''})),contracts:kc.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),reports:rp.map(r=>({...r.data,id:r.id,modelId:r.model_id})),media:me.map(r=>({...r.data,id:r.id,modelId:r.model_id||''})),insta:ig.map(r=>({...r.data,id:r.id,createdAt:r.created_at}))};
   synced=snap()}
  else{const[st,mo,co,ta,po,su,kc,rp]=await Promise.all([sb.from('settings').select('data').eq('id',1).maybeSingle(),sb.from('models').select('id,data').eq('user_id',session.user.id),sb.from('content').select('id,data'),sb.from('tasks').select('id,shared,data'),sb.from('payouts').select('id,model_id,data'),sb.from('submissions').select('id,model_id,data,created_at'),sb.from('contracts').select('id,model_id,data,created_at'),sb.from('reports').select('id,model_id,data')].map(p=>p.then(must)));
   S={...EMPTY(),contracts:kc.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at})),reports:rp.map(r=>({...r.data,id:r.id,modelId:r.model_id})),agency:(st&&st.data&&st.data.agency)||'Mon Agence',models:mo.map(r=>({...r.data,id:r.id})),content:co.map(r=>({...r.data,id:r.id})),tasks:ta.map(r=>({...r.data,id:r.id,shared:r.shared})),payouts:po.map(r=>({...r.data,id:r.id,modelId:r.model_id})),submissions:su.map(r=>({...r.data,id:r.id,modelId:r.model_id,createdAt:r.created_at}))};
@@ -1361,6 +1437,19 @@ D.addEventListener('click',e=>{const b=e.target.closest('[data-act]');if(!b||b.t
  else if(a==='togall'){hidden.clear();render()}
  else if(a==='rem')openReminders();
  else if(a==='knew')openContract(id);
+ else if(a==='ignew')openIg();
+ else if(a==='igs'){ui.igs=b.dataset.v;keepUI();render()}
+ else if(a==='igopen'){igIdx=0;viewIg(id)}
+ else if(a==='igprev'||a==='ignext'){const p=byId(S.insta,id),n=p.files.length;igIdx=(igIdx+(a==='ignext'?1:-1)+n)%n;viewIg(id)}
+ else if(a==='igedit')openIg(id);
+ else if(a==='igrm'){(b.dataset.k==='new'?(URL.revokeObjectURL(igPick[+b.dataset.v].url),igPick):igKeep).splice(+b.dataset.v,1);$('#igpicks').innerHTML=igPickList();hydrateIg()}
+ else if(a==='igdl'){const p=byId(S.insta,id);igDownload(p.files[igIdx])}
+ else if(a==='igdlall'){const p=byId(S.insta,id);p.files.forEach((f,i)=>setTimeout(()=>igDownload(f),i*700))}
+ else if(a==='igshare')igShare(byId(S.insta,id));
+ else if(a==='igcopy')copyText(byId(S.insta,id).caption,'Légende copiée');
+ else if(a==='igpost'){const p=byId(S.insta,id);commit(()=>{p.status='poste';p.postedAt=new Date().toISOString();p.postedBy=session&&session.user.email||''},'Marqué comme posté');closeLayer()}
+ else if(a==='igunpost'){const p=byId(S.insta,id);commit(()=>{p.status='a_poster';p.postedAt='';p.postedBy=''},'Remis à poster');closeLayer()}
+ else if(a==='igdel'){const p=byId(S.insta,id);askConfirm('Supprimer ce post ?',`Les ${p.files.length} fichier${p.files.length>1?'s':''} seront supprimés pour tous les admins.`,'Supprimer',()=>{commit(()=>{S.insta=S.insta.filter(x=>x.id!==id)},'Post supprimé');sb.storage.from('insta').remove(p.files.map(f=>f.path))},1)}
  else if(a==='kedit'){const c=byId(S.contracts,id);openContract(c.modelId,id)}
  else if(a==='kpreview'){const f=$('#fk'),m=mdl(f.querySelector('[name=mid]').value);$('#kprev').innerHTML=`<div class="ktext">${esc(contractText(m,kFormOpts(f)))}</div>`}
  else if(a==='ksend'){const c=byId(S.contracts,id),m=mdl(c.modelId);askConfirm('Envoyer à la signature ?',`${esc(m.name)} pourra lire et signer ce contrat depuis son espace${m._linked?'':' dès qu’elle aura relié son compte'}. Tu ne pourras plus le modifier.`,'Envoyer',()=>commit(()=>{c.status='envoye';c.sentAt=new Date().toISOString()},'Contrat envoyé à la signature'))}
@@ -1435,15 +1524,18 @@ D.addEventListener('change',e=>{const el=e.target,a=el.dataset.act,id=el.dataset
  else if(el.id==='subFiles'){pickedFiles.push(...el.files);el.value='';renderPicked()}
  else if(el.id==='docFile'&&el.files[0]){uploadDoc(el.dataset.mid,el.files[0]);el.value=''}
  else if(el.id==='mupload'&&el.files.length){uploadMedia(el.files);el.value=''}
+ else if(el.id==='igFiles'&&el.files.length){const fs=[...el.files];el.value='';openIg(null,fs)}
+ else if(el.id==='igMore'&&el.files.length){const fs=[...el.files];el.value='';igAddFiles(fs)}
+ else if(a==='iga'){ui.iga=el.value;keepUI();render()}
  else if(a==='mm'){ui.mm=el.value;keepUI();render()}
  else if(a==='simm'){sim=simDefaults(mdl(el.value));render()}
  else if(el.dataset.sim==='elast'){sim.elast=el.value;$('#simres').innerHTML=simResult()}
  else if(a==='lstatus'){const l=byId(S.leaks,id);if(l)commit(()=>{l.status=el.value;if(el.value==='demande'&&!l.sentAt)l.sentAt=T0;if(el.value==='supprime')l.removedAt=T0},`Statut : ${LST[el.value]}`)}
 });
 D.addEventListener('invalid',e=>{const p=e.target.closest&&e.target.closest('.panel');if(p&&p.hidden){const f=p.closest('form'),t=f&&f.querySelector(`.tab[data-v="${p.dataset.p}"]`);if(t)t.click();setTimeout(()=>e.target.focus(),50)}},true);
-D.addEventListener('dragover',e=>{const z=e.target.closest&&e.target.closest('#dropzone');if(z){e.preventDefault();z.classList.add('over')}});
-D.addEventListener('dragleave',e=>{const z=e.target.closest&&e.target.closest('#dropzone');if(z)z.classList.remove('over')});
-D.addEventListener('drop',e=>{const z=e.target.closest&&e.target.closest('#dropzone');if(z){e.preventDefault();z.classList.remove('over');pickedFiles.push(...e.dataTransfer.files);renderPicked()}});
+D.addEventListener('dragover',e=>{const z=e.target.closest&&(e.target.closest('#dropzone')||e.target.closest('#igdrop')||e.target.closest('#igpicks'));if(z){e.preventDefault();z.classList.add('over')}});
+D.addEventListener('dragleave',e=>{const z=e.target.closest&&(e.target.closest('#dropzone')||e.target.closest('#igdrop')||e.target.closest('#igpicks'));if(z)z.classList.remove('over')});
+D.addEventListener('drop',e=>{const ig=e.target.closest&&(e.target.closest('#igdrop')||e.target.closest('#igpicks'));if(ig){e.preventDefault();ig.classList.remove('over');const fs=[...e.dataTransfer.files];if(ig.id==='igdrop')openIg(null,fs);else igAddFiles(fs);return}const z=e.target.closest&&e.target.closest('#dropzone');if(z){e.preventDefault();z.classList.remove('over');pickedFiles.push(...e.dataTransfer.files);renderPicked()}});
 D.addEventListener('input',e=>{if(e.target.id==='q'){ui.q=e.target.value;keepUI();$('#grid').innerHTML=gridHTML()}
  else if(e.target.id==='pq'){ui.pq=e.target.value;keepUI();$('#board').innerHTML=boardHTML()}
  else if(e.target.id==='mq'){ui.mq=e.target.value;keepUI();clearTimeout(window.__mq);window.__mq=setTimeout(()=>{const p=e.target.selectionStart;render();const i=$('#mq');if(i){i.focus();i.setSelectionRange(p,p)}},250)}
@@ -1486,6 +1578,7 @@ D.addEventListener('submit',e=>{e.preventDefault();const f=e.target,fid=f.getAtt
  if(fid==='fk'){const m=mdl(d.mid),o=kFormOpts(f),send=e.submitter&&e.submitter.value==='send',ex=d.kid&&byId(S.contracts,d.kid);
   const save=()=>{commit(()=>{if(ex&&ex.status==='brouillon'){const n=newContract(m,o,send);Object.assign(ex,{...n,id:ex.id,createdAt:ex.createdAt})}else S.contracts.push(newContract(m,o,send))},send?`Contrat envoyé à ${m.name}`:'Brouillon enregistré');closeLayer()};
   if(send)askConfirm('Envoyer à la signature ?',`${esc(m.name)} pourra lire et signer ce contrat depuis son espace. Tu ne pourras plus le modifier.`,'Envoyer',save);else save();return}
+ if(fid==='fig'){saveIg(d);return}
  if(fid==='fmed'){const x=byId(S.media,d.id);commit(()=>{Object.assign(x,{modelId:d.modelId,tags:String(d.tags||'').split(',').map(s=>s.trim().toLowerCase()).filter(Boolean),theme:tr(d.theme),outfit:tr(d.outfit),place:tr(d.place)})},'Média enregistré');closeLayer();return}
  if(fid&&fid.startsWith('fai-')){callAI(fid.slice(4),d);return}
  if(fid==='fpay'){const m=mdl(d.mid),c=payCalc(m,d.month);commit(()=>{const ex=payFor(m.id,d.month);const p=ex||{id:uid(),modelId:m.id,month:d.month};Object.assign(p,{gross:c.g,pct:c.pc,amount:Math.round((+d.amount||0)*100)/100,status:'paye',paidAt:d.paidAt,method:d.method,note:tr(d.note)});if(!ex)S.payouts.push(p)},`Paiement de ${m.name} enregistré`);closeLayer();return}

@@ -79,6 +79,10 @@ Contrats, candidatures, rapports, médiathèque et historique : les tables et fo
 
 Ton lien de candidature : `https://swdrms-dev.github.io/ofmana/#rejoindre` (bouton « Lien de candidature » dans Prospection).
 
+## 10. Photos Insta ✅ (déjà fait le 25/11/2026)
+
+Table `insta` et espace de stockage privé `insta` (admins uniquement, 50 Mo max par fichier), dans `supabase/setup.sql` (partie v4).
+
 ## Bon à savoir
 
 - Sur l'offre gratuite, Supabase n'envoie que quelques emails par heure (confirmation, mot de passe oublié). Si tu ajoutes beaucoup de modèles d'un coup, configure ton propre service d'envoi dans **Authentication > Emails > SMTP Settings**, par exemple Resend ou Brevo.
